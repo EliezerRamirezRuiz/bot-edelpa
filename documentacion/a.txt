@@ -18,6 +18,7 @@ class MyCog(commands.Cog):
     async def on_message(self, message):
         if message.content == 'ping':
             await message.channel.send('pong')
+
 In this example, we define a new Cog called MyCog. We define an __init__ method that takes a bot parameter, which we can use to access the bot instance from within our commands and event handlers.
 
 We then define a my_command method as a command using the @commands.command() decorator. This method will be invoked whenever a user types !my_command in a Discord channel where the bot is present.
@@ -35,6 +36,7 @@ bot = commands.Bot(command_prefix='!')
 bot.add_cog(MyCog(bot))
 
 bot.run('your_token_here')
+
 In this example, we create a new Bot instance and add an instance of MyCog using the add_cog method. This tells the bot to register our my_command command and on_message event handler with Discord and associate them with our MyCog class.
 
 I hope this helps! Let me know if you have any further questions or need more assistance.

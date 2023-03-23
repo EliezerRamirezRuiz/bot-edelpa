@@ -128,7 +128,7 @@ I'm glad I could help! If you have any more questions or need further assistance
 
 
 
-Eliezer reuven Ramirez ruiz
+Eliezer reuven Ramirez ruiz 
 lastest question, I can do with the event too?
 
 --------------------------------------------------
@@ -140,15 +140,7 @@ First, create a new file called my_events.py and define the event handler:
 
 python
 Copy code
-from discord.ext import commands
 
-class MyEvents(commands.Cog):
-    def __init__(self, bot):
-        self.bot = bot
-
-    @commands.Cog.listener()
-    async def on_message(self, message):
-        print(f'{message.author.name} sent a message: {message.content}')
 In this example, we define an event handler called MyEvents as a subclass of commands.Cog. We also define an __init__ method that takes a bot parameter, which we can use to access the bot instance from within our event handler.
 
 We then define an on_message method as an event listener using the commands.Cog.listener() decorator. This method will be called every time a message is sent in our server, and it will print the message author's name and the message content to the console.
