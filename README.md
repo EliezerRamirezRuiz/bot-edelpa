@@ -1,7 +1,9 @@
-# 
+# Bot Discord Edelpa
 <i>21/03/2023</i>
 
 
+
+pycord
 
 
 

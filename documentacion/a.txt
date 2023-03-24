@@ -40,3 +40,49 @@ bot.run('your_token_here')
 In this example, we create a new Bot instance and add an instance of MyCog using the add_cog method. This tells the bot to register our my_command command and on_message event handler with Discord and associate them with our MyCog class.
 
 I hope this helps! Let me know if you have any further questions or need more assistance.
+
+
+----------------------------------------------------------------------------------------
+import aiohttp
+
+async with aiohttp.ClientSession() as session:
+    webhook = discord.Webhook.partial(
+        id,
+        token,
+        session=session
+    )
+    await webhook.send("Hello from Pycord 2.0")
+
+
+
+
+    --------------------------------------
+
+    
+@bot.event
+async def on_guild_channel_create(channel):
+    print(f"New channel created: {channel.name}")
+    # Add code to do something with the new channel, like setting permissions or sending a welcome message
+
+@bot.event
+async def on_guild_channel_delete(channel):
+    print(f"Channel deleted: {channel.name}")
+    # Add code to do something when a channel is deleted, like removing it from a list of tracked channels
+
+@bot.event
+async def on_guild_role_create(role):
+    print(f"New role created: {role.name}")
+    # Add code to do something with the new role, like setting permissions or adding it to a list of roles
+
+@bot.event
+async def on_guild_role_delete(role):
+    print(f"Role deleted: {role.name}")
+    # Add code to do something when a role is deleted, like removing it from a list of tracked roles
+
+
+@bot.event
+async def on_command_error(ctx, error):
+    """Function to return a error what we wanted"""
+    print(f"What has happened: {ctx, error}")
+    await ctx.send(f'error: "{error}"')
+    # Add code to do something when a role is deleted, like removing it from a list of tracked roles
