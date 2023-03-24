@@ -8,7 +8,11 @@ class CustomHelpCommand(commands.MinimalHelpCommand):
         # !help send_error_message
         await self.get_destination().send(f'Error: {error}')
 
+
     async def send_command_help(self, command):
         # This method is called if a specific command is requested in the help command
         # We can customize the message that is sent here
-        await self.get_destination().send(f'Help for command {command}: {command.help}')
+        message = f'''  Help for command {command}: {command.help}\n
+                        Menu for command {command}: {command.Menu}\n
+                        '''
+        await self.get_destination().send(message)

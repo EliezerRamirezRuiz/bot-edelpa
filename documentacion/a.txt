@@ -86,3 +86,49 @@ async def on_command_error(ctx, error):
     print(f"What has happened: {ctx, error}")
     await ctx.send(f'error: "{error}"')
     # Add code to do something when a role is deleted, like removing it from a list of tracked roles
+
+
+
+
+jcsaiucfaaw
+
+
+    @bot.event
+async def on_command_error(ctx, error):
+    if isinstance(error, commands.CommandNotFound):
+        await ctx.send('Command not found.')
+
+    elif isinstance(error, commands.MissingRequiredArgument):
+        await ctx.send('Missing required argument.')
+
+    elif isinstance(error, commands.DisabledCommand):
+        await ctx.send('This command has been disabled.')
+
+    else:
+        print(error)  # Print the error to the console
+        await ctx.send('An error occurred while executing the command.')
+
+
+@bot.event
+async def on_command_error(ctx, error):
+    if isinstance(error, commands.CommandNotFound):
+        await ctx.send('Command not found.')
+
+    elif isinstance(error, commands.MissingRequiredArgument):
+        await ctx.send('Missing required argument.')
+
+    elif isinstance(error, commands.DisabledCommand):
+        await ctx.send('This command has been disabled.')
+    else:
+        print(error)  # Print the error to the console
+        await ctx.send('An error occurred while executing the command.')
+
+
+@bot.event
+async def on_command(ctx):
+    await ctx.send("working")
+
+
+@bot.event
+async def on_command_completion(ctx):
+    await ctx.send("command has finished successfully")

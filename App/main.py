@@ -25,12 +25,11 @@ intents.message_content = True
 
 
 """ Instance Bot """
-bot = commands.Bot(command_prefix='!', description=descripcion, intents=intents)
-bot.help_command = CustomHelpCommand() #Help/help_message.py
+bot = commands.Bot(command_prefix='!', description=descripcion,
+                   intents=intents, help_command=CustomHelpCommand())
 
 
 """Configuration Bot"""
-
 
 
 @bot.event
@@ -38,15 +37,16 @@ async def on_ready():
     """Function when the Bot is started"""
     await bot.add_cog(MyEvents(bot))
     await bot.add_cog(MyCommand(bot))
-    print(f"Hello users {bot.user}") 
-    
+    print(f"Hello user {bot.user}")
+
 
 def main():
     """Function to run the Bot"""
     try:
         bot.run(token=token)
+
     except Exception as error:
-        print(f'error: {error}\nerror.__cause__: {error.__cause__}')
+        print(f'error: {error}\nerror cause: {error.__cause__}')
 
 
 if '__main__' == __name__:
