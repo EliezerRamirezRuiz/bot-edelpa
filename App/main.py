@@ -1,11 +1,11 @@
 """library used - All are in requirements.txt"""
 import os
-
+import logging
 import discord
-from discord.ext import commands
 
 from dotenv import load_dotenv
 
+from discord.ext import commands
 from Help.help_message import CustomHelpCommand
 from Events.extends_events import MyEvents
 from Commands.extends_commands import MyCommand
@@ -30,6 +30,7 @@ bot = commands.Bot(command_prefix='!', description=descripcion,
 
 
 """Configuration Bot"""
+handler = logging.FileHandler(filename='discord.log', encoding='utf-8', mode='r+')
 
 
 @bot.event

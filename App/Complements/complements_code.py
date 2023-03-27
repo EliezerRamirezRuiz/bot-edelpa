@@ -1,4 +1,5 @@
 import requests
+import asyncio
 
 base_url = 'https://discordapp.com/api/webhooks/'
 
@@ -14,3 +15,4 @@ for i, (key, value) in enumerate(complement.items()):
     webhook_url = f'{base_url+value}'
     message_content = 'Hello, Patricio!'
     response = requests.post(webhook_url, json={'content': message_content,})
+

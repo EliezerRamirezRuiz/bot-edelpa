@@ -1,7 +1,7 @@
 from discord.ext import commands
 from discord.ui import View
 from Components.menu_component import Menu
-import asyncio
+from asyncio import TimeoutError
 
 class MyCommand(commands.Cog):
     def __init__(self, bot):
@@ -19,13 +19,17 @@ class MyCommand(commands.Cog):
 
     @commands.command()
     async def consultar_stock(self, ctx):
-        await ctx.send("Por favor envíe su mensaje:")
         try:
             message = await self.bot.wait_for('message', check=lambda m: m.author == ctx.author, timeout=30.0)
-            print(message.content)
-            await ctx.send("good")
-        except asyncio.TimeoutError:
-            await ctx.send("Lo siento, el tiempo para enviar un mensaje ha expirado.")
+
+
+            if type(int(message.content)) == int:
+                await ctx.send("Trabajando")
+            else:
+                await ctx.send("El codigo solo contiene numeros")
+
+        except TimeoutError as error:
+            await ctx.send(f"Lo siento se excedio el tiempo para responder, reintente con !menu")
         
 
 
