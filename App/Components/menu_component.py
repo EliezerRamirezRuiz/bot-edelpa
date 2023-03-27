@@ -2,9 +2,12 @@ from discord.ui import View, Select
 import discord
 
 
-
 class Menu(Select):
-    def __init__(self) -> None:
+    def __init__(self, bot, ctx, command):
+        self.bot = bot
+        self.ctx = ctx
+        self.command = command
+
         options = [
             discord.SelectOption(
             label="Default",
@@ -41,8 +44,7 @@ class Menu(Select):
 
     async def callback(self, interaction: discord.Interaction):
         if self.values[0] == "Consultar Stock":
-            await interaction.response.send_message(f"working", delete_after=1)
+            await self.command.consultar_stock(self.ctx)
 
         elif self.values[0] == "Estado Robot":
-
             await interaction.response.send_message(f"working")

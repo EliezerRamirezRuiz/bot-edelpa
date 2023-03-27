@@ -37,7 +37,8 @@ async def on_ready():
     """Function when the Bot is started"""
     await bot.add_cog(MyEvents(bot))
     await bot.add_cog(MyCommand(bot))
-    print(f"Hello user {bot.user}")
+    print(f"Hello user {bot.user.name}")
+
 
 
 def main():
