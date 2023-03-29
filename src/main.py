@@ -33,9 +33,10 @@ bot = commands.Bot(command_prefix='!', description=descripcion,
 handler = logging.FileHandler(filename='discord.log', encoding='utf-8', mode='r+')
 
 
+
 @bot.event
 async def on_ready():
-    """Function when the Bot is started"""
+    """Function when the Bot is ready to answer commands"""
     await bot.add_cog(MyEvents(bot))
     await bot.add_cog(MyCommand(bot))
     print(f"Hello user {bot.user.name}")
