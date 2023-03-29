@@ -6,9 +6,7 @@ import discord
 from dotenv import load_dotenv
 
 from discord.ext import commands
-from Help.help_message import CustomHelpCommand
-from Events.extends_events import MyEvents
-from Commands.extends_commands import MyCommand
+from Functions import *
 
 
 load_dotenv()

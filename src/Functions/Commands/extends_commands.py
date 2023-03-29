@@ -1,6 +1,6 @@
 from discord.ext import commands
 from discord.ui import View
-from Components.menu_component import Menu
+from Functions.Components.menu_component import Menu
 from asyncio import TimeoutError
 
 class MyCommand(commands.Cog):
@@ -21,7 +21,6 @@ class MyCommand(commands.Cog):
     async def consultar_stock(self, ctx):
         try:
             message = await self.bot.wait_for('message', check=lambda m: m.author == ctx.author, timeout=30.0)
-
 
             if type(int(message.content)) == int:
                 await ctx.send("Trabajando")
