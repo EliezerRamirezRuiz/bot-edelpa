@@ -16,3 +16,17 @@ for i, (key, value) in enumerate(complement.items()):
     message_content = 'Hello, Patricio!'
     response = requests.post(webhook_url, json={'content': message_content,})
 
+
+def check_int(value):
+
+    if type(str(value.content)) == str:
+        return False
+    
+    elif type(int(value.content)) == int:
+        return True
+    
+    else:
+       return False
+
+
+
