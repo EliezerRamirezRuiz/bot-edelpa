@@ -1,0 +1,18 @@
+https://techcommunity.microsoft.com/t5/sql-server-blog/using-sql-service-broker-for-asynchronous-external-script-r/ba-p/305494
+
+http://rusanu.com/2006/04/06/fire-and-forget-good-for-the-military-but-not-for-service-broker-conversations/
+
+http://www.davewentzel.com/content/service-broker-demystified-fire-and-forget-anti-pattern
+
+http://www.davewentzel.com/content/service-broker-demystified-default-not-default
+
+https://learn.microsoft.com/en-us/previous-versions/sql/sql-server-2008-r2/bb522908(v=sql.105)?redirectedfrom=MSDN
+
+https://learn.microsoft.com/en-us/sql/database-engine/service-broker/lesson-1-creating-the-base-conversation-objects?source=recommendations&view=sql-server-ver16
+
+https://www.youtube.com/watch?v=dJLy9bsnBgk
+
+https://discord.com/developers/docs/resources/webhook#webhook-object
+
+funcion para habilitar service broker
+ALTER DATABASE Prueba SET ENABLE_BROKER;

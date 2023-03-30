@@ -22,7 +22,6 @@ class MyCommand(commands.Cog):
         """Funcion que funciona solo si el padre menu lo llama, ademas consultar stock a pedir"""
         try:
             message = await self.bot.wait_for('message', check=lambda m: m.author == ctx.author, timeout=30.0)
-
             value = check_int(message)
             
             if value:
@@ -40,11 +39,11 @@ class MyCommand(commands.Cog):
         try:
             await ctx.send("Porfavor escriba el codigo del stock a consultar:")
             message = await self.bot.wait_for('message', check=lambda m: m.author == ctx.author, timeout=30.0)
-
-            value = check_int(message)
+            
+            value = check_int(message, ctx)
 
             if value:
-                print("next code...")
+                ctx.send("next code...")
             else:
                 print("stop...")
 

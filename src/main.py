@@ -37,7 +37,7 @@ async def on_ready():
     """Function when the Bot is ready to answer commands"""
     await bot.add_cog(MyEvents(bot))
     await bot.add_cog(MyCommand(bot))
-    print(f"Hello user {bot.user.name}")
+    print(f"Hello user {bot.user}")
 
 
 
@@ -52,3 +52,4 @@ def main():
 
 if '__main__' == __name__:
     main()
+    

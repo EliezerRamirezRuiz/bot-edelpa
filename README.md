@@ -1,32 +1,21 @@
-# Bot Discord Edelpa
-<i>21/03/2023</i>
+# Bot Edelpa
+
+> Este es un bot de Edelpa desarrollado con los fines que la empresa estime conveniente y mas le ayude en su </br>
+funciones como empresa. 
 
 
-Copyright (c) 2023-present Edelpa
+### Tecnologias utilizadas
 
-Permission is hereby granted, free of charge, to any person obtaining a
-copy of this software and associated documentation files (the "Software"),
-to deal in the Software without restriction, including without limitation
-the rights to use, copy, modify, merge, publish, distribute, sublicense,
-and/or sell copies of the Software, and to permit persons to whom the
-Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
-OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
-DEALINGS IN THE SOFTWARE.
+´´´python
+    Python \n
+    Pycord \n
+    Discord.py \n
+    SQL Server 
+´´´
+  
 
 
 
 
 
 
-
-
-https://discord.com/developers/docs/resources/webhook#webhook-object
