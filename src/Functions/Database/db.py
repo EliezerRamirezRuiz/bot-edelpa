@@ -1,10 +1,17 @@
 import pyodbc 
 import os
-import pyodbc
 
-try:
-    password = os.getenv('PASSWORD')
-    connection = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER=localhost;DATABASE=Prueba;UID=me;PWD=%s'.format(password))
+server = 'EDELPA-PC061'
+password = 'testuser1234'
+database = 'Prueba'
+username = 'testuser'
 
-except Exception as error:
-    print(f'error: {error.__cause__}')
+
+async def con_sql():
+    try:
+        connection = pyodbc.connect('DRIVER={SQL Server};SERVER='+server+\
+                                ';DATABASE='+database+';Trusted_Connection=yes;')
+        return connection
+        
+    except Exception as error:
+        print(f'error: {error}\ncause:{error.__context__}')
