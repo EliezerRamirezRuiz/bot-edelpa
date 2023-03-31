@@ -44,10 +44,10 @@ class Menu(Select):
 
     async def callback(self, interaction: discord.Interaction):
         if self.values[0] == "Consultar Stock":
-            await interaction.response.send_message(f"Escribe el stock a consultar:")
             await self.bot_command.stock(self.ctx)
             
 
         elif self.values[0] == "Estado Robot":
+            
             await interaction.response.send_message(f"Escribe el stock a consultar:")
             await self.bot_command.consultar_stock(self.ctx)

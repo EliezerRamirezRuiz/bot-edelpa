@@ -7,11 +7,14 @@ funciones como empresa.
 ### Tecnologias utilizadas
 
 ´´´python
-    Python \n
-    Pycord \n
-    Discord.py \n
-    SQL Server 
+
+    Python
+    Pycord 
+    Discord.py 
+    SQL Server
 ´´´
+
+
   
 
 

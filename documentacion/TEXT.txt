@@ -14,5 +14,7 @@ https://www.youtube.com/watch?v=dJLy9bsnBgk
 
 https://discord.com/developers/docs/resources/webhook#webhook-object
 
+https://aioodbc.readthedocs.io/en/latest/index.html
+
 funcion para habilitar service broker
 ALTER DATABASE Prueba SET ENABLE_BROKER;

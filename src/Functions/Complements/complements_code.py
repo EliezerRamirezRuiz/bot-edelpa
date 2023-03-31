@@ -2,7 +2,8 @@ import requests
 import asyncio
 
 
-def test_send_message():
+
+def a():
     base_url = 'https://discordapp.com/api/webhooks/'
 
 
@@ -15,16 +16,9 @@ def test_send_message():
 
 
     for i, (key, value) in enumerate(complement.items()):
-        webhook_url = f'{base_url+value}'
-        message_content = 'Hello, Patricio!'
-        response = requests.post(webhook_url, json={'content': message_content, })
+            webhook_url = f'{base_url+value}'
+            message_content = 'Hello, Patricio!'
+            response = requests.post(webhook_url, json={'content': message_content, })
 
 
-def check_int(value, ctx):
-    try:
-        if type(int(value.content)) == int:
-            return True
-        else:
-            return False
-    except TypeError:
-        ctx.send("Codigo invalido")
+
