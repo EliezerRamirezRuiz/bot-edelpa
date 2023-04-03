@@ -57,10 +57,10 @@ class MyEvents(commands.Cog):
         print(f"{member} ha salido del servidor")
     
 
-    '''@commands.Cog.listener()
+    @commands.Cog.listener()
     async def on_member_join(self, member):
         # Obtener el canal de bienvenida del servidor
         welcome_channel = member.guild.system_channel()
         if welcome_channel is not None:
             # Enviar mensaje de bienvenida
-            await welcome_channel.send(f'Bienvenido {member.mention} al servidor!')'''
+            await welcome_channel.send(f'Bienvenido {member.mention} al servidor!')

@@ -1,4 +1,4 @@
-from discord.ui import View, Select
+from discord.ui import Select
 import discord
 
 
@@ -26,7 +26,7 @@ class Menu(Select):
             value="Estado Robot"),
 
             discord.SelectOption(
-            label="Cantidad de Bobinas",
+            label="Ultimas alertas",
             description="Saber la cantidad de Bobinas que contiene un pallet",
             value="Option 3"),
             
@@ -42,12 +42,14 @@ class Menu(Select):
                          options=options
                          )
 
-    async def callback(self, interaction: discord.Interaction):
+    async def callback(self):
         if self.values[0] == "Consultar Stock":
             await self.bot_command.stock(self.ctx)
             
 
         elif self.values[0] == "Estado Robot":
-            
-            await interaction.response.send_message(f"Escribe el stock a consultar:")
-            await self.bot_command.consultar_stock(self.ctx)
+            await self.bot_command.estado_robot(self.ctx)
+
+        
+        elif self.values[0] == "Ultimas alertas":
+            await self.bot_command.ultimas_alertas(self.ctx)
