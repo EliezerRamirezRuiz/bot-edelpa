@@ -1,5 +1,7 @@
 from discord.ext import commands
-from Functions.Database.Functions.functions_db import obtener_stock, estado_del_robot, obtener_alerta
+
+from Functions.Commands.Database.Funciones.funciones_db import \
+    obtener_stock, estado_del_robot, obtener_alerta
 
 
 class PrincipalCommands(commands.Cog):
@@ -13,15 +15,16 @@ class PrincipalCommands(commands.Cog):
         """Funcion que consultar stock a pedir"""
 
         try:
+            """manda mensaje primero cuando se marca la opcion y despues se invoca este"""
             await ctx.send("Porfavor escriba el codigo del stock a consultar:")
-
+            
             message = await self.bot.wait_for('message', check=lambda m: m.author == ctx.author, timeout=30.0)
             result = await obtener_stock(str(message.content), ctx)
 
-            await ctx.send(result)
+            await ctx.send(result) 
             
-        except TimeoutError:
-            return f"Lo siento se excedio el tiempo para responder, por favor reescriba !consultar_stock"
+        except Exception as ex:
+            await ctx.send(ex)
 
 
     @commands.command()
@@ -34,8 +37,8 @@ class PrincipalCommands(commands.Cog):
             result = await estado_del_robot(ctx)
             await ctx.send(result)
 
-        except TimeoutError as error:
-            await ctx.send(f"Lo siento se excedio el tiempo para responder, reintente con !menu")
+        except Exception as ex:
+            await ctx.send(ex)
 
     
     @commands.command()
@@ -44,10 +47,9 @@ class PrincipalCommands(commands.Cog):
 
         try:
             await ctx.send("Obteniendo alertas")
-            
-            result = await obtener_alerta()
+            result = await obtener_alerta(ctx)
 
-            await ctx.send('')
+            await ctx.send(result)
             
-        except TimeoutError:
-            return f"Lo siento se excedio el tiempo para responder, por favor reescriba !consultar_stock"
+        except Exception as ex:
+            await ctx.send(ex)

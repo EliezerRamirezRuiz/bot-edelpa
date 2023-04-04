@@ -21,4 +21,3 @@ async def test():
                 except ContentTypeError:
                     print(f'Error: Response {i} is not in JSON format')
                     continue
-

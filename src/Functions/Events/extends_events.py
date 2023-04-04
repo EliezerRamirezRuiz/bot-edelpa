@@ -13,7 +13,7 @@ class MyEvents(commands.Cog):
     @commands.Cog.listener()
     async def on_command_error(self, ctx, error):
         if isinstance(error, commands.CommandNotFound):
-            await ctx.send('Command not found.')
+            await ctx.send('Command not found. know more with !help')
 
         elif isinstance(error, commands.MissingRequiredArgument):
             await ctx.send('Missing required argument.')
@@ -24,7 +24,6 @@ class MyEvents(commands.Cog):
         else:
             print(error)  # Print the error to the console
             await ctx.send('An error occurred while executing the command.')
-
 
 
     @commands.Cog.listener()

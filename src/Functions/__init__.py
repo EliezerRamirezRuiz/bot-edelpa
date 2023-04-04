@@ -1,8 +1,8 @@
 from Functions.Events.extends_events import MyEvents
 from Functions.Help.help_message import CustomHelpCommand
 
-from Functions.Commands.menu import MenuCommands
-from Functions.Commands.principal_functions import PrincipalCommands
+from Functions.Commands.comandos.discord_menu import MenuCommands
+from Functions.Commands.comandos.comandos import PrincipalCommands
 
 
 

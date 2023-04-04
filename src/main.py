@@ -2,17 +2,14 @@
 import os
 import logging
 import discord
-import asyncio
-
 
 from discord.ext import commands
 from Functions import *
 from dotenv import load_dotenv
-from threading import Thread
-from Functions.Complements.complements import test
+from Functions.Commands.Complementos.complements import test
+
 
 load_dotenv()
-
 
 
 """Variables"""
@@ -41,18 +38,13 @@ async def on_ready():
     print(f"Hello user {bot.user}")
 
 
-async def main():
+def main():
     """Function to run the Bot"""
-    try:
-        async with asyncio.TaskGroup() as tg:
-            tg.create_task(bot.start(token))
-
-    except Exception as error:
-        return f'error: {error}\nerror cause: {error.__cause__}'
+    bot.run(token)
 
 
 if __name__ == '__main__':
-    asyncio.run(main())
+    main()
     
         
     

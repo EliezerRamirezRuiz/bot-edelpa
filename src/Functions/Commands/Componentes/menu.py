@@ -26,30 +26,40 @@ class Menu(Select):
             value="Estado Robot"),
 
             discord.SelectOption(
-            label="Ultimas alertas",
+            label="Ultimas Alertas",
             description="Saber la cantidad de Bobinas que contiene un pallet",
-            value="Option 3"),
+            value="Ultimas Alertas"),
             
             discord.SelectOption(
             label="Reporte del dia",
             description="Saber la cantidad hecha por dia",
-            value="Reporte del dia"),]
+            value="Reporte del dia"),
+            
+            discord.SelectOption(
+            label="prueba",
+            description="Saber la cantidad hecha por dia",
+            value="prueba"),]
         
-        super().__init__(custom_id="Menu",
-                         placeholder="Menu",
-                         min_values=1,
-                         max_values=1,
-                         options=options
-                         )
+        super().__init__(custom_id="Menu", placeholder="Menu",
+                        min_values=1, max_values=1,
+                        options=options, row=2)
 
-    async def callback(self):
+    async def callback(self, interaccion:discord.Interaction):
+        if self.values[0] == "prueba":
+            message = await self.bot_command.stock(self.ctx)
+            await self.ctx.send(message)
         if self.values[0] == "Consultar Stock":
             await self.bot_command.stock(self.ctx)
-            
+
 
         elif self.values[0] == "Estado Robot":
-            await self.bot_command.estado_robot(self.ctx)
+            pass
 
         
-        elif self.values[0] == "Ultimas alertas":
+        elif self.values[0] == "Ultimas Alertas":
             await self.bot_command.ultimas_alertas(self.ctx)
+
+
+        elif self.values[0] == "Reporte del dia":
+            await self.bot_command.ultimas_alertas(self.ctx)
+
