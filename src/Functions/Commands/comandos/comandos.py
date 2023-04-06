@@ -1,7 +1,7 @@
 from discord.ext import commands
 
-from Functions.Commands.Database.Funciones.funciones_db import \
-    obtener_stock, estado_del_robot, obtener_alerta
+from Functions.Database.Funciones.funciones_db import \
+    obtener_stock, estado_del_robot, obtener_alertas
 
 
 class PrincipalCommands(commands.Cog):
@@ -19,7 +19,7 @@ class PrincipalCommands(commands.Cog):
             await ctx.send("Porfavor escriba el codigo del stock a consultar:")
             
             message = await self.bot.wait_for('message', check=lambda m: m.author == ctx.author, timeout=30.0)
-            result = await obtener_stock(str(message.content), ctx)
+            result = await obtener_stock(str(message.content))
 
             await ctx.send(result) 
             
@@ -34,7 +34,7 @@ class PrincipalCommands(commands.Cog):
         try:
             await ctx.send("Consultando estado del robot")
 
-            result = await estado_del_robot(ctx)
+            result = await estado_del_robot()
             await ctx.send(result)
 
         except Exception as ex:
@@ -47,7 +47,7 @@ class PrincipalCommands(commands.Cog):
 
         try:
             await ctx.send("Obteniendo alertas")
-            result = await obtener_alerta(ctx)
+            result = await obtener_alertas()
 
             await ctx.send(result)
             

@@ -6,7 +6,7 @@ import discord
 from discord.ext import commands
 from Functions import *
 from dotenv import load_dotenv
-from Functions.Commands.Complementos.complements import test
+from Functions.Database.Funciones.funciones_db import return_data
 
 
 load_dotenv()
@@ -34,13 +34,19 @@ async def on_ready():
     await bot.add_cog(MyEvents(bot))
     await bot.add_cog(MenuCommands(bot))
     await bot.add_cog(PrincipalCommands(bot))
-
     print(f"Hello user {bot.user}")
+    bot.loop.create_task(return_data())
+    """se le puede asignar tareas cuando esta disponible"""
 
 
 def main():
     """Function to run the Bot"""
-    bot.run(token)
+    try:
+        bot.run(token)
+
+    except Exception as ex:
+        print(f"error : {ex}, \
+              cause: {ex.__cause__}")
 
 
 if __name__ == '__main__':
