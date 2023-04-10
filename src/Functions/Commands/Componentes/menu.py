@@ -1,8 +1,18 @@
+"""Archivo que contiene el menu con multiples opciones 
+que apretando alguna realiza la accion conrrespondiente"""
+
+from Functions.Database.Funciones.alertas import LeerAlerta
+from Functions.Database.Funciones.estado_robot import EstadoRobot
+from Functions.Database.Funciones.obtener_stock import ObtenerStock
+from Functions.Database.Funciones.reporte_dia import ReporteDia
 from discord.ui import Select
+
 import discord
 
-from Functions.Database.Funciones.funciones_db import \
-    obtener_stock, estado_del_robot, obtener_alertas, reporte_dia
+alert = LeerAlerta()
+estado_robot =  EstadoRobot()
+obtener_stock = ObtenerStock()
+reporte_dia = ReporteDia()
 
 
 class Menu(Select):
@@ -54,8 +64,7 @@ class Menu(Select):
             try:
                 await interaccion.response.send_message('Escriba el codigoa consultar!')
                 message = await self.bot.wait_for('message', check=lambda m: m.author == self.ctx.author, timeout=30.0)
-                result = await obtener_stock(str(message.content))
-
+                result = await obtener_stock.query(str(message.content))
                 await self.ctx.send(result)
 
             except TimeoutError as error:
@@ -70,7 +79,7 @@ class Menu(Select):
         elif self.values[0] == "Ultimas Alertas":
             try:
                 await interaccion.response.send_message("Obteniendo alertas")
-                result = await obtener_alertas()
+                result = await alert.query()
                 await self.ctx.send(result)
         
             except Exception as ex:
@@ -80,7 +89,7 @@ class Menu(Select):
         elif self.values[0] == "Reporte del dia":
             try:
                 await interaccion.response.send_message("Obteniendo reporte")
-                await reporte_dia()
+                await reporte_dia.query()
         
             except Exception as ex:
                 await self.ctx.send(f"ultimas alertas:{ex}")

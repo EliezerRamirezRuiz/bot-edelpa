@@ -6,7 +6,6 @@ import discord
 from discord.ext import commands
 from Functions import *
 from dotenv import load_dotenv
-from Functions.Database.Funciones.funciones_db import return_data
 
 
 load_dotenv()
@@ -35,8 +34,8 @@ async def on_ready():
     await bot.add_cog(MenuCommands(bot))
     await bot.add_cog(PrincipalCommands(bot))
     print(f"Hello user {bot.user}")
-    bot.loop.create_task(return_data())
-    """se le puede asignar tareas cuando esta disponible"""
+    'bot.loop.create_task()'
+
 
 
 def main():
@@ -51,6 +50,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-    
-        
-    
