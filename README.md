@@ -15,10 +15,10 @@ notificaciones de forma autonoma.
 
 ### Actualizaciones
 
-> El Bot estaba pensado para realizarse como un bot de whatsapp pero <br>
-debido a las limitantes, se ha replanteado para realizarse en otra <br>
-plataforma digital de comunicacion y la cual se ha llegado a un concenso <br>
-que es <i>"DISCORD"</i>
+> El Bot estaba pensado para realizarse como un bot de whatsapp pero 
+<br>debido a las limitantes, se ha replanteado para realizarse en otra 
+<br>plataforma digital de comunicacion y la cual se ha llegado a un concenso 
+<br>es Discord que nos proporciona <i>[Discord Developer Portal](https://discord.com/login?redirect_to=%2Fdevelopers%2Fapplications)</i>
 
 <br>
 
@@ -30,3 +30,11 @@ que es <i>"DISCORD"</i>
 > - [Aiohttp](https://docs.aiohttp.org/en/stable/)
 > - [Aioodbc](https://github.com/aio-libs/aioodbc/)
 > - [Python-dotenv](https://pypi.org/project/python-dotenv/)
+
+<br>
+
+### Programacion
+
+> Se ha escogido una programacion orientada a objetos para mas factilidad, facilidad y escalibidad.
+<br>para asi manejar y gestionar las respectivas acciones que realizara.
+

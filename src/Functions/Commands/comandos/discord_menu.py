@@ -13,7 +13,8 @@ class MenuCommands(commands.Cog):
 
     @commands.group()
     async def menu(self, ctx):
-        """Menu con opciones, las opciones son funciones"""
+        """Menu con opciones, las opciones son funciones que  
+        posteriormente podrian requerir respuesta del usuario"""
         select = Menu(self.bot, ctx, self)
         view = View(timeout=180)
         view.add_item(select)
