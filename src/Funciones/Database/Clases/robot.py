@@ -1,8 +1,8 @@
-from Functions.Database.conexion_db import Database
+from Funciones.Database.db import Database
 
 
-class EstadoRobot(Database):
-    async def query(self):
+class Robot(Database):
+    async def get_data(self):
         """ Funcion para traer datos de la base de datos SQL Server, 
         para ser mas exacto una alerta """
         try:

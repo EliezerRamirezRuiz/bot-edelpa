@@ -1,18 +1,18 @@
 """Archivo que contiene el menu con multiples opciones 
 que apretando alguna realiza la accion conrrespondiente"""
 
-from Functions.Database.Funciones.alertas import LeerAlerta
-from Functions.Database.Funciones.estado_robot import EstadoRobot
-from Functions.Database.Funciones.obtener_stock import ObtenerStock
-from Functions.Database.Funciones.reporte_dia import ReporteDia
+from Funciones.Database.Clases.alerta import Alerta
+from Funciones.Database.Clases.robot import Robot
+from Funciones.Database.Clases.stock import Stock
+from Funciones.Database.Clases.reporte import Reporte
 from discord.ui import Select
 
 import discord
 
-alert = LeerAlerta()
-estado_robot =  EstadoRobot()
-obtener_stock = ObtenerStock()
-reporte_dia = ReporteDia()
+alert = Alerta()
+robot =  Robot()
+stock = Stock()
+report = Reporte()
 
 
 class Menu(Select):
@@ -62,9 +62,9 @@ class Menu(Select):
         # Caso 1
         if self.values[0] == "Consultar Stock":
             try:
-                await interaccion.response.send_message('Escriba el codigoa consultar!')
+                await interaccion.response.send_message('Escriba el codigo a consultar:')
                 message = await self.bot.wait_for('message', check=lambda m: m.author == self.ctx.author, timeout=30.0)
-                result = await obtener_stock.query(str(message.content))
+                result = await stock.get_data(str(message.content))
                 await self.ctx.send(result)
 
             except TimeoutError as error:
@@ -73,24 +73,25 @@ class Menu(Select):
         # Caso 2
         elif self.values[0] == "Estado Robot":
             await interaccion.response.send_message('Verificando')
-            """next code"""
+            ...
 
         # Caso 3
         elif self.values[0] == "Ultimas Alertas":
             try:
                 await interaccion.response.send_message("Obteniendo alertas")
-                result = await alert.query()
+                result = await alert.get_data()
                 await self.ctx.send(result)
         
             except Exception as ex:
-                await self.ctx.send(f"ultimas alertas:{ex}")
+                await self.ctx.send(f"{ex}")
 
         #Caso 4
         elif self.values[0] == "Reporte del dia":
             try:
                 await interaccion.response.send_message("Obteniendo reporte")
-                await reporte_dia.query()
-        
+                await report.get_data()
+                await self.ctx.send()
+
             except Exception as ex:
                 await self.ctx.send(f"ultimas alertas:{ex}")
 

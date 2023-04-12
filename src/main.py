@@ -4,19 +4,18 @@ import logging
 import discord
 
 from discord.ext import commands
-from Functions import *
+from Funciones import *
 from dotenv import load_dotenv
-from Functions.Database.Funciones.alertas import LeerAlerta
+
 
 
 load_dotenv()
 
 
-
 """Variables"""
 token = os.environ["BOT_SECRET_TOKEN"]
 descripcion = """Hola soy el bot de Edelpa S.A, \nte ayudare a enterarte de las alertas mas recientes del robot."""
-alert = LeerAlerta()
+alert = Alerta()
 
 
 """ Obligatory to retry connection"""
@@ -38,6 +37,7 @@ async def on_ready():
     """Evento que esta disponible cuando el bot se conecta de manera correcta \n
     y realiza el registro de las subclases de de Commands.cog, para que esten \n
     disponible los comandos anidados"""
+
     await bot.add_cog(MyEvents(bot))
     await bot.add_cog(MenuCommands(bot))
     await bot.add_cog(PrincipalCommands(bot))
@@ -45,14 +45,14 @@ async def on_ready():
 
 
 def main():
-    """Funcion para que el bot pueda correr y ante cualqueir 
-    inconveniente lanze expecion"""
+    """Funcion para que el bot pueda correr y ante cualquier 
+    inconveniente mande una excepecion expecion"""
+
     try:
         bot.run(token)
 
     except Exception as ex:
-        print(f"error : {ex}, \
-              cause: {ex.__cause__}")
+        raise ex
 
 
 if __name__ == '__main__':

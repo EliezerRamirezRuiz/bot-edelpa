@@ -1,19 +1,26 @@
-from Functions.Database.conexion_db import Database
-from aiohttp.client_exceptions import ContentTypeError
 
 import aiohttp
 import asyncio
 
+from Funciones.Database.db import Database
+from aiohttp.client_exceptions import ContentTypeError
 
-class LeerAlerta(Database):
+
+class Alerta(Database):
+    """Subclase heredada de Database, se encarga de las alertas 
+    y contendra todos los metodos que tengan alguna relacion con
+    las alertas"""
+
     def __init__(self) -> None:
         self.base_url = 'https://discordapp.com/api/webhooks/'
         super().__init__()
 
 
-    async def query(self):
+    async def get_data(self):
         """ Funcion para traer datos de la base de datos SQL Server, 
-        para ser mas exacto muchas alertas """
+        para ser mas exacto muchas alertas, todo a traves de un 
+        procedimiento almacenado """
+
         try:
             conn = await self.connection_sqlserver()
             async with conn.cursor() as cursor:
@@ -22,6 +29,7 @@ class LeerAlerta(Database):
                 await cursor.execute(query)
                 row = await cursor.fetchall()
 
+                print(row)
                 return row
 
         except Exception as ex:
@@ -36,14 +44,15 @@ class LeerAlerta(Database):
         """Funcion para mandar mensaje automaticamente sin parar,
         se espera 5 segundos para volver a contactar la base de datos
         y traer aquellas alertas que esten activas"""
+
         while True:
             async with aiohttp.ClientSession() as session:
 
-                await asyncio.sleep(5)
-                lista_alertas = await self.query()
+                await asyncio.sleep(3)
+                lista_alertas = await self.get_data()
 
                 if len(lista_alertas) == 0:
-                    continue
+                    print('no hay alertas')
 
                 else:
                     for data in lista_alertas:

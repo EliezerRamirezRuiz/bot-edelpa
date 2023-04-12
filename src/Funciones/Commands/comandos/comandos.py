@@ -1,14 +1,14 @@
 from discord.ext import commands
 
-from Functions.Database.Funciones.alertas import LeerAlerta
-from Functions.Database.Funciones.estado_robot import EstadoRobot
-from Functions.Database.Funciones.obtener_stock import ObtenerStock
-from Functions.Database.Funciones.reporte_dia import ReporteDia
+from Funciones.Database.Clases.alerta import Alerta
+from Funciones.Database.Clases.robot import Robot
+from Funciones.Database.Clases.stock import Stock
+from Funciones.Database.Clases.reporte import Reporte
 
-alertas = LeerAlerta()
-estado_robot =  EstadoRobot()
-obtener_stock = ObtenerStock()
-reporte_dia = ReporteDia()
+alertas = Alerta()
+estado_robot =  Robot()
+obtener_stock = Stock()
+reporte_dia = Reporte()
 
 
 class PrincipalCommands(commands.Cog):
@@ -26,7 +26,7 @@ class PrincipalCommands(commands.Cog):
             await ctx.send("Porfavor escriba el codigo del stock a consultar:")
             
             message = await self.bot.wait_for('message', check=lambda m: m.author == ctx.author, timeout=30.0)
-            result = await obtener_stock.query(str(message.content))
+            result = await obtener_stock.get_data(str(message.content))
 
             await ctx.send(result) 
             
@@ -41,7 +41,7 @@ class PrincipalCommands(commands.Cog):
         try:
             await ctx.send("Consultando estado del robot")
 
-            result = await estado_robot.query()
+            result = await estado_robot.get_data()
             await ctx.send(result)
 
         except Exception as ex:
@@ -54,7 +54,7 @@ class PrincipalCommands(commands.Cog):
 
         try:
             await ctx.send("Obteniendo alertas")
-            result = await alertas.query()
+            result = await alertas.get_data()
 
             await ctx.send(result)
             

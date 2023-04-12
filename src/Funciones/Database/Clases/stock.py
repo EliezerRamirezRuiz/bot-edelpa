@@ -1,10 +1,13 @@
-from Functions.Database.conexion_db import Database
+from Funciones.Database.db import Database
 
 
-class ObtenerStock(Database):
-    async def query(self, code: str):
+class Stock(Database):
+    async def get_data(self, code: str) :
         """ Funcion para traer datos de la base de datos SQL Server, 
-        para ser mas exacto una Stock """
+        para ser mas exacto una Stock. En caso de que el resultado que 
+        traiga es igual a None, mandara un mensaje de 'codigo invalido'
+        
+        """
         try:
             conn = await self.connection_sqlserver()
             async with conn.cursor() as cursor:
@@ -17,8 +20,8 @@ class ObtenerStock(Database):
 
                 return row
 
-        except Exception as ex:
-            return f'obtener stock no puede:{ex}'
+        except TimeoutError as ex:
+            return f'ocurrio: {ex.__cause__}'
 
         finally:
             await cursor.close()
