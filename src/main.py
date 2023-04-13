@@ -8,7 +8,6 @@ from Funciones import *
 from dotenv import load_dotenv
 
 
-
 load_dotenv()
 
 
@@ -41,7 +40,8 @@ async def on_ready():
     await bot.add_cog(MyEvents(bot))
     await bot.add_cog(MenuCommands(bot))
     await bot.add_cog(PrincipalCommands(bot))
-    bot.loop.create_task(alert.alertas_automaticas())
+    await bot.change_presence(activity=discord.Game(name="Working hard"))
+    bot.loop.create_task(alert.alertas_automaticas2(bot))
 
 
 def main():
@@ -50,7 +50,7 @@ def main():
 
     try:
         bot.run(token)
-
+        
     except Exception as ex:
         raise ex
 

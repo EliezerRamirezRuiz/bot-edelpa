@@ -1,0 +1,22 @@
+SP_HELPTEXT mandar_alertas
+
+CREATE PROCEDURE MANDAR_ALERTAS
+	AS BEGIN
+		SELECT A.AlertName, A.AlertDescription,
+		A.AlertID, C.ID, C.NOMBRE_DEL_CANAL
+		FROM ALERTS A 
+		INNER JOIN CANALES C ON C.AREA = A.AREA
+		WHERE A.AlertActivo = 1;
+	END
+
+
+CREATE PROCEDURE ULTIMAS_ALERTAS
+	AS BEGIN 
+		SELECT TOP 5 
+		AlertName,
+		AlertDescription,
+		AlertActivo
+		FROM ALERTS
+		WHERE AlertActivo = 1 
+		ORDER BY AlertDate DESC
+	END
