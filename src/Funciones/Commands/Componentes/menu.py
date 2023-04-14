@@ -73,25 +73,18 @@ class Menu(Select):
         # Caso 2
         elif self.values[0] == "Estado Robot":
             await interaccion.response.send_message('Verificando')
-            ...
+            await self.ctx.send('Funcionando')
 
         # Caso 3
         elif self.values[0] == "Ultimas Alertas":
-            try:
-                await interaccion.response.send_message("Obteniendo alertas")
-                result = await alert.get_data()
-                await self.ctx.send(result)
-        
-            except Exception as ex:
-                await self.ctx.send(f"{ex}")
+            await interaccion.response.send_message("Obteniendo alertas...")
+            alerta = await alert.ultimas_alertas_activas()
+            await self.ctx.send(embed=alerta)
 
         #Caso 4
         elif self.values[0] == "Reporte del dia":
-            try:
                 await interaccion.response.send_message("Obteniendo reporte")
                 await report.get_data()
                 await self.ctx.send()
 
-            except Exception as ex:
-                await self.ctx.send(f"ultimas alertas:{ex}")
 

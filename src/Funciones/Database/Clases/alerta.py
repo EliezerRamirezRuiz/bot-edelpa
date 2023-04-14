@@ -1,7 +1,6 @@
-"""Archivo """
-import aiohttp
-import asyncio
+"""Archivo para controlar las alertas """
 import discord
+
 from Funciones.Database.db import Database
 from aiohttp.client_exceptions import ContentTypeError
 
@@ -13,7 +12,6 @@ class Alerta(Database):
     programables"""
 
     def __init__(self) -> None:
-        self.base_url = 'https://discordapp.com/api/webhooks/'
         super().__init__()
 
 
@@ -29,8 +27,11 @@ class Alerta(Database):
                 await cursor.execute(query)
                 row = await cursor.fetchall()
 
-                print(row)
-                return row
+                print(f'{row}\n -----------------------------------')
+                if row is None:
+                    return []
+                
+                return row 
 
         except Exception as ex:
             print(f'obtener alerta :{ex}')
@@ -39,8 +40,39 @@ class Alerta(Database):
             await cursor.close()
             await conn.close()
 
+    
+    async def ultimas_alertas_activas(self):
+        """Funcion que trae los datos de la funcion `get_data()`
+        se manipulan para presentar y entregar de una manera mas 
+        ordenada. En caso que no contenga alertas activas se mandara 
+        un mensaje que le informe al usuario que no hay alertas"""
 
+        data = await self.get_data()
+        if len(data) > 0:
+            embed = discord.Embed(title='Ultimas alertas activas')
+            for i in data:
+                problema = i[0]
+                error = i[1]
+                fecha = i[3].strftime(r"%Y-%m-%d")
+                hora = i[3].strftime(r"%H:%M:%S")
+                estado = 'Activo' if i[2] == True else 'Desactivado'
 
+                embed.add_field(name=f'PROBLEMA :{problema}'
+                                ,value=f'''*ERROR: {error}
+                                *FECHA: {fecha}
+                                *HORA: {hora}
+                                *ESTADO: {estado}''',
+                                inline=False)
+            
+                embed.set_footer(text='Bot Edelpa S.A.')
+            
+            return embed
+        
+        else:
+            
+            embed = discord.Embed(title='No hay alertas activas')
+            embed.set_footer(text='Bot Edelpa S.A.')
+            return embed
 
 
 

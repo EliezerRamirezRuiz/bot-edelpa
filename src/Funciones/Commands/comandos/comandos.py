@@ -19,12 +19,12 @@ class PrincipalCommands(commands.Cog):
     
     @commands.command()
     async def consultar_stock(self, ctx):
-        """Funcion que consultar stock a pedir"""
+        """Funcion que consultar stock a pedir, manda mensaje para que el usuario sepa 
+        que debe mandar una respuesta para consultar el stock"""
 
         try:
-            """manda mensaje primero cuando se marca la opcion y despues se invoca este"""
-            await ctx.send("Porfavor escriba el codigo del stock a consultar:")
-            
+     
+            await ctx.send("Porfavor escriba el codigo del stock a consultar:")        
             message = await self.bot.wait_for('message', check=lambda m: m.author == ctx.author, timeout=30.0)
             result = await obtener_stock.get_data(str(message.content))
 
@@ -40,7 +40,6 @@ class PrincipalCommands(commands.Cog):
 
         try:
             await ctx.send("Consultando estado del robot")
-
             result = await estado_robot.get_data()
             await ctx.send(result)
 
@@ -50,13 +49,13 @@ class PrincipalCommands(commands.Cog):
     
     @commands.command()
     async def ultimas_alertas(self, ctx):
-        """Funcion que consultar ultimas 5 o 10 alertas"""
+        """Funcion que consulta la funcion `Alerta.ultimas_alertas_activas()` y obtiene el objeto Embed y
+            lo retornamos. """
 
         try:
             await ctx.send("Obteniendo alertas")
-            result = await alertas.get_data()
-
-            await ctx.send(result)
+            alerta = await alertas.ultimas_alertas_activas()
+            await ctx.send(embed=alerta)
             
         except Exception as ex:
             await ctx.send(ex)

@@ -36,18 +36,16 @@ async def on_ready():
     """Evento que esta disponible cuando el bot se conecta de manera correcta \n
     y realiza el registro de las subclases de de Commands.cog, para que esten \n
     disponible los comandos anidados"""
-
     await bot.add_cog(MyEvents(bot))
     await bot.add_cog(MenuCommands(bot))
     await bot.add_cog(PrincipalCommands(bot))
     await bot.change_presence(activity=discord.Game(name="Working hard"))
-    bot.loop.create_task(alert.alertas_automaticas2(bot))
+    'bot.loop.create_task()'
 
 
 def main():
-    """Funcion para que el bot pueda correr y ante cualquier 
-    inconveniente mande una excepecion expecion"""
-
+    """ Funcion para que el bot pueda correr y ante cualquier 
+    inconveniente mande una excepecion expecion """
     try:
         bot.run(token)
         
