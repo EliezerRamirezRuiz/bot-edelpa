@@ -32,8 +32,5 @@ Las librerias utilizadas en este proyecto fueron:
 
 <br>
 
-## Programacion
 
-Se ha escogido una programacion orientada a objetos para mas factilidad, facilidad y escalibidad.
-<br>para asi manejar y gestionar las respectivas acciones que realizara.
 

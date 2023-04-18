@@ -64,3 +64,5 @@ class MyEvents(commands.Cog):
         if welcome_channel is not None:
             # Enviar mensaje de bienvenida
             await welcome_channel.send(f'Bienvenido {member.mention} al servidor!')
+
+    

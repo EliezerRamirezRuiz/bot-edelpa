@@ -1,7 +1,7 @@
 from discord.ext import commands
 from discord.ui import View
 
-from Funciones.Commands.Componentes.menu import Menu
+from Commands.Componentes.menu import Menu
 
 
 class MenuCommands(commands.Cog):

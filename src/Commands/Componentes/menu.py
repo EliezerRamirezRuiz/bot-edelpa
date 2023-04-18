@@ -1,18 +1,9 @@
 """Archivo que contiene el menu con multiples opciones 
 que apretando alguna realiza la accion conrrespondiente"""
-
-from Funciones.Database.Clases.alerta import Alerta
-from Funciones.Database.Clases.robot import Robot
-from Funciones.Database.Clases.stock import Stock
-from Funciones.Database.Clases.reporte import Reporte
-from discord.ui import Select
-
 import discord
 
-alert = Alerta()
-robot =  Robot()
-stock = Stock()
-report = Reporte()
+from discord.ui import Select
+from Database import * 
 
 
 class Menu(Select):
@@ -51,7 +42,8 @@ class Menu(Select):
             discord.SelectOption(
             label="prueba",
             description="Saber la cantidad hecha por dia",
-            value="prueba"),]
+            value="prueba"),
+            ]
 
         super().__init__(custom_id="Menu", placeholder="Menu",
                         min_values=1, max_values=1,
@@ -61,30 +53,27 @@ class Menu(Select):
 
         # Caso 1
         if self.values[0] == "Consultar Stock":
-            try:
-                await interaccion.response.send_message('Escriba el codigo a consultar:')
-                message = await self.bot.wait_for('message', check=lambda m: m.author == self.ctx.author, timeout=30.0)
-                result = await stock.get_data(str(message.content))
-                await self.ctx.send(result)
-
-            except TimeoutError as error:
-                await self.ctx.send(f'error:{error}')
+            await interaccion.response.send_message('Escriba el codigo a consultar:')
+            message = await self.bot.wait_for('message', check=lambda m: m.author == self.ctx.author, timeout=30.0)
+            result = await stock.get_data(str(message.content))
+            await self.ctx.send(result)
 
         # Caso 2
         elif self.values[0] == "Estado Robot":
             await interaccion.response.send_message('Verificando')
-            await self.ctx.send('Funcionando')
+            embed = await robot.get_data()
+            await self.ctx.send(embed)
 
         # Caso 3
         elif self.values[0] == "Ultimas Alertas":
             await interaccion.response.send_message("Obteniendo alertas...")
-            alerta = await alert.ultimas_alertas_activas()
-            await self.ctx.send(embed=alerta)
+            embed = await alerta.ultimas_alertas_activas()
+            await self.ctx.send(embed=embed)
 
         #Caso 4
         elif self.values[0] == "Reporte del dia":
-                await interaccion.response.send_message("Obteniendo reporte")
-                await report.get_data()
-                await self.ctx.send()
+            await interaccion.response.send_message("Obteniendo reporte")
+            embed = await report.get_data()
+            await self.ctx.send(report)
 
 

@@ -1,7 +1,7 @@
-from Funciones.Database.db import Database
+from Database.db import Database
 
 
-class Reporte(Database):
+class Robot(Database):
     async def get_data(self):
         """ Funcion para traer datos de la base de datos SQL Server, 
         para ser mas exacto una alerta """
@@ -11,7 +11,7 @@ class Reporte(Database):
             return 'Trabajando'
 
         except Exception as ex:
-            return f'estado del robot :{ex}'
+            return f'error '
 
         finally:
             """finall operacion"""

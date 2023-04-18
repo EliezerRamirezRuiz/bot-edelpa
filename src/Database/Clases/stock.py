@@ -1,9 +1,10 @@
-from Funciones.Database.db import Database
 import discord
+from Database.db import Database
+
 
 
 class Stock(Database):
-    async def get_data(self, code: str) :
+    async def get_data(self, code) :
         """ Funcion para traer datos de la base de datos SQL Server, 
         para ser mas exacto una Stock. En caso de que el resultado que 
         traiga es igual a None, mandara un mensaje de 'codigo invalido'
@@ -30,9 +31,10 @@ class Stock(Database):
             await conn.close()
         
 
-    async def return_stock(self, code):
-        """Funcion que usa `get_data` para obtener datos """
+    async def return_stock(self, code: str):
+        """ Funcion que usa `self.get_data` para obtener datos """
         stock = await self.get_data(code)
+
         if len(stock) > 0:
             embed = discord.Embed(title='Stock Material')
             embed.add_field(name=f'Material: {stock[0]}'

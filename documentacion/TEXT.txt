@@ -4,3 +4,17 @@ https://aioodbc.readthedocs.io/en/latest/index.html
 
 funcion para habilitar service broker
 ALTER DATABASE Prueba SET ENABLE_BROKER;
+
+
+
+El bot hasta el momento puede:
+    -Conectarse
+    -Mandar mensaje de ayuda
+    -Executar comandos
+    -Mandar menu con opciones
+    -Conectarse a una base de datos
+    -Executar procedimientos almacenados
+    -Crear una tarea en el loop y 
+        executarla al paralelo que el bot
+    
+    

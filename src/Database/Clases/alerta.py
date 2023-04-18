@@ -1,8 +1,6 @@
 """Archivo para controlar las alertas """
 import discord
-
-from Funciones.Database.db import Database
-from aiohttp.client_exceptions import ContentTypeError
+from Database.db import Database
 
 
 class Alerta(Database):
@@ -17,8 +15,9 @@ class Alerta(Database):
 
     async def get_data(self):
         """ Funcion para traer datos de la base de datos SQL Server, 
-        para ser mas exacto muchas alertas, todo a traves de un 
-        procedimiento almacenado """
+        para ser mas exacto muchas alertas. Todo a traves de un 
+        procedimiento almacenado en caso de no contener datos se mandara
+        una lista vacia [] """
 
         try:
             conn = await self.connection_sqlserver()
@@ -48,8 +47,12 @@ class Alerta(Database):
         un mensaje que le informe al usuario que no hay alertas"""
 
         data = await self.get_data()
+        
         if len(data) > 0:
-            embed = discord.Embed(title='Ultimas alertas activas')
+            embed = discord.Embed(title='Ultimas alertas activas', 
+                                  url='https://www.edelpa.cl/')
+            embed.set_footer(text='Bot Edelpa S.A.')
+            embed.set_image(url='https://raw.githubusercontent.com/EliezerEdelpa/Imagenes-Edelpa/main/foto_edelpa.png')
             for i in data:
                 problema = i[0]
                 error = i[1]
@@ -63,8 +66,6 @@ class Alerta(Database):
                                 *HORA: {hora}
                                 *ESTADO: {estado}''',
                                 inline=False)
-            
-                embed.set_footer(text='Bot Edelpa S.A.')
             
             return embed
         

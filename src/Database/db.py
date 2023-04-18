@@ -4,11 +4,12 @@ import os
 from abc import ABCMeta, abstractmethod
 from dotenv import load_dotenv
 
+
 load_dotenv()
 
 
 class Database(metaclass=ABCMeta):
-    r"""Clase abstracta para obtener conexion y que cada clase hija realice query de la base de datos.
+    """Clase abstracta para obtener conexion y que cada clase hija realice query de la base de datos.
             Metodo abstracto: 
 
         query(): Disponible para implementar funcion que uno desee conectando a la base de datos"""
