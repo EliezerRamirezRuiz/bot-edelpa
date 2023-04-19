@@ -1,17 +1,17 @@
 from Database.db import Database
-
+import discord
 
 class Robot(Database):
     async def get_data(self):
         """ Funcion para traer datos de la base de datos SQL Server, 
         para ser mas exacto una alerta """
         try:
-            """codigo a ejecutar"""
-
-            return 'Trabajando'
+            embed = discord.Embed(title='Trabajando')
+            return embed
 
         except Exception as ex:
-            return f'error '
+            embed = discord.Embed(title=f'{ex}')
+            return embed
 
         finally:
-            """finall operacion"""
+            pass

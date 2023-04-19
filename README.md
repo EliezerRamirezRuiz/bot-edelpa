@@ -34,3 +34,14 @@ Las librerias utilizadas en este proyecto fueron:
 
 
 
+COMANDOS
+- !consultar_stock
+- !estado_robot
+- !alertas_activas
+- !alertas_desactivadas
+
+MENU
+- Consultar stock
+- Estado robot
+- Ultimas alertas activas
+- Reporte del dia

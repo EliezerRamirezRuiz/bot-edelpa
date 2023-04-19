@@ -4,10 +4,11 @@ from Database.db import Database
 
 
 class Alerta(Database):
-    """Subclase heredada de Database, se encarga de las alertas 
+    """
+    Subclase se encarga de las alertas 
     y contendra todos los metodos que tengan alguna relacion con
     las alertas que sean llamados de comandos o menus con opciones
-    programables"""
+    """
 
     def __init__(self) -> None:
         super().__init__()
@@ -26,7 +27,6 @@ class Alerta(Database):
                 await cursor.execute(query)
                 row = await cursor.fetchall()
 
-                print(f'{row}\n -----------------------------------')
                 if row is None:
                     return []
                 
@@ -76,4 +76,11 @@ class Alerta(Database):
             return embed
 
 
+    async def ultimas_alertas_desactivadas(self):
+        """Funcion que trae los datos de la funcion `get_data()`
+        se manipulan para presentar y entregar de una manera mas 
+        ordenada. En caso que no contenga alertas activas se mandara 
+        un mensaje que le informe al usuario que no hay alertas"""
 
+        embed = discord.Embed(title="No se ha podido obtener las ultimas alertas desactivadas")
+        return embed

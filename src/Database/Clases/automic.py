@@ -1,3 +1,9 @@
+"""
+Modulo encargado de mandar alertas automaticamente 
+
+Estado: Completado
+"""
+
 import discord
 import asyncio
 
@@ -16,10 +22,9 @@ class AutomaticAlerta(Database):
                 query = f" EXEC MANDAR_ALERTAS "
                 await cursor.execute(query)
                 row = await cursor.fetchall()
-
-                
-                print(row)
+  
                 return row
+
 
         except Exception as ex:
             print(f'obtener alerta :{ex}')
@@ -39,7 +44,7 @@ class AutomaticAlerta(Database):
                 await cursor.execute(query)
 
         except Exception as ex:
-            print(f' Apagar alertas tiene un error en :{ex}')
+            ...
 
         finally:
             await cursor.close()
@@ -51,7 +56,7 @@ class AutomaticAlerta(Database):
         que los usuarios se den cuenta que hay un error en el robot o alguna area"""
 
         while True:
-            await asyncio.sleep(1)
+            await asyncio.sleep(15)
             lista_alertas = await self.get_data()
 
             if len(lista_alertas) == 0:

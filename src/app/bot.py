@@ -3,11 +3,9 @@ import logging
 import discord
 import os
 
+from Database import alerta_automatica
 from discord.ext import commands
 from dotenv import load_dotenv
-
-from Database import alerta_automatica
-
 from app import *
 
 
@@ -34,14 +32,16 @@ bot = commands.Bot(command_prefix='!', description=descripcion,
 handler = logging.FileHandler(filename='discord.log', encoding='utf-8', mode='r+')
 
 
+
 @bot.event
 async def on_ready():
     """Evento que esta disponible cuando el bot se conecta de manera correcta \n
     y realiza el registro de las subclases de de Commands.cog, para que esten \n
     disponible los comandos anidados"""
+
     await bot.add_cog(MyEvents(bot))
     await bot.add_cog(MenuCommands(bot))
-    await bot.add_cog(PrincipalCommands(bot))
+    await bot.add_cog(GetCommands(bot))
     await bot.change_presence(activity=discord.Game(name="Working hard"))
     bot.loop.create_task(alerta_automatica.auto_alertas(bot))
 

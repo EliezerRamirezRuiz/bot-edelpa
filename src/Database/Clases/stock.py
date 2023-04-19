@@ -16,7 +16,6 @@ class Stock(Database):
                 query = f" EXEC  ObtenerStock {code} "
                 await cursor.execute(query)
                 row = await cursor.fetchone()
-                print(row)
 
                 if row is None:
                     return []
