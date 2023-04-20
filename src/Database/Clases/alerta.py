@@ -1,19 +1,15 @@
 """Archivo para controlar las alertas """
 import discord
-from Database.db import Database
+from Database.db import Conexion
 
 
-class Alerta(Database):
+class Alerta(Conexion):
     """
     Subclase se encarga de las alertas 
     y contendra todos los metodos que tengan alguna relacion con
     las alertas que sean llamados de comandos o menus con opciones
     """
-
-    def __init__(self) -> None:
-        super().__init__()
-
-
+    
     async def get_data(self):
         """ Funcion para traer datos de la base de datos SQL Server, 
         para ser mas exacto muchas alertas. Todo a traves de un 
@@ -60,11 +56,11 @@ class Alerta(Database):
                 hora = i[3].strftime(r"%H:%M:%S")
                 estado = 'Activo' if i[2] == True else 'Desactivado'
 
-                embed.add_field(name=f'PROBLEMA :{problema}'
-                                ,value=f'''*ERROR: {error}
-                                *FECHA: {fecha}
-                                *HORA: {hora}
-                                *ESTADO: {estado}''',
+                embed.add_field(name=f'PROBLEMA :{problema}',
+                                value=f'''*ERROR: {error}
+                                *Fecha: {fecha}
+                                *Hora: {hora}
+                                *Estado: {estado}''',
                                 inline=False)
             
             return embed

@@ -7,10 +7,10 @@ Estado: Completado
 import discord
 import asyncio
 
-from Database.db import Database
+from Database.db import Conexion
  
 
-class AutomaticAlerta(Database):
+class AutomaticAlerta(Conexion):
     async def get_data(self) -> list:
         """ Funcion para traer datos de la base de datos SQL Server, 
         para ser mas exacto muchas alertas, todo a traves de un 

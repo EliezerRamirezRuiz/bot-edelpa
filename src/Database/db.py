@@ -8,18 +8,14 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-class Database(metaclass=ABCMeta):
-    """Clase abstracta para obtener conexion y que cada clase hija realice query de la base de datos.
-            Metodo abstracto: 
-
-        query(): Disponible para implementar funcion que uno desee conectando a la base de datos"""
+class Conexion(metaclass=ABCMeta):
+    """Clase abstracta que retorna una conexion """
     
 
     def __init__(self) -> None:
         self.server = os.getenv('SERVER')
         self.database = os.getenv('DATABASE')
-        self.dsn = 'DRIVER={SQL Server};SERVER=' + self.server + \
-                ';DATABASE='+ self.database + ';Trusted_Connection=yes;'
+        self.dsn = 'DRIVER={SQL Server};SERVER=' + self.server + ';DATABASE='+ self.database + ';Trusted_Connection=yes;'
 
 
     async def connection_sqlserver(self):

@@ -13,7 +13,7 @@ load_dotenv()
 
 
 """Variables"""
-token = os.environ["BOT_SECRET_TOKEN"]
+token = os.getenv("BOT_SECRET_TOKEN")
 descripcion = """Hola soy el bot de Edelpa S.A, \nte ayudare a enterarte de las alertas mas recientes del robot."""
 
 
@@ -29,8 +29,7 @@ bot = commands.Bot(command_prefix='!', description=descripcion,
 
 
 """Configuration Bot"""
-handler = logging.FileHandler(filename='discord.log', encoding='utf-8', mode='r+')
-
+# handler = logging.FileHandler(filename='discord.log', encoding='utf-8', mode='r+')
 
 
 @bot.event
@@ -38,7 +37,6 @@ async def on_ready():
     """Evento que esta disponible cuando el bot se conecta de manera correcta \n
     y realiza el registro de las subclases de de Commands.cog, para que esten \n
     disponible los comandos anidados"""
-
     await bot.add_cog(MyEvents(bot))
     await bot.add_cog(MenuCommands(bot))
     await bot.add_cog(GetCommands(bot))
