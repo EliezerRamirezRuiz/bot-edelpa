@@ -1,4 +1,4 @@
-from Database.db import Conexion
+from Database.database import Conexion
 import discord
 
 class Robot(Conexion):

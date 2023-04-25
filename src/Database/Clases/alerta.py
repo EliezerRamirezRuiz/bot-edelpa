@@ -1,6 +1,6 @@
 """Archivo para controlar las alertas """
 import discord
-from Database.db import Conexion
+from Database.database import Conexion
 
 
 class Alerta(Conexion):
