@@ -3,14 +3,14 @@ import aioodbc
 #import through from 
 from datetime import datetime
 from aioodbc.connection import _ContextManager
-from src.config.config import (DRIVER,SERVER,DATABASE)
+from config.config import (DRIVER,SERVER,DATABASE)
 from discord import Embed
 
 
-async def conexion_db() -> _ContextManager:
+async def conexion_db():
     DSN = f'DRIVER={DRIVER};SERVER={SERVER};DATABASE={DATABASE};Trusted_Connection=yes;'
     try:
-        connection = await aioodbc.connect(DSN)
+        connection = await aioodbc.connect(dsn=DSN)
         return connection
 
     except Exception as ex:
@@ -21,15 +21,14 @@ def obtener_hora() -> datetime:
     return datetime.now()
 
 
-async def comprobar_hora(hora:datetime) -> bool:
-    now = await hora
-    return now == obtener_hora()
+def comprobar_hora(hora_uno:datetime, hora_dos:datetime) -> bool:
+    return hora_uno == hora_dos
 
-
+# comprobar_ma
 def comprobar_largo(lista:list) -> bool:
     return len(lista) > 0
 
-
+# comprobar_mayor
 def comprobar_mayor(numero:int) -> bool:
     return numero > 0
 

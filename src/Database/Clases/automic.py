@@ -5,16 +5,22 @@ Estado: Completado
 """
 #import
 import asyncio
+from asyncio.exceptions import CancelledError
 #from through from
 from discord.ext import commands
 from discord import Embed
 from Database.database import (conexion_db, comprobar_hora, 
-                               comprobar_largo, comprobar_mayor)
+                               comprobar_largo, comprobar_mayor,
+                               obtener_hora)
 
 
 class AutomaticAlerta():
     """Clase se enfoca en realizar acciones para las alertas automaticas"""
-    async def get_data(self) -> list:
+    def __init__(self) -> None:
+        pass
+    
+
+    async def obtener_alertas(self) -> list:
         """ Funcion para traer datos `{Procedure MANDAR_ALERTAS}` """
         try:
             conn = await conexion_db()
@@ -73,29 +79,23 @@ class AutomaticAlerta():
         """Cada cierto tiempo trae alertas y las muestra de forma automatica para
         que los usuarios se den cuenta que hay un error en el robot o alguna area"""
         while True:
-            await asyncio.sleep(15)
-            lista_alertas = await self.get_data()
-
+            lista_alertas = await self.obtener_alertas()
             if comprobar_largo(lista_alertas):
-
                 for data in lista_alertas:
-
-                    if comprobar_mayor(data[5]):
+                    print(data[2], obtener_hora())
+                    if comprobar_mayor(data[5]) == True and comprobar_hora(obtener_hora() ,data[2]) == True:
                         print(data)
                         # reemplaza channel_id con la ID del canal
                         channel = bot.get_channel(int(data[3])) 
                         embed = Embed(title=f" {data[0]}", description=f"{data[1]}", color=0x00ff00)
-                        embed.set_author(name='Bot Edelpa - Alert!', icon_url=r'https://github.com/EliezerEdelpa/Imagenes-Edelpa/blob/main/Dise%C3%B1o%20sin%20t%C3%ADtulo%20(1).png')
+                        embed.set_author(name='Bot Edelpa - Alert!', icon_url=r'https://raw.githubusercontent.com/EliezerEdelpa/Imagenes-Edelpa/main/foto_edelpa.png')
                         embed.set_footer(text='Empresa Edelpa S.A.')
-                        #embed.set_image(url='https://raw.githubusercontent.com/EliezerEdelpa/Imagenes-Edelpa/main/foto_edelpa.png')
-
+                        #embed.set_image(url='')
                         await channel.send(embed=embed)
-                        await self.bajar_contador_alertas(int(data[4]))
-
+                        await self.bajar_contador_alertas(int(data[4]))  
+                    
                     else: 
                         await self.cambiar_estado_alerta(data[4]) 
-
             else:
-                print('no hay alertas')
                 continue
                     

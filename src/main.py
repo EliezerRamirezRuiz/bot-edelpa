@@ -4,8 +4,8 @@ from Commands.comandos.discord_menu import MenuCommands
 from Commands.comandos.get_commands import GetCommands
 from discord import Game
 
-from src.app.bot import app
-from src.config.config import TOKEN
+from app.bot import app
+from config.config import TOKEN
 
 # Import
 import logging
