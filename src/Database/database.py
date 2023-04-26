@@ -1,41 +1,56 @@
+#import
 import aioodbc
-import os
-import datetime
-
+#import through from 
+from datetime import datetime
 from aioodbc.connection import _ContextManager
-from abc import ABCMeta, abstractmethod
-from dotenv import load_dotenv
+from src.config.config import (DRIVER,SERVER,DATABASE)
+from discord import Embed
 
 
-load_dotenv()
+async def conexion_db() -> _ContextManager:
+    DSN = f'DRIVER={DRIVER};SERVER={SERVER};DATABASE={DATABASE};Trusted_Connection=yes;'
+    try:
+        connection = await aioodbc.connect(DSN)
+        return connection
+
+    except Exception as ex:
+        raise ex
 
 
-NOW = datetime.datetime.now()
-
-class Conexion(metaclass=ABCMeta):
-    """Clase abstracta que retorna una conexion """
-    
-
-    def __init__(self) -> None:
-        self.server = os.getenv('SERVER')
-        self.database = os.getenv('DATABASE')
-        self.dsn = 'DRIVER={SQL Server};SERVER=' + self.server + ';DATABASE='+ self.database + ';Trusted_Connection=yes;'
+def obtener_hora() -> datetime:
+    return datetime.now()
 
 
-    async def connection_sqlserver(self) -> _ContextManager:
-        
-        try:
-            connection = await aioodbc.connect(dsn=self.dsn)
-            return connection
-
-        except Exception:
-            return f'''Fue imposible obtener una respuesta del servidor,
-                porfavor contacte con el administrador de Area Informatica'''
+async def comprobar_hora(hora:datetime) -> bool:
+    now = await hora
+    return now == obtener_hora()
 
 
-    @abstractmethod
-    async def get_data(self):
-        pass
+def comprobar_largo(lista:list) -> bool:
+    return len(lista) > 0
 
 
+def comprobar_mayor(numero:int) -> bool:
+    return numero > 0
 
+
+def create_embed(title=None, description=None, color=None, author:list=None, footer=None, thumbnail=None, image=None, fields=None):
+    embed = Embed(title=title, description=description, color=color)
+
+    if author:
+        embed.set_author(name=author['name'], url=author.get('url'), icon_url=author.get('icon_url'))
+
+    if footer:
+        embed.set_footer(text=footer['text'], icon_url=footer.get('icon_url'))
+
+    if thumbnail:
+        embed.set_thumbnail(url=thumbnail)
+
+    if image:
+        embed.set_image(url=image)
+
+    if fields:
+        for field in fields:
+            embed.add_field(name=field['name'], value=field['value'], inline=field.get('inline', True))
+
+    return embed

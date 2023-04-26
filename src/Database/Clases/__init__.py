@@ -14,9 +14,6 @@ alerta_automatica = AutomaticAlerta()
 
 
 __all__ = [
-            'alerta'
-            ,'robot'
-            ,'stock'
-            ,'report'
-            ,'alerta_automatica'
+            'alerta', 'robot' ,'stock'
+            ,'report', 'alerta_automatica'
                                 ]

@@ -1,18 +1,18 @@
 """Archivo para manipular las acciones de """
 import discord
-from Database.database import Conexion
+from Database.database import conexion_db
 from discord import Embed
 
 
-class Stock(Conexion):
-    async def get_data(self, code:str, ctx) -> list :
+class Stock():
+    async def obtener_stock(self, code:str, ctx) -> list :
         """ Funcion para traer datos de la base de datos SQL Server, 
         para ser mas exacto una Stock. En caso de que el resultado que 
         traiga es igual a None, se mandara lista vacia'
         """
 
         try:
-            conn = await self.connection_sqlserver()
+            conn = await conexion_db()
             async with conn.cursor() as cursor:
                 query = f" EXEC  ObtenerStock {code} "
                 await cursor.execute(query)
@@ -35,8 +35,8 @@ class Stock(Conexion):
         
 
     async def return_stock(self, code: str) -> Embed :
-        """ Funcion para retornar los datos de `get_data` """
-        stock = await self.get_data(code)
+        """ Funcion para retornar los datos de `obtener_stock` """
+        stock = await self.obtener_stock(code)
 
         if len(stock) > 0:
             embed = Embed(title='Stock del Material')

@@ -2,10 +2,9 @@
 que apretando alguna realiza la accion conrrespondiente"""
 from discord import (SelectOption, Interaction)
 from discord.ui import Select
-from Database import * 
+from Database.Clases import * 
 
 class Option():
-
     options:list = [
             SelectOption(label="Default", default=True, value="Default"
                         , description="default"),

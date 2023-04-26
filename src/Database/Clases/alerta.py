@@ -1,54 +1,50 @@
 """Archivo para controlar las alertas """
-import discord
-from Database.database import Conexion
+from discord import Embed
+from Database.database import conexion_db
 
 
-class Alerta(Conexion):
+class Alerta():
     """
-    Subclase se encarga de las alertas 
-    y contendra todos los metodos que tengan alguna relacion con
+    Clase se encarga de las alertas y contendra todos los metodos que tengan alguna relacion con
     las alertas que sean llamados de comandos o menus con opciones
     """
     
-    async def get_data(self):
-        """ Funcion para traer datos de la base de datos SQL Server, 
-        para ser mas exacto muchas alertas. Todo a traves de un 
-        procedimiento almacenado en caso de no contener datos se mandara
-        una lista vacia [] """
-
+    async def ultimas_alertas(self) -> None:
+        """ Funcion que trae las ultimas alertas """
         try:
-            conn = await self.connection_sqlserver()
+            conn = await conexion_db()
             async with conn.cursor() as cursor:
                 query = f" EXEC ULTIMAS_ALERTAS "
                 await cursor.execute(query)
                 row = await cursor.fetchall()
 
-                if row is None:
-                    return []
-                
-                return row 
-
         except Exception as ex:
-            print(f'obtener alerta :{ex}')
+            print(f'ultimas alerta :{ex}')
 
+        else:
+            if row is None:
+                return []
+                
+            return row 
+        
         finally:
             await cursor.close()
             await conn.close()
 
     
-    async def ultimas_alertas_activas(self):
-        """Funcion que trae los datos de la funcion `get_data()`
+    async def ultimas_alertas_activas(self) -> Embed:
+        """Funcion que trae los datos de la funcion `ultimas_alertas()`
         se manipulan para presentar y entregar de una manera mas 
         ordenada. En caso que no contenga alertas activas se mandara 
         un mensaje que le informe al usuario que no hay alertas"""
 
-        data = await self.get_data()
+        data = await self.ultimas_alertas()
         
         if len(data) > 0:
-            embed = discord.Embed(title='Ultimas alertas activas', 
-                                  url='https://www.edelpa.cl/')
+            embed = Embed(title='Ultimas alertas activas', url='https://www.edelpa.cl/')
             embed.set_footer(text='Bot Edelpa S.A.')
             embed.set_image(url='https://raw.githubusercontent.com/EliezerEdelpa/Imagenes-Edelpa/main/foto_edelpa.png')
+            
             for i in data:
                 problema = i[0]
                 error = i[1]
@@ -67,16 +63,16 @@ class Alerta(Conexion):
         
         else:
             
-            embed = discord.Embed(title='No hay alertas activas')
+            embed = Embed(title='No hay alertas activas')
             embed.set_footer(text='Bot Edelpa S.A.')
             return embed
 
 
-    async def ultimas_alertas_desactivadas(self):
-        """Funcion que trae los datos de la funcion `get_data()`
+    async def ultimas_alertas_desactivadas(self) -> Embed:
+        """Funcion que trae los datos de la funcion `ultimas_alertas()`
         se manipulan para presentar y entregar de una manera mas 
         ordenada. En caso que no contenga alertas activas se mandara 
         un mensaje que le informe al usuario que no hay alertas"""
 
-        embed = discord.Embed(title="No se ha podido obtener las ultimas alertas desactivadas")
+        embed = Embed(title="No se ha podido ultimas las ultimas alertas desactivadas")
         return embed

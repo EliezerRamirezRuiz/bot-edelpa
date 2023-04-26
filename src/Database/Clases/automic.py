@@ -3,26 +3,21 @@ Modulo encargado de mandar alertas automaticamente
 
 Estado: Completado
 """
-
-
+#import
 import asyncio
-
-from Database.database import Conexion, NOW
+#from through from
 from discord.ext import commands
 from discord import Embed
+from Database.database import (conexion_db, comprobar_hora, 
+                               comprobar_largo, comprobar_mayor)
 
 
-class AutomaticAlerta(Conexion):
-    """Clase que es heredada de `Conexion`, esta clase se enfoca \n
-    en realizar acciones para las alertas automaticas"""
-
-
+class AutomaticAlerta():
+    """Clase se enfoca en realizar acciones para las alertas automaticas"""
     async def get_data(self) -> list:
-        """ Funcion para traer datos de la base de datos SQL Server,
-        para ser mas exacto muchas alertas, todo a traves de un
-        procedimiento almacenado"""
+        """ Funcion para traer datos `{Procedure MANDAR_ALERTAS}` """
         try:
-            conn = await self.connection_sqlserver()
+            conn = await conexion_db()
             async with conn.cursor() as cursor:
                 query = f" EXEC MANDAR_ALERTAS "
                 await cursor.execute(query)
@@ -41,13 +36,13 @@ class AutomaticAlerta(Conexion):
             await conn.close()
 
 
-    async def cambiar_estado_alerta(self, code:int) -> None:
+    async def cambiar_estado_alerta(self, id:int) -> None:
         """Funcion que executa un procedimiento almacenado que apaga las alarmas,
         se executara despues de haber mandado las alertas con la funcion `self.auto_alertas()`"""
         try:
-            conn = await self.connection_sqlserver()
+            conn = await conexion_db()
             async with conn.cursor() as cursor:
-                query = f" EXEC APAGAR_ALERTAS {code}"
+                query = f" EXEC APAGAR_ALERTAS {id}"
                 await cursor.execute(query)
 
         except Exception:
@@ -61,13 +56,13 @@ class AutomaticAlerta(Conexion):
     async def bajar_contador_alertas(self, id:int) -> None:
         """Funcion para bajar el contador de veces que se debe executar una alerta"""
         try:
-            conn = await self.connection_sqlserver()
+            conn = await conexion_db()
             async with conn.cursor() as cursor:
                 query = f" EXEC BAJAR_CONTADOR_ALERTA {id}"
                 await cursor.execute(query)
 
         except Exception:
-            await 'error al cambiar el estado de la alerta'
+            print('error al modificar alerta')
 
         finally:
             await cursor.close()
@@ -81,15 +76,11 @@ class AutomaticAlerta(Conexion):
             await asyncio.sleep(15)
             lista_alertas = await self.get_data()
 
-            if len(lista_alertas) == 0:
-                print('no hay alertas')
-                continue
-            
-            else:
+            if comprobar_largo(lista_alertas):
 
                 for data in lista_alertas:
 
-                    if data[5] > 0 and data[2] == NOW:
+                    if comprobar_mayor(data[5]):
                         print(data)
                         # reemplaza channel_id con la ID del canal
                         channel = bot.get_channel(int(data[3])) 
@@ -101,9 +92,10 @@ class AutomaticAlerta(Conexion):
                         await channel.send(embed=embed)
                         await self.bajar_contador_alertas(int(data[4]))
 
-                    elif data[5] == 0:
+                    else: 
                         await self.cambiar_estado_alerta(data[4]) 
 
-                    else: 
-                        continue 
+            else:
+                print('no hay alertas')
+                continue
                     

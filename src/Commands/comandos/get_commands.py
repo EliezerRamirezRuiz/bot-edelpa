@@ -1,4 +1,4 @@
-from Database import *
+from Database.Clases import *
 from discord.ext import commands
 
 
