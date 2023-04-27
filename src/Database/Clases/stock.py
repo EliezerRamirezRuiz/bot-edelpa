@@ -1,5 +1,4 @@
 """Archivo para manipular las acciones de """
-import discord
 from Database.database import conexion_db
 from discord import Embed
 
@@ -12,29 +11,28 @@ class Stock():
         """
 
         try:
-            conn = await conexion_db()
-            async with conn.cursor() as cursor:
-                query = f" EXEC  ObtenerStock {code} "
-                await cursor.execute(query)
-                row = await cursor.fetchone()
-
-        except Exception:
-            """Caso de error durante ejecucion"""
-            return ctx.send('No se pudo obtener el stock, contacte con el encargado de informatica')
-
-        else: 
-            print(row)
-            if row is None:
-                return []
+            async with await conexion_db() as conn:
+                async with conn.cursor() as cursor:
+                    query = f" EXEC  ObtenerStock {code} "
+                    await cursor.execute(query)
+                    row = await cursor.fetchone()
+                    
+                    print(row)
+                    if row is None:
+                        return []
                 
-            return row
-        
-        finally:
-            await cursor.close()
-            await conn.close()
-        
+                    return row
 
-    async def return_stock(self, code: str) -> Embed :
+        except Exception as ex:
+            """Caso de error durante ejecucion"""
+            if isinstance(ex, TimeoutError):
+                await ctx.send('Tiempo de espera excedido, reintente')
+                
+            else:
+                await ctx.send('Error, porfavor contactar con el administrador del Bot')
+
+        
+    async def return_stock(self, code:str) -> Embed :
         """ Funcion para retornar los datos de `obtener_stock` """
         stock = await self.obtener_stock(code)
 

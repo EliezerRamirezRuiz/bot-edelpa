@@ -1,39 +1,49 @@
-#import
-import aioodbc
-#import through from 
+""" importaciones """
+from aioodbc import Connection, connect
 from datetime import datetime
-from aioodbc.connection import _ContextManager
-from config.config import (DRIVER,SERVER,DATABASE)
+from config.config import DSN
 from discord import Embed
 
 
-async def conexion_db():
-    DSN = f'DRIVER={DRIVER};SERVER={SERVER};DATABASE={DATABASE};Trusted_Connection=yes;'
+async def conexion_db() -> Connection:
+    """Retornamos una conexion valida para conectarse a base de datos `SQL SERVER`"""
     try:
-        connection = await aioodbc.connect(dsn=DSN)
+        connection = await connect(dsn=DSN['dsn'])
         return connection
 
     except Exception as ex:
-        raise ex
+        if isinstance(ex, TimeoutError):
+            print('tiempo de ejecucion excedido')
+        
+        elif isinstance(ex, ):
+            pass
 
-
+# obtener la hora actual
 def obtener_hora() -> datetime:
     return datetime.now()
 
-
+# comprobamos si las horas son iguales
 def comprobar_hora(hora_uno:datetime, hora_dos:datetime) -> bool:
     return hora_uno == hora_dos
 
-# comprobar_ma
+# comprobar largo de lista si e mayor a 0
 def comprobar_largo(lista:list) -> bool:
     return len(lista) > 0
 
-# comprobar_mayor
+# comprobar si cantidad es mayor
 def comprobar_mayor(numero:int) -> bool:
     return numero > 0
 
+# formatear la hora en hora y minutos
+def formatear_hora(hora:datetime) -> str:
+    return hora.strftime("%H:%M")
 
-def create_embed(title=None, description=None, color=None, author:list=None, footer=None, thumbnail=None, image=None, fields=None):
+
+def create_embed(title=None, description=None, color=None, 
+                    author:dict=None, footer=None, thumbnail=None, image=None, fields=None):
+    """funcion para crear objetos embed de Discord, con los campos adicionales si es que existieran
+    \n `Consideración`: Los atributos `atributo['nombre']` Si no son declarados arrojara un error llamada `Keyerror`,
+    caso contrario pasa con `atributo.get('nombre')` lo dejara en none si no se encuentra."""
     embed = Embed(title=title, description=description, color=color)
 
     if author:

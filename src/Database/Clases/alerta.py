@@ -1,4 +1,4 @@
-"""Archivo para controlar las alertas """
+""" Importaciones """
 from discord import Embed
 from Database.database import conexion_db
 
