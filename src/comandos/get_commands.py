@@ -1,6 +1,5 @@
-from Database.Clases import *
 from discord.ext import commands
-
+from src.database import *
 
 class GetCommands(commands.Cog):
     """instancia del bot para controlar los comandos de manera escalable"""
@@ -15,12 +14,19 @@ class GetCommands(commands.Cog):
         try:
             await ctx.send("Porfavor escriba el codigo del stock a consultar:")        
             message = await self.bot.wait_for('message', check=lambda m: m.author == ctx.author, timeout=30.0)
-            embed = await stock.return_stock(str(message.content))
+            embed = await instancia_stock.return_stock(str(message.content))
             await ctx.send(embed=embed)
 
 
         except Exception as ex:
-            await ctx.send(ex)
+            if isinstance(ex, ValueError):
+                await ctx.send('Valor invalido')
+
+            if isinstance(ex, TimeoutError):
+                await ctx.send('Se ha excedido el tiempo de respuesta')
+
+            else:
+                await ctx.send('Error desconocido, porfavor contactar con el encargado de informatica')
 
 
     @commands.command()
@@ -29,7 +35,7 @@ class GetCommands(commands.Cog):
         Funcion por trabajar y arreglar"""
 
         await ctx.send("Consultando estado del robot")
-        embed = await robot.get_data()
+        embed =  await instancia_robot.get_data()
         await ctx.send(embed=embed)
 
     
@@ -41,7 +47,7 @@ class GetCommands(commands.Cog):
         Funcion concluida y para utilizar"""
         
         await ctx.send("Obteniendo alertas")
-        embed = await alerta.ultimas_alertas_activas()
+        embed = await instancia_alerta.ultimas_alertas_activas()
         await ctx.send(embed=embed)
 
 
@@ -49,9 +55,8 @@ class GetCommands(commands.Cog):
     async def alertas_desactivadas(self, ctx):
         """Funcion que consulta la funcion `Alerta.ultimas_alertas_desactivadas()` y obtiene el objeto Embed y
             lo retornamos. \n
-
         Funcion concluida y para utilizar"""
         
         await ctx.send("Obteniendo ultimas alertas desactivadas")
-        embed = await alerta.ultimas_alertas_desactivadas()
+        embed = await instancia_alerta.ultimas_alertas_desactivadas()
         await ctx.send(embed=embed)

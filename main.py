@@ -1,19 +1,24 @@
-from Database.Clases import alerta_automatica
-from Events.eventos import MyEvents
-from Commands.comandos.discord_menu import MenuCommands
-from Commands.comandos.get_commands import GetCommands
+#constantes
+from src.config.config import TOKEN
+
+#instancia
+from src.database import instancia_automatica
+
+#clase
+from src.comandos.discord_menu import MenuCommands
+from src.comandos.get_commands import GetCommands
+from src.Events.eventos import MyEvents
+
+#funcion
+from src.app.bot import app
 from discord import Game
 
-from app.bot import app
-from config.config import TOKEN
-
-# Import
+# module
 import logging
 
 
-
 """Configuration Bot"""
-# handler = logging.FileHandler(filename='discord.log', encoding='utf-8', mode='r+')
+handler = logging.FileHandler(filename='discord.log', encoding='utf-8', mode='r+')
 
 bot = app()
 
@@ -27,7 +32,7 @@ async def on_ready():
     await bot.add_cog(MenuCommands(bot))
     await bot.add_cog(GetCommands(bot))
     await bot.change_presence(activity=Game(name="Working hard"))
-    bot.loop.create_task(alerta_automatica.auto_alertas(bot))
+    bot.loop.create_task(instancia_automatica.auto_alertas(bot))
 
 
 def main() -> None:

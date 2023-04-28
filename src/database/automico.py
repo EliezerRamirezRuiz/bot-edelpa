@@ -1,11 +1,11 @@
 """ Importaciones """
 from discord.ext import commands
-from Database.database import (conexion_db, comprobar_hora, comprobar_largo, 
+from src.database.db import (conexion_db, comprobar_hora, comprobar_largo, 
                                comprobar_mayor, obtener_hora, formatear_hora, create_embed)
 
 
 class AutomaticAlerta():
-    """Clase se enfoca en realizar acciones para las alertas automaticas"""
+    """ Clase se enfoca en realizar acciones para las alertas automaticas """
     
     async def obtener_alertas(self) -> list:
         """ Funcion para traer datos `{Procedure MANDAR_ALERTAS}` """
@@ -51,9 +51,9 @@ class AutomaticAlerta():
 
         except Exception as ex:
             if isinstance(ex, TimeoutError):
-                pass
+                print('Tiempo excedido')
             else:
-                pass
+                print('Error durante la ejecución del procedimiento almacenado')
 
 
 
@@ -71,9 +71,12 @@ class AutomaticAlerta():
 
             if comprobar_largo(lista_alertas):
                 for data in lista_alertas:
+
                     hora_data, hora_actual = formatear_hora(data[2]), formatear_hora(obtener_hora())
 
-                    if comprobar_mayor(data[5]) == True and comprobar_hora(hora_data, hora_actual) == True:
+                    if comprobar_mayor(data[5]) is True and \
+                        comprobar_hora(hora_data, hora_actual) is True:
+
                         channel = bot.get_channel(int(data[3]))
 
                         embed = create_embed(
@@ -87,10 +90,11 @@ class AutomaticAlerta():
                         await channel.send(embed=embed)
                         await self.bajar_contador_alertas(int(data[4]))
 
-                    elif comprobar_mayor(data[5]) == False:
+                    elif comprobar_mayor(data[5]) is False:
                         await self.cambiar_estado_alerta(data[4])
 
                     else:
                         continue
+
             else:
                 continue

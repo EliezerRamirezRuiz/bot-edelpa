@@ -1,4 +1,4 @@
-from Database.database import conexion_db
+from src.database.db import conexion_db
 import discord
 
 class Reporte():

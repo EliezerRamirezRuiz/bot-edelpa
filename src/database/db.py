@@ -1,12 +1,12 @@
 """ importaciones """
 from aioodbc import Connection, connect
 from datetime import datetime
-from config.config import DSN
+from src.config.config import DSN
 from discord import Embed
-
+from pyodbc import ProgrammingError
 
 async def conexion_db() -> Connection:
-    """Retornamos una conexion valida para conectarse a base de datos `SQL SERVER`"""
+    """ Retornamos una conexion valida para conectarse a base de datos `SQL SERVER` """
     try:
         connection = await connect(dsn=DSN['dsn'])
         return connection
@@ -15,35 +15,40 @@ async def conexion_db() -> Connection:
         if isinstance(ex, TimeoutError):
             print('tiempo de ejecucion excedido')
         
-        elif isinstance(ex, ):
-            pass
+        elif isinstance(ex, ProgrammingError):
+            print('Se intento cerrar una conexion')
 
-# obtener la hora actual
+
 def obtener_hora() -> datetime:
+    """ Obtener la hora actual """
     return datetime.now()
 
-# comprobamos si las horas son iguales
+
 def comprobar_hora(hora_uno:datetime, hora_dos:datetime) -> bool:
+    """ Comprobamos si las horas son iguales """
     return hora_uno == hora_dos
 
-# comprobar largo de lista si e mayor a 0
+
 def comprobar_largo(lista:list) -> bool:
+    """ comprobar largo de lista si e mayor a 0 """
     return len(lista) > 0
 
-# comprobar si cantidad es mayor
+
 def comprobar_mayor(numero:int) -> bool:
+    """ Comprobar si cantidad es mayor """
     return numero > 0
 
-# formatear la hora en hora y minutos
+
 def formatear_hora(hora:datetime) -> str:
+    """ Formatear la hora en hora y minutos """
     return hora.strftime("%H:%M")
 
 
 def create_embed(title=None, description=None, color=None, 
                     author:dict=None, footer=None, thumbnail=None, image=None, fields=None):
-    """funcion para crear objetos embed de Discord, con los campos adicionales si es que existieran
+    """Función para crear objetos embed de Discord, con los campos adicionales si es que existieran
     \n `Consideración`: Los atributos `atributo['nombre']` Si no son declarados arrojara un error llamada `Keyerror`,
-    caso contrario pasa con `atributo.get('nombre')` lo dejara en none si no se encuentra."""
+    caso contrario pasa con `atributo.get('nombre')` lo dejara en None si no se encuentra."""
     embed = Embed(title=title, description=description, color=color)
 
     if author:

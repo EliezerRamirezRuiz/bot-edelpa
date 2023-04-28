@@ -1,6 +1,6 @@
 """ Importaciones """
 from discord import Embed
-from Database.database import conexion_db
+from src.database.db import conexion_db
 
 
 class Alerta():
@@ -8,37 +8,34 @@ class Alerta():
     Clase se encarga de las alertas y contendra todos los metodos que tengan alguna relacion con
     las alertas que sean llamados de comandos o menus con opciones
     """
-    
-    async def ultimas_alertas(self) -> None:
-        """ Funcion que trae las ultimas alertas """
+
+    async def alertas_activas(self) -> list:
+        """ Funcion que trae las ultimas alertas activas """
         try:
-            conn = await conexion_db()
-            async with conn.cursor() as cursor:
-                query = f" EXEC ULTIMAS_ALERTAS "
-                await cursor.execute(query)
-                row = await cursor.fetchall()
+            async with await conexion_db() as conn:
+                async with conn.cursor() as cursor:
+                    query = f" EXEC ULTIMAS_ALERTAS_ACTIVAS "
+                    await cursor.execute(query)
+                    row = await cursor.fetchall()
+                    if row is None:
+                        return []
+                
+                    return row 
 
         except Exception as ex:
-            print(f'ultimas alerta :{ex}')
+            if isinstance(ex, TimeoutError):
+                print('Tiempo excedido')
+            
+            else:
+                print('Error desconocido')
 
-        else:
-            if row is None:
-                return []
-                
-            return row 
-        
-        finally:
-            await cursor.close()
-            await conn.close()
 
-    
     async def ultimas_alertas_activas(self) -> Embed:
-        """Funcion que trae los datos de la funcion `ultimas_alertas()`
-        se manipulan para presentar y entregar de una manera mas 
-        ordenada. En caso que no contenga alertas activas se mandara 
+        """Funcion que trae los datos de la funcion `alertas_activas()` se manipulan para presentar
+        y entregar de una manera mas ordenada. En caso que no contenga alertas activas se mandara 
         un mensaje que le informe al usuario que no hay alertas"""
 
-        data = await self.ultimas_alertas()
+        data = await self.alertas_activas()
         
         if len(data) > 0:
             embed = Embed(title='Ultimas alertas activas', url='https://www.edelpa.cl/')
@@ -62,7 +59,6 @@ class Alerta():
             return embed
         
         else:
-            
             embed = Embed(title='No hay alertas activas')
             embed.set_footer(text='Bot Edelpa S.A.')
             return embed
