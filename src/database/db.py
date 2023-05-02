@@ -5,6 +5,7 @@ from src.config.config import DSN
 from discord import Embed
 from pyodbc import ProgrammingError
 
+
 async def conexion_db() -> Connection:
     """ Retornamos una conexion valida para conectarse a base de datos `SQL SERVER` """
     try:
@@ -44,6 +45,10 @@ def formatear_hora(hora:datetime) -> str:
     return hora.strftime("%H:%M")
 
 
+def formatear_fecha(date:datetime) -> str:
+    return date.strftime(r'%Y-%m-%d')
+
+
 def create_embed(title=None, description=None, color=None, 
                     author:dict=None, footer=None, thumbnail=None, image=None, fields=None):
     """Función para crear objetos embed de Discord, con los campos adicionales si es que existieran
@@ -67,4 +72,10 @@ def create_embed(title=None, description=None, color=None,
         for field in fields:
             embed.add_field(name=field['name'], value=field['value'], inline=field.get('inline', True))
 
+    return embed
+
+
+def tiempo_excedido():
+    embed = create_embed(title='Tiempo excedido',
+                description='ya no se puede responder la solicitud anterior')
     return embed

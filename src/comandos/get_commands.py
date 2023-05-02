@@ -47,7 +47,7 @@ class GetCommands(commands.Cog):
         Funcion concluida y para utilizar"""
         
         await ctx.send("Obteniendo alertas")
-        embed = await instancia_alerta.ultimas_alertas_activas()
+        embed = await instancia_alerta.ultimas_alertas_activas(self.bot)
         await ctx.send(embed=embed)
 
 
@@ -58,5 +58,5 @@ class GetCommands(commands.Cog):
         Funcion concluida y para utilizar"""
         
         await ctx.send("Obteniendo ultimas alertas desactivadas")
-        embed = await instancia_alerta.ultimas_alertas_desactivadas()
+        embed = await instancia_alerta.ultimas_alertas_desactivadas(self.bot)
         await ctx.send(embed=embed)

@@ -1,7 +1,8 @@
 """ Importaciones """
 from discord.ext import commands
 from src.database.db import (conexion_db, comprobar_hora, comprobar_largo, 
-                               comprobar_mayor, obtener_hora, formatear_hora, create_embed)
+                            comprobar_mayor, obtener_hora, formatear_hora, 
+                            formatear_fecha, create_embed)
 
 
 class AutomaticAlerta():
@@ -83,7 +84,8 @@ class AutomaticAlerta():
                                         title=f'{data[0]}', description=f'{data[1]}', color=0x00ff00,
                                         author={'name':f'{bot.user.name}','url':'https://www.edelpa.cl/','icon_url':f'{bot.user.avatar.url}'},
                                         footer={'text':'Envases del Pacifico - Edelpa'}, 
-                                        fields=[{'name':'Hora ocurrido', "value":f'{hora_data}', 'inline':False,}
+                                        fields=[{'name':'Tiempo ocurrido', "value":f'{formatear_fecha(data[8])} | {formatear_hora(data[8])}', 'inline':False,}
+                                                ,{'name':'Hora recordatorio', "value":f'{hora_data}', 'inline':False,}
                                                 ,{'name':'id de Alerta', 'value':f'{data[4]}', 'inline':False,}
                                                 ,{'name':'Cantidad de recordatorio', 'value':f'{data[5]}', 'inline':False}])
 

@@ -18,8 +18,11 @@ class Opciones:
                         , description="Saber el estado actual del robot"),
             
             SelectOption(label="Ultimas alertas activas", value="Ultimas alertas activas"
-                        , description="Saber la cantidad de Bobinas que contiene un pallet"),
+                        , description="Saber la informacion de las alertas desactivadas (TOP 10)"),
             
+            SelectOption(label="Ultimas alertas desactivadas", value="Ultimas alertas desactivadas"
+                        , description="Saber la informacion de las alertas desactivadas (TOP 10)"),
+
             SelectOption(label="Reporte del dia",  value="Reporte del dia"
                         , description="Saber la cantidad de alertas que se podrujeron por dia",),
             ]
@@ -32,18 +35,25 @@ class Menu(Select):
         self.bot_command = bot_command
 
         super().__init__(custom_id="Menu", placeholder="Menu", min_values=1, 
-                         max_values=1, options=Opciones().values, row=2)
+                         max_values=1, options=Opciones().values, row=1)
 
     async def callback(self, interaccion:Interaction):
         opcion = self.values[0]
         match opcion:
-            # Caso 1
-            case "Consultar Stock":
-                await interaccion.response.send_message('Escriba el codigo a consultar:')
-                message = await self.bot.wait_for('message', check=lambda m: m.author == self.ctx.author, timeout=30.0)
-                embed = await instancia_stock .return_stock(str(message.content), self.ctx)
-                await self.ctx.send(embed=embed)
+            #caso 1
+            case "Default":
+                await self.ctx.send('Opcion no valida')
 
+            # Caso 2
+            case "Consultar Stock":
+                try:                
+                    await interaccion.response.send_message('Escriba el codigo a consultar:')
+                    message = await self.bot.wait_for('message', check=lambda m: m.author == self.ctx.author, timeout=30.0)
+                    embed = await instancia_stock .return_stock(str(message.content), self.ctx)
+                    await self.ctx.send(embed=embed)
+
+                except TimeoutError:
+                    await self.ctx.send('Tiempo excedido')
 
             # Caso 2
             case "Estado Robot":
@@ -51,18 +61,24 @@ class Menu(Select):
                 embed = await instancia_robot.get_data()
                 await self.ctx.send(embed=embed)
 
-
             # Caso 3
             case "Ultimas alertas activas":
-                await interaccion.response.send_message("Obteniendo alertas...")
-                embed = await instancia_alerta.ultimas_alertas_activas()
+                await interaccion.response.send_message("Obteniendo informacion...")
+                embed = await instancia_alerta.ultimas_alertas_activas(self.bot)
                 await self.ctx.send(embed=embed)
 
+            # Caso 4
+            case "Ultimas alertas desactivadas":
+                await interaccion.response.send_message("Obteniendo informacion...")
+                embed = await instancia_alerta.ultimas_alertas_desactivadas(self.bot)
+                await self.ctx.send(embed=embed)
 
-            #Caso 4
+            #Caso 5
             case "Reporte del dia":
                 await interaccion.response.send_message("Obteniendo reporte")
                 embed = await instancia_report.get_data()
                 await self.ctx.send(embed=embed)
+            
+
 
 
