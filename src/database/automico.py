@@ -1,9 +1,9 @@
 """ Importaciones """
 from discord.ext import commands
-from src.database.db import (conexion_db, comprobar_hora, comprobar_largo, 
+from src.database.db import conexion_db
+from src.utils.funciones_utiles import (comprobar_hora, comprobar_largo, 
                             comprobar_mayor, obtener_hora, formatear_hora, 
                             formatear_fecha, create_embed)
-
 
 class AutomaticAlerta():
     """ Clase se enfoca en realizar acciones para las alertas automaticas """

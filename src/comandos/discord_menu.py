@@ -3,7 +3,7 @@ from discord.ui import View
 from src.componentes.menu import Menu
 
 
-class MenuCommands(commands.Cog):
+class ComandosMenu(commands.Cog):
     """Aqui se define una clase con metodos que son 
     comandos que solo pueden ser llamadas por el menu"""
     def __init__(self, bot):

@@ -5,8 +5,8 @@ from src.config.config import TOKEN
 from src.database import instancia_automatica
 
 #clase
-from src.comandos.discord_menu import MenuCommands
-from src.comandos.get_commands import GetCommands
+from src.comandos.discord_menu import ComandosMenu
+from src.comandos.get_commands import ComandosPrincipales
 from src.Events.eventos import MyEvents
 
 #funcion
@@ -29,8 +29,8 @@ async def on_ready():
     y realiza el registro de las subclases de de Commands.cog, para que esten \n
     disponible los comandos anidados"""
     await bot.add_cog(MyEvents(bot))
-    await bot.add_cog(MenuCommands(bot))
-    await bot.add_cog(GetCommands(bot))
+    await bot.add_cog(ComandosMenu(bot))
+    await bot.add_cog(ComandosPrincipales(bot))
     await bot.change_presence(activity=Game(name="Working hard"))
     bot.loop.create_task(instancia_automatica.auto_alertas(bot))
 

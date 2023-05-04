@@ -1,7 +1,7 @@
 """Archivo para manipular las acciones de """
-from src.database.db import conexion_db, comprobar_largo, create_embed
+from src.database.db import conexion_db
 from discord import Embed
-
+from src.utils.funciones_utiles import comprobar_largo, create_embed
 
 class Stock():
     async def obtener_stock(self, code:str, ctx) -> list :
@@ -10,25 +10,18 @@ class Stock():
         traiga es igual a None, se mandara lista vacia'
         """
 
-        try:
-            async with await conexion_db() as conn:
-                async with conn.cursor() as cursor:
-                    query = f" EXEC  OBTENERSTOCK 'EP100000000006000621850000500010' "
-                    await cursor.execute(query)
-                    row = await cursor.fetchone()
-                    print(row)
-                    if row is None:
-                        return []
+        async with await conexion_db() as conn:
+            async with conn.cursor() as cursor:
+                query = f" EXEC  OBTENERSTOCK '{code}' "
+                await cursor.execute(query)
+                row = await cursor.fetchone()
+                print(row)
+                if row is None:
+                    return []
                 
-                    return row
+                return row
 
-        except Exception as ex:
-            """Casos de error durante ejecucion"""
-            if isinstance(ex, TimeoutError):
-                await ctx.send('Tiempo de espera excedido, reintente')
-                
-            else:
-                await ctx.send('Error, porfavor contactar con el administrador del Bot')
+
 
         
     async def return_stock(self, code:str, ctx) -> Embed :

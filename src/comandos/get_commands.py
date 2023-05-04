@@ -1,7 +1,7 @@
 from discord.ext import commands
 from src.database import *
 
-class GetCommands(commands.Cog):
+class ComandosPrincipales(commands.Cog):
     """instancia del bot para controlar los comandos de manera escalable"""
     def __init__(self, bot):
         self.bot = bot

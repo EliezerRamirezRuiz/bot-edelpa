@@ -32,7 +32,7 @@ Las librerias utilizadas en este proyecto fueron:
 
 <br>
 
-
+https://www.youtube.com/watch?v=9zl0FT30jvo
 
 COMANDOS
 - !consultar_stock
