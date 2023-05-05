@@ -3,7 +3,6 @@ from src.Help.mensaje_ayuda import CustomHelpCommand
 from discord.ext import commands
 from discord import Intents
 
-
 def app():
     descripcion = """Bot encargado de automatizar consultas de alertas, reportes y stock"""
 
@@ -14,7 +13,3 @@ def app():
     """ Instance Bot """
     bot = commands.Bot(command_prefix='!', description=descripcion, intents=intents, help_command=CustomHelpCommand())
     return bot
-
-
-
-    

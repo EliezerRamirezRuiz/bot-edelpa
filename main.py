@@ -6,7 +6,7 @@ from src.database import instancia_automatica
 
 #clase
 from src.comandos.discord_menu import ComandosMenu
-from src.comandos.get_commands import ComandosPrincipales
+from src.comandos.comandos import ComandosPrincipales
 from src.Events.eventos import MyEvents
 
 #funcion
@@ -14,13 +14,26 @@ from src.app.bot import app
 from discord import Game
 
 # module
+from discord import Interaction
 import logging
 
 
 """Configuration Bot"""
 handler = logging.FileHandler(filename='discord.log', encoding='utf-8', mode='r+')
 
+
 bot = app()
+
+
+@bot.tree.command(name='menu', description='Invocamos el comando menu para poder llamar otras funciones',  extras={'Command':'menu'})
+async def slash_menu(interaction: Interaction):
+    await interaction.response.send_message('Hola', ephemeral=True)
+
+
+@bot.command()
+async def sincronizar(ctx):
+    await bot.tree.sync()
+    await ctx.send('comandos slashes actualizado')
 
 
 @bot.event
