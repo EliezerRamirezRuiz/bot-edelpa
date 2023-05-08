@@ -1,8 +1,9 @@
 """Archivo que contiene el menu con multiples opciones 
 que apretando alguna realiza la accion conrrespondiente"""
-from discord import (SelectOption, Interaction)
+from discord import SelectOption, Interaction
 from discord.ui import Select
 from src.database import * 
+from src.utils.funciones_utiles import tiempo_excedido
 
 
 class OpcionesMenu:
@@ -29,27 +30,27 @@ class OpcionesMenu:
 
 
 class Menu(Select):
-    def __init__(self, bot, ctx, bot_command):
+    def __init__(self, bot, ctx):
         self.bot = bot
         self.ctx = ctx
-        self.bot_command = bot_command
-
+    
         super().__init__(custom_id="Menu", placeholder="Menu", min_values=1, 
                          max_values=1, options=OpcionesMenu().values, row=1)
 
     async def callback(self, interaccion:Interaction):
+        embed_tiempo_excedido = tiempo_excedido()
         opcion = self.values[0]
         match opcion:
             #caso 1
             case "Default":
-                await self.ctx.send('Opcion no valida')
+                await interaccion.response.send_message(embed=embed_tiempo_excedido)
 
             # Caso 2
             case "Consultar Stock":
                 try:                
                     await interaccion.response.send_message('Escriba el codigo a consultar:')
                     message = await self.bot.wait_for('message', check=lambda m: m.author == self.ctx.author, timeout=30.0)
-                    embed = await instancia_stock .return_stock(str(message.content), self.ctx)
+                    embed = await instancia_stock.return_stock(str(message.content), self.ctx)
                     await self.ctx.send(embed=embed)
 
                 except TimeoutError:
@@ -84,7 +85,3 @@ class Menu(Select):
                 await interaccion.response.send_message("Obteniendo reporte")
                 embed = await instancia_report.get_data()
                 await self.ctx.send(embed=embed)
-            
-
-
-

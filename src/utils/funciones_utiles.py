@@ -1,6 +1,7 @@
 from datetime import datetime
 from discord import Embed
 
+
 def obtener_hora() -> datetime:
     """ Obtener la hora actual """
     return datetime.now()

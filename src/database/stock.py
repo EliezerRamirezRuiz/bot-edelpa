@@ -4,7 +4,7 @@ from discord import Embed
 from src.utils.funciones_utiles import comprobar_largo, create_embed
 
 class Stock():
-    async def obtener_stock(self, code:str, ctx) -> list :
+    async def obtener_stock(self, code:str) -> list :
         """ Funcion para traer datos de la base de datos SQL Server, 
         para ser mas exacto una Stock. En caso de que el resultado que 
         traiga es igual a None, se mandara lista vacia'
@@ -24,9 +24,9 @@ class Stock():
 
 
         
-    async def return_stock(self, code:str, ctx) -> Embed :
+    async def return_stock(self, code:str) -> Embed :
         """ Funcion para retornar los datos de `obtener_stock` """
-        stock = await self.obtener_stock(code, ctx)
+        stock = await self.obtener_stock(code)
         print(stock)
 
         if comprobar_largo(stock) is True:

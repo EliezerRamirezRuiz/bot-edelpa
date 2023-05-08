@@ -1,6 +1,8 @@
 from discord.ext import commands
 from discord.ui import View
-from src.componentes.menu import Menu
+from discord import Interaction
+
+from componentes.menu_ctx import Menu
 
 
 class ComandosMenu(commands.Cog):
@@ -10,11 +12,11 @@ class ComandosMenu(commands.Cog):
         self.bot = bot
 
 
-    @commands.group()
+    @commands.command()
     async def menu(self, ctx):
         """Menu con opciones, las opciones son funciones que  
         posteriormente podrian requerir respuesta del usuario"""
-        select = Menu(self.bot, ctx, self)
+        select = Menu(self.bot, ctx)
         view = View(timeout=180)
         view.add_item(select)
-        await ctx.send(select.placeholder, view=view)
+        await ctx.send(view=view)

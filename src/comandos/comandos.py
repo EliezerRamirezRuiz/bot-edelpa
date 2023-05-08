@@ -17,7 +17,6 @@ class ComandosPrincipales(commands.Cog):
             embed = await instancia_stock.return_stock(str(message.content))
             await ctx.send(embed=embed)
 
-
         except Exception as ex:
             if isinstance(ex, ValueError):
                 await ctx.send('Valor invalido')

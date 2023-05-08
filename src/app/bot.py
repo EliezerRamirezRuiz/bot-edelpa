@@ -7,9 +7,10 @@ def app():
     descripcion = """Bot encargado de automatizar consultas de alertas, reportes y stock"""
 
     """ Obligatory to retry connection"""
-    intents = Intents.default()
+    intents = Intents.all()
     intents.message_content = True
 
     """ Instance Bot """
     bot = commands.Bot(command_prefix='!', description=descripcion, intents=intents, help_command=CustomHelpCommand())
+
     return bot

@@ -1,0 +1,5 @@
+            # Caso 4
+            case "Estado Robot":
+                await interaccion.response.send_message('Verificando')
+                embed = await instancia_robot.get_data()
+                await self.ctx.send(embed=embed)
