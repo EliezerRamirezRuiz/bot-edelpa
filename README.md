@@ -2,7 +2,7 @@
 <i>Eli-ezer Reuven Ramirez Ruiz - 19/03/2023</i>
 
 
-## Proposito del Bot
+## Problema dentro de la empresa
 
 "La empresa Edelpa ha solicitado la creacion de un bot para poder mantener en comunicacion <br>
 a la empresa de los estado, posibles fallo que presente el robot. Tambien se espera que el <br>
@@ -25,14 +25,16 @@ notificaciones de forma autonoma."
 
 Las librerias utilizadas en este proyecto fueron:
 - [Discord.py](https://discordpy.readthedocs.io/en/stable/)
-- [Pycord](https://docs.pycord.dev/en/stable/)
 - [Aiohttp](https://docs.aiohttp.org/en/stable/)
 - [Aioodbc](https://github.com/aio-libs/aioodbc/)
 - [Python-dotenv](https://pypi.org/project/python-dotenv/)
 
 <br>
 
+Links de referencia
+https://discordpy.readthedocs.io/en/stable/ext/commands/extensions.html#reloading
 https://www.youtube.com/watch?v=9zl0FT30jvo
+https://discordpy.readthedocs.io/en/stable/ext/commands/cogs.html?highlight=bot%20get_cog
 
 COMANDOS
 - !consultar_stock

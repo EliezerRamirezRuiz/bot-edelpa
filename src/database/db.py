@@ -7,7 +7,7 @@ from pyodbc import ProgrammingError
 async def conexion_db() -> Connection:
     """ Retornamos una conexion valida para conectarse a base de datos `SQL SERVER` """
     try:
-        connection = await connect(dsn=DSN['dsn'])
+        connection = await connect(dsn=DSN)
         return connection
 
     except Exception as ex:

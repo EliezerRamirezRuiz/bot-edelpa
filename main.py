@@ -5,10 +5,10 @@ from src.config.config import TOKEN
 from src.database import instancia_automatica
 
 #clase
-from src.comandos.discord_menu import ComandosMenu
+"""from src.comandos.comandos_menu import ComandosMenu
 from src.comandos.comandos import ComandosPrincipales
 from src.Events.eventos import MyEvents
-from src.slash_comandos.slash import SlashComandos
+from src.slash_comandos.slash import SlashComandos"""
 
 #funcion
 from src.app.bot import app
@@ -25,23 +25,29 @@ handler = logging.FileHandler(filename='discord.log', encoding='utf-8', mode='r+
 bot = app()
 
 
-"""@bot.command()
+@bot.command()
+async def cargar_extensiones(ctx):
+    await bot.load_extension('src.comandos.comandos_menu')
+    await bot.load_extension('src.comandos.comandos')
+    await bot.load_extension('src.Events.eventos')
+    await bot.load_extension('src.slash_comandos.slash')
+    await ctx.send('carga lista')
+
+
+@bot.command()
 async def sincronizar(ctx):
-    await bot.tree.sync()
-    await ctx.send('comandos slashes actualizado')"""
+    await bot.reload_extension('src.comandos.comandos_menu')
+    await bot.reload_extension('src.comandos.comandos')
+    await bot.reload_extension('src.Events.eventos')
+    await bot.reload_extension('src.slash_comandos.slash')   
+    await ctx.send('recarga lista listo')
 
 
 @bot.event
 async def on_ready():
-    """Evento que esta disponible cuando el bot se conecta de manera correcta \n
-    y realiza el registro de las subclases de de Commands.cog, para que esten \n
-    disponible los comandos anidados"""
-    await bot.add_cog(MyEvents(bot))
-    await bot.add_cog(ComandosMenu(bot))
-    await bot.add_cog(ComandosPrincipales(bot))
-    await bot.add_cog(SlashComandos(bot))
     await bot.change_presence(activity=Game(name="Working hard"))
     bot.loop.create_task(instancia_automatica.auto_alertas(bot))
+    print('listo')
 
 
 def main() -> None:
@@ -56,3 +62,4 @@ def main() -> None:
 
 if __name__ == '__main__':
     main()
+

@@ -1,7 +1,7 @@
 from src.database.db import conexion_db
 import discord
 
-class Robot():
+class RobotDB():
     async def get_data(self):
         """ Funcion para traer datos de la base de datos SQL Server, 
         para ser mas exacto una alerta """

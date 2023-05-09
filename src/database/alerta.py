@@ -5,7 +5,7 @@ from src.utils.funciones_utiles import (comprobar_hora, comprobar_largo,
                             comprobar_mayor, obtener_hora, formatear_hora, 
                             formatear_fecha, create_embed)
 
-class Alerta():
+class AlertaDB():
     """
     Clase se encarga de las alertas y contendra todos los metodos que tengan alguna relacion con
     las alertas que sean llamados de comandos o menus con opciones

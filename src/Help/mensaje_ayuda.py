@@ -1,7 +1,7 @@
-from discord.ext import commands
+from discord.ext.commands import MinimalHelpCommand
 
 
-class CustomHelpCommand(commands.MinimalHelpCommand):
+class CustomHelpCommand(MinimalHelpCommand):
     async def send_error_message(self, error):
         # This method is called if the command raises an error
         # We can customize the error message that is sent here

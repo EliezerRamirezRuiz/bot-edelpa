@@ -3,7 +3,8 @@ from src.database.db import conexion_db
 from discord import Embed
 from src.utils.funciones_utiles import comprobar_largo, create_embed
 
-class Stock():
+
+class StockDB:
     async def obtener_stock(self, code:str) -> list :
         """ Funcion para traer datos de la base de datos SQL Server, 
         para ser mas exacto una Stock. En caso de que el resultado que 
@@ -12,7 +13,7 @@ class Stock():
 
         async with await conexion_db() as conn:
             async with conn.cursor() as cursor:
-                query = f" EXEC  OBTENERSTOCK '{code}' "
+                query = f" EXEC  OBTENERSTOCK {code} "
                 await cursor.execute(query)
                 row = await cursor.fetchone()
                 print(row)
@@ -20,8 +21,6 @@ class Stock():
                     return []
                 
                 return row
-
-
 
         
     async def return_stock(self, code:str) -> Embed :

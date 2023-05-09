@@ -61,3 +61,8 @@ def tiempo_excedido():
     embed = create_embed(title='Tiempo excedido',
                 description='ya no se puede responder la solicitud anterior')
     return embed
+
+
+def mensaje_simple(mensaje:str):
+    embed = create_embed(title=mensaje)
+    return embed

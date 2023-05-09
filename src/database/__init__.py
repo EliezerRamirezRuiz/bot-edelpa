@@ -1,12 +1,12 @@
-from src.database.automico import AutomaticAlerta
-from src.database.reporte import Reporte
-from src.database.alerta import Alerta
-from src.database.robot import Robot
-from src.database.stock import Stock
+from src.database.automico import AutomaticAlertaDB
+from src.database.reporte import ReporteDB
+from src.database.alerta import AlertaDB
+from src.database.robot import RobotDB
+from src.database.stock import StockDB
 
 
-instancia_alerta, instancia_robot, instancia_stock = Alerta(), Robot(), Stock()
-instancia_report, instancia_automatica =  Reporte(), AutomaticAlerta()
+instancia_alerta, instancia_robot, instancia_stock = AlertaDB(), RobotDB(), StockDB()
+instancia_report, instancia_automatica =  ReporteDB(), AutomaticAlertaDB()
 
 
 __all__ = [

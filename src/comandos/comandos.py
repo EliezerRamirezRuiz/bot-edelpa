@@ -59,3 +59,7 @@ class ComandosPrincipales(commands.Cog):
         await ctx.send("Obteniendo ultimas alertas desactivadas")
         embed = await instancia_alerta.ultimas_alertas_desactivadas(self.bot)
         await ctx.send(embed=embed)
+
+
+async def setup(bot):
+    await bot.add_cog(ComandosPrincipales(bot))
