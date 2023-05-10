@@ -31,6 +31,7 @@ class AlertaDB():
             else:
                 print('Error desconocido')
 
+
     async def alertas_desactivadas(self):
         """ Funcion que trae las ultimas alertas inactivas """
         try:
@@ -43,7 +44,7 @@ class AlertaDB():
                         return []
                 
                     return row 
-
+                
         except Exception as ex:
             if isinstance(ex, TimeoutError):
                 print('Tiempo excedido')
@@ -52,7 +53,7 @@ class AlertaDB():
                 print('Error desconocido')
 
 
-    async def ultimas_alertas_activas(self, bot, lista=None) -> Embed:
+    async def retornar_alertas_activas(self, bot, lista=None) -> Embed:
         """Funcion que trae los datos de la funcion `alertas_activas()` se manipulan para presentar
         y entregar de una manera mas ordenada. En caso que no contenga alertas activas se mandara 
         un mensaje que le informe al usuario que no hay alertas"""
@@ -82,12 +83,12 @@ class AlertaDB():
                 title='Ultimas alertas activas', description='Lista de alertas activas', color=0x00ff00, 
                 author={'name':f'{bot.user.name}','url':'https://www.edelpa.cl/','icon_url':f'{bot.user.avatar.url}'},
                 footer={'text':'Envases del Pacifico - Edelpa'}, 
-                fields=[{'name':'No hay alertas activas', "value":'None', 'inline':False,}])
+                fields=[{'name':'No hay alertas activas', "value":'Información no disponible', 'inline':False,}])
             
             return embed
 
 
-    async def ultimas_alertas_desactivadas(self, bot, lista=None) -> Embed:
+    async def retornar_alertas_desactivadas(self, bot, lista=None) -> Embed:
         """Funcion que trae los datos de la funcion `alertas_desactivadas()`
         se manipulan para presentar y entregar de una manera mas 
         ordenada. """
@@ -118,6 +119,6 @@ class AlertaDB():
                 title='Ultimas alertas activas', description='Lista de alertas activas', color=0x00ff00, 
                 author={'name':f'{bot.user.name}','url':'https://www.edelpa.cl/','icon_url':f'{bot.user.avatar.url}'},
                 footer={'text':'Envases del Pacifico - Edelpa'}, 
-                fields=[{'name':'No hay alertas activas', "value":'None', 'inline':False,}])
+                fields=[{'name':'No hay alertas activas', "value":'Información no disponible', 'inline':False,}])
             
             return embed

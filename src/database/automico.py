@@ -57,7 +57,6 @@ class AutomaticAlertaDB():
                 print('Error durante la ejecución del procedimiento almacenado')
 
 
-
     async def auto_alertas(self, bot: commands.Bot) -> None:
         """Funcion que esta en un ciclo `While-True`, trae alertas y las muestra de forma automatica para que los usuarios 
         se den cuenta que hay un error en el robot o alguna area. 

@@ -32,11 +32,13 @@ Las librerias utilizadas en este proyecto fueron:
 <br>
 
 Links de referencia
+https://support.discord.com/hc/es/articles/4644915651095-Permisos-para-comandos
 https://discordpy.readthedocs.io/en/stable/ext/commands/extensions.html#reloading
 https://www.youtube.com/watch?v=9zl0FT30jvo
 https://discordpy.readthedocs.io/en/stable/ext/commands/cogs.html?highlight=bot%20get_cog
 
 COMANDOS
+- !menu
 - !consultar_stock
 - !estado_robot
 - !alertas_activas
@@ -47,3 +49,7 @@ MENU
 - Estado robot
 - Ultimas alertas activas
 - Reporte del dia
+
+SLASH
+- /menu
+- /consultar_stock

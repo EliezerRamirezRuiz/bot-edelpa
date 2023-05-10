@@ -8,13 +8,11 @@ class ComandosPrincipales(commands.Cog):
 
     
     @commands.command()
-    async def consultar_stock(self, ctx):
+    async def consultar_stock(self, ctx, codigo):
         """Funcion que consultar stock a pedir, manda mensaje para que el usuario sepa 
         que debe mandar una respuesta para consultar el stock"""
         try:
-            await ctx.send("Porfavor escriba el codigo del stock a consultar:")        
-            message = await self.bot.wait_for('message', check=lambda m: m.author == ctx.author, timeout=30.0)
-            embed = await instancia_stock.return_stock(str(message.content))
+            embed = await instancia_stock.return_stock(str(codigo))
             await ctx.send(embed=embed)
 
         except Exception as ex:
