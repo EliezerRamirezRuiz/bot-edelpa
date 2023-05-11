@@ -1,12 +1,10 @@
-""" Instancia del bot, configuracion del bot, metodo para iniciar el bot y capturar excepciones"""
+# import clase ayuda
 from src.Help.mensaje_ayuda import CustomHelpCommand
-from discord.ext.commands.errors import ExtensionNotFound
-
+# import discord
+from discord.ext.commands.errors import ExtensionNotFound, ExtensionNotLoaded
 from discord.ext import commands
 from discord import Intents
 from discord import Game
-
-
 # instancia
 from src.database import instancia_automatica
 
@@ -29,13 +27,14 @@ def app_factory():
             await bot.load_extension('src.comandos.comandos')
             await bot.load_extension('src.events.eventos')
             await bot.load_extension('src.slash_comandos.slash')
+
             print('extensiones cargadas')
 
         except Exception as ex:
             if isinstance(ex, ExtensionNotFound):
-                print(f'error: {ex}')
+                print(f'Extension no encontrada')
             else:
-                print(f'error: {ex}')
+                print(f'Error, contacte con el programador. ')
 
     
     @bot.command()
@@ -44,18 +43,23 @@ def app_factory():
             await bot.reload_extension('src.comandos.comandos_menu')
             await bot.reload_extension('src.comandos.comandos')
             await bot.reload_extension('src.events.eventos')
-            await bot.reload_extension('src.slash_comandos.slash')   
-            await ctx.send('recarga lista listo')
+            await bot.reload_extension('src.slash_comandos.slash')
+            await ctx.send('Comandos actualizados')
 
-        except ImportError:
-            await ctx.send('Hubo un error al recargar las extensiones')
+        except Exception as ex:
+            if isinstance(ex, ImportError):
+                await ctx.send('Hubo un error al recargar las extensiones, verificar path de las extesiones.')
+
+            elif isinstance(ex, ExtensionNotLoaded):
+                await cargar_extensiones()
+                await ctx.send('Comandos cargados y actualizados')
 
 
     @bot.event
     async def on_ready():
-        await cargar_extensiones()
-        await bot.change_presence(activity=Game(name="Working hard"))
+        await bot.change_presence(activity=Game(name="Working in Edelpa S.A."))
         bot.loop.create_task(instancia_automatica.auto_alertas(bot))
-        print('listo')
+        print('Bot listo')
+
 
     return bot

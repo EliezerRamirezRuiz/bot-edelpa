@@ -1,5 +1,5 @@
-from discord.ext.commands import Cog, CommandNotFound, MissingRequiredArgument, DisabledCommand
-
+from discord.ext.commands import Cog, Bot
+from discord.ext.commands import CommandNotFound, MissingRequiredArgument, DisabledCommand
 
 class MyEvents(Cog):
     def __init__(self, bot):
@@ -66,7 +66,8 @@ class MyEvents(Cog):
             await welcome_channel.send(f'Bienvenido {member.mention} al servidor!')
 
 
-async def setup(bot):
+async def setup(bot:Bot):
+    print('I am being loaded from eventos.py')    
     await bot.add_cog(MyEvents(bot))
 
 

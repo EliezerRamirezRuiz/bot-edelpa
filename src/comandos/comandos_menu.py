@@ -1,5 +1,7 @@
-from discord.ext.commands import Cog, command
+from discord.ext.commands import Cog, Bot
+from discord.ext.commands import command
 from discord.ui import View
+
 from src.componentes.menu import Menu
 
 
@@ -25,6 +27,7 @@ class ComandosMenu(Cog):
         print('Comandos_menu.py online.')
 
 
-async def setup(bot):
+async def setup(bot:Bot):
+    print('I am being loaded from comandos_menu.py')
     await bot.add_cog(ComandosMenu(bot))
 

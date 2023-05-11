@@ -1,13 +1,16 @@
-from discord.ext import commands
+from discord.ext.commands import Cog, Bot 
+from discord.ext.commands import command 
+
 from src.database import *
 
-class ComandosPrincipales(commands.Cog):
+
+class ComandosPrincipales(Cog):
     """instancia del bot para controlar los comandos de manera escalable"""
     def __init__(self, bot):
         self.bot = bot
 
     
-    @commands.command()
+    @command()
     async def consultar_stock(self, ctx, codigo):
         """Funcion que consultar stock a pedir, manda mensaje para que el usuario sepa 
         que debe mandar una respuesta para consultar el stock"""
@@ -26,7 +29,7 @@ class ComandosPrincipales(commands.Cog):
                 await ctx.send('Error desconocido, porfavor contactar con el encargado de informatica')
 
 
-    @commands.command()
+    @command()
     async def estado_robot(self, ctx):
         """Function para obtener estado del robot\n
         Funcion por trabajar y arreglar"""
@@ -36,7 +39,7 @@ class ComandosPrincipales(commands.Cog):
         await ctx.send(embed=embed)
 
     
-    @commands.command()
+    @command()
     async def alertas_activas(self, ctx):
         """Funcion que consulta la funcion `Alerta.ultimas_alertas_activas()` 
         y obtiene el objeto Embed y lo retornamos. \n
@@ -48,7 +51,7 @@ class ComandosPrincipales(commands.Cog):
         await ctx.send(embed=embed)
 
 
-    @commands.command()
+    @command()
     async def alertas_desactivadas(self, ctx):
         """Funcion que consulta la funcion `Alerta.ultimas_alertas_desactivadas()` y obtiene el objeto Embed y
             lo retornamos. \n
@@ -59,5 +62,6 @@ class ComandosPrincipales(commands.Cog):
         await ctx.send(embed=embed)
 
 
-async def setup(bot):
+async def setup(bot:Bot):
+    print('I am being loaded from comandos.py')
     await bot.add_cog(ComandosPrincipales(bot))

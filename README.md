@@ -1,55 +1,47 @@
 # Bot Edelpa
-<i>Eli-ezer Reuven Ramirez Ruiz - 19/03/2023</i>
+<i> Eli-ezer Reuven Ramirez Ruiz - 19/03/2023 </i>
 
-
-## Problema dentro de la empresa
-
-"La empresa Edelpa ha solicitado la creacion de un bot para poder mantener en comunicacion <br>
-a la empresa de los estado, posibles fallo que presente el robot. Tambien se espera que el <br>
-Bot pueda cumplir con otros requerimientos tales como que se conecte a una Base de datos de <br>
-SQL Server y pueda consultar stocks y alertas, gracias a eso poder generar respuestas y <br>
-notificaciones de forma autonoma."
-
-<br>
-
-## Actualizaciones
-
-"El Bot estaba pensado para realizarse como un bot de whatsapp pero 
-<br>debido a las limitantes, se ha replanteado para realizarse en otra 
-<br>plataforma digital de comunicacion y la cual se ha llegado a un concenso 
-<br>es Discord que nos proporciona <i>[Discord Developer Portal](https://discord.com/login?redirect_to=%2Fdevelopers%2Fapplications)</i>"
+## Introducción
+> Bot que cumple con la funcion de ser intermediario entre discord y la base de datos. <br>
 
 <br>
 
 ## Tecnologias utilizadas
 
-Las librerias utilizadas en este proyecto fueron:
+> Las librerias utilizadas en este proyecto fueron:
 - [Discord.py](https://discordpy.readthedocs.io/en/stable/)
-- [Aiohttp](https://docs.aiohttp.org/en/stable/)
 - [Aioodbc](https://github.com/aio-libs/aioodbc/)
 - [Python-dotenv](https://pypi.org/project/python-dotenv/)
 
 <br>
+ 
+### COMANDOS
+> 1) !menu [Opciones]
+> 2) !consultar_stock (parametro: codigo[int])
+> 3) !estado_robot (sin parametros)
+> 4) !alertas_activa (sin parametros)
+> 5) !alertas_desactivadas (sin parametros)
 
-Links de referencia
-https://support.discord.com/hc/es/articles/4644915651095-Permisos-para-comandos
-https://discordpy.readthedocs.io/en/stable/ext/commands/extensions.html#reloading
-https://www.youtube.com/watch?v=9zl0FT30jvo
-https://discordpy.readthedocs.io/en/stable/ext/commands/cogs.html?highlight=bot%20get_cog
+### MENU
+> 1) Consultar stock  <br>
+> 2) Estado robot <br>
+> 3) Ultimas alertas activas <br>
+> 4) Reporte del dia <br>
+> 5) /
 
-COMANDOS
-- !menu
-- !consultar_stock
-- !estado_robot
-- !alertas_activas
-- !alertas_desactivadas
+### SLASH 
+> 1) /menu <br>
+> 2) /consultar_stock (parametro: codigo[int]) <br>
+> 3) /ultimas_alertas_activas <br>
+> 4) /ultimas_alertas_desactivadas <br>
+> 5) /
 
-MENU
-- Consultar stock
-- Estado robot
-- Ultimas alertas activas
-- Reporte del dia
+<br>
 
-SLASH
-- /menu
-- /consultar_stock
+### Links de referencia
+- https://support.discord.com/hc/es/articles/4644915651095-Permisos-para-comandos
+- https://discordpy.readthedocs.io/en/stable/ext/commands/extensions.html#reloading
+- https://www.youtube.com/watch?v=9zl0FT30jvo
+- https://discordpy.readthedocs.io/en/stable/ext/commands/cogs.html?highlight=bot%20get_cog^
+- https://stackoverflow.com/questions/69787853/how-do-i-make-a-modular-discord-bot-in-python
+- https://www.youtube.com/watch?v=LXsdt6RMNfY
