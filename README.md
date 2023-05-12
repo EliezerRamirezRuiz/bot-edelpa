@@ -45,3 +45,10 @@
 - https://discordpy.readthedocs.io/en/stable/ext/commands/cogs.html?highlight=bot%20get_cog^
 - https://stackoverflow.com/questions/69787853/how-do-i-make-a-modular-discord-bot-in-python
 - https://www.youtube.com/watch?v=LXsdt6RMNfY
+- https://stackoverflow.com/questions/61671671/discord-py-problems-with-loading-extensions
+- https://stackoverflow.com/questions/61671671/discord-py-problems-with-loading-extensions
+- https://discordpy.readthedocs.io/en/stable/ext/commands/extensions.html#reloading
+- https://discordpy.readthedocs.io/en/stable/ext/commands/extensions.html?highlight=setup 
+- https://discordpy.readthedocs.io/en/stable/interactions/api.html?highlight=app_commands#discord.app_commands.AppCommandPermissions.guild
+- https://discordpy.readthedocs.io/en/stable/ext/commands/api.html#discord.ext.commands.Cog
+- https://discordpy.readthedocs.io/en/stable/ext/commands/cogs.html?highlight=bot%20get_cog
