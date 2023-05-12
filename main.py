@@ -1,19 +1,14 @@
 #constantes
 from src.config.config import TOKEN
 
-
 #funcion
 from src.app.bot import app_factory
-
 
 # logging
 import logging
 
 
-"""Configuration Bot"""
 handler = logging.FileHandler(filename='discord.log', encoding='utf-8', mode='r+')
-
-
 bot = app_factory()
 
 

@@ -18,7 +18,7 @@
 ### COMANDOS
 > 1) !menu [Opciones]
 > 2) !consultar_stock (parametro: codigo[int])
-> 3) !estado_robot (sin parametros)
+> 3) !estado_robot (sin parametros)(pendiente)
 > 4) !alertas_activa (sin parametros)
 > 5) !alertas_desactivadas (sin parametros)
 

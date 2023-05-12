@@ -33,9 +33,6 @@ class SlashComandos(Cog):
         if comando is not None:
             await comando.consultar_stock(contexto, codigo)
 
-        await interaccion.delete_original_response()
-
-
 
     @app_commands.command(name='ultimas_alertas_activas', description='Atajo para traer las ultimas alertas, tiene un parametro que es cuentas ')
     async def ultimas_alertas_activas(self, interaccion: Interaction) -> None:
@@ -47,8 +44,6 @@ class SlashComandos(Cog):
         comando = self.bot.get_cog('ComandosPrincipales')
         if comando is not None:
             await comando.consultar_stock(contexto)
-            
-        await interaccion.delete_original_response()
 
 
     @Cog.listener()

@@ -33,7 +33,6 @@ class ComandosPrincipales(Cog):
     async def estado_robot(self, ctx):
         """Function para obtener estado del robot\n
         Funcion por trabajar y arreglar"""
-
         await ctx.send("Consultando estado del robot")
         embed =  await instancia_robot.get_data()
         await ctx.send(embed=embed)
@@ -47,7 +46,7 @@ class ComandosPrincipales(Cog):
         Funcion concluida y para utilizar"""
         
         await ctx.send("Obteniendo alertas")
-        embed = await instancia_alerta.ultimas_alertas_activas(self.bot)
+        embed = await instancia_alerta.retornar_alertas_activas(self.bot)
         await ctx.send(embed=embed)
 
 
@@ -58,10 +57,10 @@ class ComandosPrincipales(Cog):
         Funcion concluida y para utilizar"""
         
         await ctx.send("Obteniendo ultimas alertas desactivadas")
-        embed = await instancia_alerta.ultimas_alertas_desactivadas(self.bot)
+        embed = await instancia_alerta.retornar_alertas_desactivadas(self.bot)
         await ctx.send(embed=embed)
 
 
-async def setup(bot:Bot):
+async def setup(bot:Bot): 
     print('I am being loaded from comandos.py')
     await bot.add_cog(ComandosPrincipales(bot))

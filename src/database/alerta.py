@@ -116,7 +116,7 @@ class AlertaDB():
         
         else:
             embed = create_embed(
-                title='Ultimas alertas activas', description='Lista de alertas activas', color=0x00ff00, 
+                title='Ultimas alertas desactivadas', description='Lista de alertas activas', color=0x00ff00, 
                 author={'name':f'{bot.user.name}','url':'https://www.edelpa.cl/','icon_url':f'{bot.user.avatar.url}'},
                 footer={'text':'Envases del Pacifico - Edelpa'}, 
                 fields=[{'name':'No hay alertas activas', "value":'Información no disponible', 'inline':False,}])

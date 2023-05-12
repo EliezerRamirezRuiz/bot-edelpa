@@ -5,8 +5,10 @@ from src.utils.funciones_utiles import (comprobar_hora, comprobar_largo,
                             comprobar_mayor, obtener_hora, formatear_hora, 
                             formatear_fecha, create_embed)
 
-class AutomaticAlertaDB():
-    """ Clase se enfoca en realizar acciones para las alertas automaticas """
+class AlertaAutomatica():
+    def __init__(self, ctx) -> None:
+        self.ctx = ctx
+
     
     async def obtener_alertas(self) -> list:
         """ Funcion para traer datos `{Procedure MANDAR_ALERTAS}` """
