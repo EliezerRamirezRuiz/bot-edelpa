@@ -10,7 +10,7 @@ class SlashComandos(Cog):
 
     @app_commands.commands.command(name='slash_menu', description='Ejecuta el comando !menu')
     async def slash_menu(self, interaccion: Interaction) -> None:
-        Embed = mensaje_simple('Ejecutando menu...')
+        Embed = mensaje_simple('Procesando menu...')
         await interaccion.response.send_message(embed=Embed)
         original_mensaje = await interaccion.original_response()  
         contexto = await self.bot.get_context(original_mensaje)
@@ -20,11 +20,10 @@ class SlashComandos(Cog):
             await comando.menu(contexto)
 
     
-
     @app_commands.command(name='consultar_stock', description='Ejecuta el comando !consultar_stock')
     @app_commands.describe(codigo="""Código requerido para buscar el stock, Ejemplo: 'EP100000000006000621850000500010'  """)
     async def consultar_stock(self, interaccion: Interaction, codigo:str) -> None:
-        Embed = mensaje_simple('Procesando...')
+        Embed = mensaje_simple('Procesando solicitud...')
         await interaccion.response.send_message(embed=Embed)
         original_mensaje = await interaccion.original_response()
         contexto = await self.bot.get_context(original_mensaje)
@@ -34,16 +33,28 @@ class SlashComandos(Cog):
             await comando.consultar_stock(contexto, codigo)
 
 
-    @app_commands.command(name='ultimas_alertas_activas', description='Atajo para traer las ultimas alertas, tiene un parametro que es cuentas ')
-    async def ultimas_alertas_activas(self, interaccion: Interaction) -> None:
-        Embed = mensaje_simple('Procesando...')
+    @app_commands.command(name='ultimas_alertas_activas', description='Trae las ultimas alertas desactivadas, `Top 10` ')
+    async def alertas_activas(self, interaccion: Interaction) -> None:
+        Embed = mensaje_simple('Procesando solicitud...')
         await interaccion.response.send_message(embed=Embed)
         original_mensaje = await interaccion.original_response()  
         contexto = await self.bot.get_context(original_mensaje)
         
         comando = self.bot.get_cog('ComandosPrincipales')
         if comando is not None:
-            await comando.consultar_stock(contexto)
+            await comando.alertas_activas(contexto)
+
+
+    @app_commands.command(name='ultimas_alertas_desactivadas', description='Trae las ultimas alertas desactivadas, `Top 10` ')
+    async def alertas_desactivadas(self, interaccion: Interaction) -> None:
+        Embed = mensaje_simple('Procesando solicitud...')
+        await interaccion.response.send_message(embed=Embed)
+        original_mensaje = await interaccion.original_response()  
+        contexto = await self.bot.get_context(original_mensaje)
+        
+        comando = self.bot.get_cog('ComandosPrincipales')
+        if comando is not None:
+            await comando.alertas_desactivadas(contexto)
 
 
     @Cog.listener()

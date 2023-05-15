@@ -16,7 +16,7 @@ def main() -> None:
     """ Funcion para que el bot pueda correr y ante cualquier 
     inconveniente mande una excepecion expecion """
     try:
-        bot.run(TOKEN)
+        bot.run(TOKEN,  log_handler=handler)
         
     except Exception as ex:
         raise ex

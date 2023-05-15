@@ -2,36 +2,3 @@ EliezerEdelpa
 eramirezr@edelpa.cl
 Edelpa*2023
 
-
-
-
-
-SELECT * FROM CANALES
-
-
-DELETE FROM ALERTS 
-WHERE AlertID IN (9,10,11)
-
-
-ALTER PROCEDURE INSERTAR_ALERTAS 
-	@ALERTNAME VARCHAR(25),
-	@ALERTDESCRIPCION VARCHAR(50),
-	@AREA INT,
-	@FRECUENCIA INT 
-
-	AS BEGIN 
-	
-	IF NOT EXISTS (
-		SELECT * 
-		FROM ALERTS
-		WHERE AlertName = @ALERTNAME
-		AND AlertDescription = @ALERTDESCRIPCION
-		AND Area = @AREA
-	)
-	BEGIN
-		INSERT INTO ALERTS (AlertName, AlertDescription, AlertActivo, Area, AlertTimes, Frecuencia)
-			VALUES (@ALERTNAME, @ALERTDESCRIPCION, 1, @AREA, 3, @FRECUENCIA);
-
-	END
-
-END

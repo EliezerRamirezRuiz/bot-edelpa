@@ -16,29 +16,31 @@
 <br>
  
 ### COMANDOS
-> 1) !menu [Opciones]
+> 1) !menu (Opciones)
 > 2) !consultar_stock (parametro: codigo[int])
 > 3) !estado_robot (sin parametros)(pendiente)
 > 4) !alertas_activa (sin parametros)
 > 5) !alertas_desactivadas (sin parametros)
 
 ### MENU
-> 1) Consultar stock  <br>
-> 2) Estado robot <br>
-> 3) Ultimas alertas activas <br>
-> 4) Reporte del dia <br>
-> 5) /
+> 1) Default  <br>
+> 2) Consultar stock  <br>
+> 3) Estado robot <br>
+> 4) Ultimas alertas activas <br>
+> 5) Ultimas alertas desactivadas <br>
+> 6) Reporte del dia <br>
 
 ### SLASH 
 > 1) /menu <br>
 > 2) /consultar_stock (parametro: codigo[int]) <br>
 > 3) /ultimas_alertas_activas <br>
 > 4) /ultimas_alertas_desactivadas <br>
-> 5) /
 
 <br>
 
+```txt
 ### Links de referencia
+
 - https://support.discord.com/hc/es/articles/4644915651095-Permisos-para-comandos
 - https://discordpy.readthedocs.io/en/stable/ext/commands/extensions.html#reloading
 - https://www.youtube.com/watch?v=9zl0FT30jvo
@@ -52,3 +54,5 @@
 - https://discordpy.readthedocs.io/en/stable/interactions/api.html?highlight=app_commands#discord.app_commands.AppCommandPermissions.guild
 - https://discordpy.readthedocs.io/en/stable/ext/commands/api.html#discord.ext.commands.Cog
 - https://discordpy.readthedocs.io/en/stable/ext/commands/cogs.html?highlight=bot%20get_cog
+```
+

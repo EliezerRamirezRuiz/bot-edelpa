@@ -1,63 +1,24 @@
 """ Importaciones """
 from discord import Embed
-from src.database.db import conexion_db
+from src.database.procedimientos import ProcedimientosAlmacenados
 from src.utils.funciones_utiles import (comprobar_hora, comprobar_largo, 
                             comprobar_mayor, obtener_hora, formatear_hora, 
                             formatear_fecha, create_embed)
 
-class AlertaDB():
+class AlertaBaseDeDatos():
     """
     Clase se encarga de las alertas y contendra todos los metodos que tengan alguna relacion con
     las alertas que sean llamados de comandos o menus con opciones
     """
-
-    async def alertas_activas(self) -> list:
-        """ Funcion que trae las ultimas alertas activas """
-        try:
-            async with await conexion_db() as conn:
-                async with conn.cursor() as cursor:
-                    query = f" EXEC ULTIMAS_ALERTAS_ACTIVAS "
-                    await cursor.execute(query)
-                    row = await cursor.fetchall()
-                    if row is None:
-                        return []
-                
-                    return row 
-
-        except Exception as ex:
-            if isinstance(ex, TimeoutError):
-                print('Tiempo excedido')
-            
-            else:
-                print('Error desconocido')
-
-
-    async def alertas_desactivadas(self):
-        """ Funcion que trae las ultimas alertas inactivas """
-        try:
-            async with await conexion_db() as conn:
-                async with conn.cursor() as cursor:
-                    query = f" EXEC ULTIMAS_ALERTAS_DESACTIVADAS "
-                    await cursor.execute(query)
-                    row = await cursor.fetchall()
-                    if row is None:
-                        return []
-                
-                    return row 
-                
-        except Exception as ex:
-            if isinstance(ex, TimeoutError):
-                print('Tiempo excedido')
-            
-            else:
-                print('Error desconocido')
+    def __init__(self) -> None:
+        self.procedimiento = ProcedimientosAlmacenados()
 
 
     async def retornar_alertas_activas(self, bot, lista=None) -> Embed:
         """Funcion que trae los datos de la funcion `alertas_activas()` se manipulan para presentar
         y entregar de una manera mas ordenada. En caso que no contenga alertas activas se mandara 
         un mensaje que le informe al usuario que no hay alertas"""
-        datos = await self.alertas_activas()
+        datos = await self.procedimiento.alertas_activas()
 
         if lista is None:
             lista = []
@@ -93,7 +54,7 @@ class AlertaDB():
         se manipulan para presentar y entregar de una manera mas 
         ordenada. """
 
-        datos = await self.alertas_desactivadas()
+        datos = await self.procedimiento.alertas_desactivadas()
 
         if lista is None:
             lista = []

@@ -17,4 +17,7 @@ async def conexion_db() -> Connection:
         elif isinstance(ex, ProgrammingError):
             print('Se intento cerrar una conexion')
 
+        else:
+            print(f'ocurrio un error durante la ejecucion, {ex}')
+
 

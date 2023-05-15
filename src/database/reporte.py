@@ -1,7 +1,12 @@
-from src.database.db import conexion_db
 import discord
+from src.database.procedimientos import ProcedimientosAlmacenados
 
-class ReporteDB():
+
+class ReporteBaseDeDatos():
+    def __init__(self) -> None:
+        self.procedimiento = ProcedimientosAlmacenados()
+
+
     async def get_data(self):
         """ Funcion para traer datos de la base de datos SQL Server, 
         para ser mas exacto una alerta """

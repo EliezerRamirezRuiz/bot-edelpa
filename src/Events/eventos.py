@@ -29,22 +29,22 @@ class MyEvents(Cog):
 
     @Cog.listener()
     async def on_command(self, ctx):
-        print(f"Command '{ctx.command.name}' was used by {ctx.author.name} # {ctx.author.discriminator}")
+        print(f"Comando '{ctx.command.name}' fue usado por {ctx.author.name} # {ctx.author.discriminator}")
 
 
     @Cog.listener()
     async def on_command_completion(self, ctx):
-        print(f"Command '{ctx.command}' was successfully executed")
+        print(f"Comando '{ctx.command}' fue ejecutado exitosamente")
 
 
     @Cog.listener()
     async def on_connect(self):
-        print("Bot Working")
+        print("Bot Trabajando")
 
     
     @Cog.listener()
     async def on_disconnect(self):
-        print("Bot off")
+        print("Bot apagado")
     
 
     @Cog.listener()

@@ -5,20 +5,20 @@ from discord.ext.commands.errors import ExtensionNotFound, ExtensionNotLoaded
 from discord.ext import commands
 from discord import Intents
 from discord import Game
-# instancia
-from src.database import instancia_automatica
+from src.database.automico import AlertaAutomatica
 
 
 def app_factory():
-    descripcion = """Bot encargado de automatizar consultas de alertas, reportes y stock"""
+    alerta_automatica = AlertaAutomatica()
+    descripcion = """Bot encargado de automatizar procesos e intentar """
 
-    """ Obligatory to retry connection"""
+    # Atributos
     intents = Intents.all()
     intents.message_content = True
 
-    """ Instance Bot """
+    # Instancia Bot
     bot = commands.Bot(command_prefix='!', description=descripcion,
-                       intents=intents, help_command=CustomHelpCommand())
+                       intents=intents, help_command = CustomHelpCommand())
 
 
     async def cargar_extensiones():
@@ -27,14 +27,14 @@ def app_factory():
             await bot.load_extension('src.comandos.comandos')
             await bot.load_extension('src.events.eventos')
             await bot.load_extension('src.slash_comandos.slash')
-
             print('extensiones cargadas')
 
         except Exception as ex:
             if isinstance(ex, ExtensionNotFound):
                 print(f'Extension no encontrada')
+
             else:
-                print(f'Error, contacte con el programador. ')
+                print(f'Error, contacte con el programador: {ex}')
 
     
     @bot.command()
@@ -58,7 +58,8 @@ def app_factory():
     @bot.event
     async def on_ready():
         await bot.change_presence(activity=Game(name="Working in Edelpa S.A."))
-        bot.loop.create_task(instancia_automatica.auto_alertas(bot))
+        bot.loop.create_task(alerta_automatica.auto_alertas(bot))
+        bot.loop.create_task(cargar_extensiones())
         print('Bot listo')
 
 

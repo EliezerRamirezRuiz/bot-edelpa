@@ -1,17 +1,14 @@
 from discord.ext.commands import MinimalHelpCommand
-
+from src.utils.funciones_utiles import create_embed
 
 class CustomHelpCommand(MinimalHelpCommand):
-    async def send_error_message(self, error):
-        # This method is called if the command raises an error
-        # We can customize the error message that is sent here
-        # !help send_error_message
-        await self.get_destination().send(f'Error: {error}')
+    def __init__(self):
+        super().__init__(no_category="Sin categoria")
 
 
     async def send_command_help(self, command):
         # This method is called if a specific command is requested in the help command
         # We can customize the message that is sent here
-        message = f'''  Help for command {command}: {command.help}\n  
-                        Function for command '''
+        message = f'''  Ayuda para comandos {command}: {command.help}\n  
+                        Funciones para comandos '''
         await self.get_destination().send(message)

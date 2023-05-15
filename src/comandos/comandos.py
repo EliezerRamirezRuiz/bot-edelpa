@@ -1,7 +1,10 @@
 from discord.ext.commands import Cog, Bot 
 from discord.ext.commands import command 
-
-from src.database import *
+# Clases
+from src.database.alerta import AlertaBaseDeDatos
+from src.database.stock import StockBaseDeDatos
+from src.database.robot import RobotBaseDeDatos 
+from src.database.reporte import ReporteBaseDeDatos
 
 
 class ComandosPrincipales(Cog):
@@ -9,13 +12,15 @@ class ComandosPrincipales(Cog):
     def __init__(self, bot):
         self.bot = bot
 
+
     
     @command()
     async def consultar_stock(self, ctx, codigo):
         """Funcion que consultar stock a pedir, manda mensaje para que el usuario sepa 
         que debe mandar una respuesta para consultar el stock"""
         try:
-            embed = await instancia_stock.return_stock(str(codigo))
+            stock = StockBaseDeDatos()
+            embed = await stock.return_stock(str(codigo))
             await ctx.send(embed=embed)
 
         except Exception as ex:
@@ -26,7 +31,8 @@ class ComandosPrincipales(Cog):
                 await ctx.send('Se ha excedido el tiempo de respuesta')
 
             else:
-                await ctx.send('Error desconocido, porfavor contactar con el encargado de informatica')
+                await ctx.send(f'''Error desconocido, porfavor contactar con el encargado de informatica''')
+                
 
 
     @command()
@@ -34,7 +40,7 @@ class ComandosPrincipales(Cog):
         """Function para obtener estado del robot\n
         Funcion por trabajar y arreglar"""
         await ctx.send("Consultando estado del robot")
-        embed =  await instancia_robot.get_data()
+        embed =  await RobotBaseDeDatos.obtener_datos()
         await ctx.send(embed=embed)
 
     
@@ -46,7 +52,7 @@ class ComandosPrincipales(Cog):
         Funcion concluida y para utilizar"""
         
         await ctx.send("Obteniendo alertas")
-        embed = await instancia_alerta.retornar_alertas_activas(self.bot)
+        embed = await AlertaBaseDeDatos.retornar_alertas_activas(self.bot)
         await ctx.send(embed=embed)
 
 
@@ -57,7 +63,15 @@ class ComandosPrincipales(Cog):
         Funcion concluida y para utilizar"""
         
         await ctx.send("Obteniendo ultimas alertas desactivadas")
-        embed = await instancia_alerta.retornar_alertas_desactivadas(self.bot)
+        embed = await AlertaBaseDeDatos.retornar_alertas_desactivadas(self.bot)
+        await ctx.send(embed=embed)
+
+
+    @command()
+    async def estado_robot(self, ctx):
+        """ Funcion que retorna el estado del robot """
+        await ctx.send("Obteniendo estado robot")
+        embed = await RobotBaseDeDatos.obtener_datos(self.bot)
         await ctx.send(embed=embed)
 
 

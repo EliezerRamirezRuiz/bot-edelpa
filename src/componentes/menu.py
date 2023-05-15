@@ -1,8 +1,14 @@
 """Archivo que contiene el menu con multiples opciones 
 que apretando alguna realiza la accion conrrespondiente"""
-from discord import (SelectOption, Interaction)
+from discord import SelectOption, Interaction
 from discord.ui import Select
-from src.database import * 
+
+# Clases
+from src.database.alerta import AlertaBaseDeDatos
+from src.database.stock import StockBaseDeDatos
+from src.database.robot import RobotBaseDeDatos 
+from src.database.reporte import ReporteBaseDeDatos
+
 
 
 class OpcionesMenu:
@@ -48,7 +54,7 @@ class Menu(Select):
                 try:                
                     await interaccion.response.send_message('Escriba el codigo a consultar:')
                     message = await self.bot.wait_for('message', check=lambda m: m.author == self.ctx.author, timeout=30.0)
-                    embed = await instancia_stock.return_stock(str(message.content))
+                    embed = await StockBaseDeDatos.return_stock(str(message.content))
                     await interaccion.followup.send(embed=embed)
 
                 except TimeoutError:
@@ -57,33 +63,23 @@ class Menu(Select):
             # Caso 3
             case "Estado Robot":
                 await interaccion.response.send_message('Verificando')
-                embed = await instancia_robot.get_data()
-                await self.ctx.send(embed=embed)
-
-            # Caso 4
-            case "Estado Robot":
-                await interaccion.response.send_message('Verificando')
-                embed = await instancia_robot.get_data()
+                embed = await RobotBaseDeDatos.obtener_datos()
                 await self.ctx.send(embed=embed)
 
             # Caso 5
             case "Ultimas alertas activas":
                 await interaccion.response.send_message("Obteniendo informacion...")
-                embed = await instancia_alerta.ultimas_alertas_activas(self.bot)
+                embed = await AlertaBaseDeDatos.retornar_alertas_activas(self.bot)
                 await self.ctx.send(embed=embed)
 
             # Caso 6
             case "Ultimas alertas desactivadas":
                 await interaccion.response.send_message("Obteniendo informacion...")
-                embed = await instancia_alerta.ultimas_alertas_desactivadas(self.bot)
+                embed = await AlertaBaseDeDatos.retornar_alertas_desactivadas(self.bot)
                 await self.ctx.send(embed=embed)
 
             #Caso 7
             case "Reporte del dia":
                 await interaccion.response.send_message("Obteniendo reporte")
-                embed = await instancia_report.get_data()
+                embed = await ReporteBaseDeDatos.get_data()
                 await self.ctx.send(embed=embed)
-            
-
-
-
