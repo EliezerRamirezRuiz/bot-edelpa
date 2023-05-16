@@ -1,58 +1,99 @@
-# Bot Edelpa
+# DISCORD BOT - EDELPA
 <i> Eli-ezer Reuven Ramirez Ruiz - 19/03/2023 </i>
 
+<br>
+
 ## Introducción
-> Bot que cumple con la funcion de ser intermediario entre discord y la base de datos. <br>
-
-<br>
-
-## Tecnologias utilizadas
-
-> Las librerias utilizadas en este proyecto fueron:
-- [Discord.py](https://discordpy.readthedocs.io/en/stable/)
-- [Aioodbc](https://github.com/aio-libs/aioodbc/)
-- [Python-dotenv](https://pypi.org/project/python-dotenv/)
-
-<br>
- 
-### COMANDOS
-> 1) !menu (Opciones)
-> 2) !consultar_stock (parametro: codigo[int])
-> 3) !estado_robot (sin parametros)(pendiente)
-> 4) !alertas_activa (sin parametros)
-> 5) !alertas_desactivadas (sin parametros)
-
-### MENU
-> 1) Default  <br>
-> 2) Consultar stock  <br>
-> 3) Estado robot <br>
-> 4) Ultimas alertas activas <br>
-> 5) Ultimas alertas desactivadas <br>
-> 6) Reporte del dia <br>
-
-### SLASH 
-> 1) /menu <br>
-> 2) /consultar_stock (parametro: codigo[int]) <br>
-> 3) /ultimas_alertas_activas <br>
-> 4) /ultimas_alertas_desactivadas <br>
-
-<br>
-
 ```txt
-### Links de referencia
+El bot surge ante una necesidad de la empresa en automatizar los procesos como:
+--> a) Automatizar la consulta de stock.
+--> b) Obtener las alertas.
+--> c) Verificar el estado del robot.
+--> d) Guardar datos en una base de datos.
 
-- https://support.discord.com/hc/es/articles/4644915651095-Permisos-para-comandos
-- https://discordpy.readthedocs.io/en/stable/ext/commands/extensions.html#reloading
-- https://www.youtube.com/watch?v=9zl0FT30jvo
-- https://discordpy.readthedocs.io/en/stable/ext/commands/cogs.html?highlight=bot%20get_cog^
-- https://stackoverflow.com/questions/69787853/how-do-i-make-a-modular-discord-bot-in-python
-- https://www.youtube.com/watch?v=LXsdt6RMNfY
-- https://stackoverflow.com/questions/61671671/discord-py-problems-with-loading-extensions
-- https://stackoverflow.com/questions/61671671/discord-py-problems-with-loading-extensions
-- https://discordpy.readthedocs.io/en/stable/ext/commands/extensions.html#reloading
-- https://discordpy.readthedocs.io/en/stable/ext/commands/extensions.html?highlight=setup 
-- https://discordpy.readthedocs.io/en/stable/interactions/api.html?highlight=app_commands#discord.app_commands.AppCommandPermissions.guild
-- https://discordpy.readthedocs.io/en/stable/ext/commands/api.html#discord.ext.commands.Cog
-- https://discordpy.readthedocs.io/en/stable/ext/commands/cogs.html?highlight=bot%20get_cog
+Enlace del bot para que se pueda unir al servidor:
+--> https://discord.com/api/oauth2/authorize?client_id=1087791201639485520&permissions=8&scope=bot%20applications.commands
 ```
+
+<br>
+
+## DOCUMENTACION DE LIBRERIAS UTILIZADAS
+```txt
+Aqui se dejara link e informacion de las librerias utilizadas:
+```
+- [Discord.py](https://discordpy.readthedocs.io/en/stable/) -> Documentación oficial y Soporte del Bot
+- [Aioodbc](https://github.com/aio-libs/aioodbc/) -> Documentación oficial y Soporte conector a la base de datos SQLSERVER
+- [Python-dotenv](https://pypi.org/project/python-dotenv/) -> Documentación oficial y Soporte para variables de entorno
+
+<br>
+
+## COMANDOS DISPONIBLES
+```txt
+COMANDOS
+1) !menu (Opciones)
+2) !consultar_stock (parametro: codigo[int])
+3) !estado_robot (sin parametros)(pendiente)
+4) !alertas_activa (sin parametros)
+5) !alertas_desactivadas (sin parametros)
+6) !sincronizar (Recarga las extensiones)
+
+OPCIONES MENU (Comando de invocación ["!menu" | "/menu"])
+1) Default  <br>
+2) Consultar stock  <br>
+3) Estado robot <br>
+4) Ultimas alertas activas <br>
+5) Ultimas alertas desactivadas <br>
+6) Reporte del dia <br>
+
+COMANDOS SLASH
+1) /menu <br>
+2) /consultar_stock (parametro: codigo[int]) <br>
+3) /ultimas_alertas_activas <br>
+4) /ultimas_alertas_desactivadas <br>
+```
+
+<br>
+
+## LIBRERIAS UTILIZADAS
+```txt
+aiohttp==3.8.4
+aioodbc==0.4.0
+aiosignal==1.3.1
+async-timeout==4.0.2
+attrs==22.2.0
+autopep8==2.0.2
+beautifulsoup4==4.12.0
+certifi==2022.12.7
+charset-normalizer==3.1.0
+click==8.1.3
+colorama==0.4.6
+discord-py-slash-command==4.2.1
+discord.py==2.2.3
+frozenlist==1.3.3
+idna==3.4
+itsdangerous==2.1.2
+Jinja2==3.1.2
+MarkupSafe==2.1.2
+MouseInfo==0.1.3
+multidict==6.0.4
+Pillow==9.4.0
+PyAutoGUI==0.9.53
+pycodestyle==2.10.0
+PyGetWindow==0.0.9
+PyMsgBox==1.0.9
+pyodbc==4.0.35
+pyperclip==1.8.2
+PyRect==0.2.0
+PyScreeze==0.1.28
+python-dotenv==1.0.0
+pytweening==1.0.4
+requests==2.28.2
+soupsieve==2.4
+urllib3==1.26.15
+Werkzeug==2.2.3
+wikipedia==1.4.0
+yarl==1.8.2
+```
+
+
 

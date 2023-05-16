@@ -6,6 +6,12 @@ from src.database.stock import StockBaseDeDatos
 from src.database.robot import RobotBaseDeDatos 
 from src.database.reporte import ReporteBaseDeDatos
 
+# Variables
+alerta = AlertaBaseDeDatos()
+reporte = ReporteBaseDeDatos()
+stock = StockBaseDeDatos()
+robot = RobotBaseDeDatos()
+
 
 class ComandosPrincipales(Cog):
     """instancia del bot para controlar los comandos de manera escalable"""
@@ -18,8 +24,8 @@ class ComandosPrincipales(Cog):
     async def consultar_stock(self, ctx, codigo):
         """Funcion que consultar stock a pedir, manda mensaje para que el usuario sepa 
         que debe mandar una respuesta para consultar el stock"""
+
         try:
-            stock = StockBaseDeDatos()
             embed = await stock.return_stock(str(codigo))
             await ctx.send(embed=embed)
 
@@ -39,8 +45,9 @@ class ComandosPrincipales(Cog):
     async def estado_robot(self, ctx):
         """Function para obtener estado del robot\n
         Funcion por trabajar y arreglar"""
+
         await ctx.send("Consultando estado del robot")
-        embed =  await RobotBaseDeDatos.obtener_datos()
+        embed =  await robot.obtener_datos()
         await ctx.send(embed=embed)
 
     
@@ -48,11 +55,10 @@ class ComandosPrincipales(Cog):
     async def alertas_activas(self, ctx):
         """Funcion que consulta la funcion `Alerta.ultimas_alertas_activas()` 
         y obtiene el objeto Embed y lo retornamos. \n
-
         Funcion concluida y para utilizar"""
-        
+
         await ctx.send("Obteniendo alertas")
-        embed = await AlertaBaseDeDatos.retornar_alertas_activas(self.bot)
+        embed = await alerta.retornar_alertas_activas(self.bot)
         await ctx.send(embed=embed)
 
 
@@ -63,15 +69,7 @@ class ComandosPrincipales(Cog):
         Funcion concluida y para utilizar"""
         
         await ctx.send("Obteniendo ultimas alertas desactivadas")
-        embed = await AlertaBaseDeDatos.retornar_alertas_desactivadas(self.bot)
-        await ctx.send(embed=embed)
-
-
-    @command()
-    async def estado_robot(self, ctx):
-        """ Funcion que retorna el estado del robot """
-        await ctx.send("Obteniendo estado robot")
-        embed = await RobotBaseDeDatos.obtener_datos(self.bot)
+        embed = await alerta.retornar_alertas_desactivadas(self.bot)
         await ctx.send(embed=embed)
 
 

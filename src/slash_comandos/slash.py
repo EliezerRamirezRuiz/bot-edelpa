@@ -1,4 +1,4 @@
-from discord import app_commands, Interaction  # im using discord.py rewrite(2.0.0)
+from discord import app_commands, Interaction 
 from discord.ext.commands import Bot, Cog
 from src.utils.funciones_utiles import mensaje_simple
 
@@ -33,7 +33,7 @@ class SlashComandos(Cog):
             await comando.consultar_stock(contexto, codigo)
 
 
-    @app_commands.command(name='ultimas_alertas_activas', description='Trae las ultimas alertas desactivadas, `Top 10` ')
+    @app_commands.command(name='ultimas_alertas_activas', description='Trae las ultimas alertas desactivadas')
     async def alertas_activas(self, interaccion: Interaction) -> None:
         Embed = mensaje_simple('Procesando solicitud...')
         await interaccion.response.send_message(embed=Embed)
@@ -45,7 +45,7 @@ class SlashComandos(Cog):
             await comando.alertas_activas(contexto)
 
 
-    @app_commands.command(name='ultimas_alertas_desactivadas', description='Trae las ultimas alertas desactivadas, `Top 10` ')
+    @app_commands.command(name='ultimas_alertas_desactivadas', description='Trae las ultimas alertas desactivadas')
     async def alertas_desactivadas(self, interaccion: Interaction) -> None:
         Embed = mensaje_simple('Procesando solicitud...')
         await interaccion.response.send_message(embed=Embed)
@@ -55,6 +55,18 @@ class SlashComandos(Cog):
         comando = self.bot.get_cog('ComandosPrincipales')
         if comando is not None:
             await comando.alertas_desactivadas(contexto)
+
+
+    @app_commands.command(name='estado_robot', description='Trae el estado de robot')
+    async def estado_robot(self, interaccion: Interaction) -> None:
+        Embed = mensaje_simple('Procesando solicitud...')
+        await interaccion.response.send_message(embed=Embed)
+        original_mensaje = await interaccion.original_response()  
+        contexto = await self.bot.get_context(original_mensaje)
+        
+        comando = self.bot.get_cog('ComandosPrincipales')
+        if comando is not None:
+            await comando.estado_robot(contexto)
 
 
     @Cog.listener()

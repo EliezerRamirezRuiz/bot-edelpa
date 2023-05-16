@@ -1,9 +1,7 @@
 """ Importaciones """
 from discord import Embed
 from src.database.procedimientos import ProcedimientosAlmacenados
-from src.utils.funciones_utiles import (comprobar_hora, comprobar_largo, 
-                            comprobar_mayor, obtener_hora, formatear_hora, 
-                            formatear_fecha, create_embed)
+from src.utils.funciones_utiles import (comprobar_largo, formatear_hora, formatear_fecha, create_embed)
 
 class AlertaBaseDeDatos():
     """

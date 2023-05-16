@@ -2,6 +2,9 @@ from src.database.conexion_basededatos import conexion_db
 
 
 class ProcedimientosAlmacenados():
+    """Clase que se encarga de ejecutar y retornar los resultados procedimientos almacenados,
+    se utiliza `conexion_db`."""
+    
     async def obtener_alertas(self) -> list:
         """ Funcion para traer datos `{Procedure MANDAR_ALERTAS}` """
         try:
@@ -78,7 +81,7 @@ class ProcedimientosAlmacenados():
                 print('Tiempo excedido')
                 
             else:
-                print('Error durante la ejecución del procedimiento almacenado')
+                print(f'Error durante la ejecución del procedimiento almacenado, {ex}')
 
 
     async def alertas_activas(self) -> list:

@@ -58,8 +58,8 @@ def app_factory():
     @bot.event
     async def on_ready():
         await bot.change_presence(activity=Game(name="Working in Edelpa S.A."))
-        bot.loop.create_task(alerta_automatica.auto_alertas(bot))
         bot.loop.create_task(cargar_extensiones())
+        bot.loop.create_task(alerta_automatica.auto_alertas(bot))
         print('Bot listo')
 
 
