@@ -21,9 +21,11 @@ Enlace del bot para que se pueda unir al servidor:
 ```txt
 Aqui se dejara link e informacion de las librerias utilizadas:
 ```
-- [Discord.py](https://discordpy.readthedocs.io/en/stable/) -> Documentación oficial y Soporte del Bot
-- [Aioodbc](https://github.com/aio-libs/aioodbc/) -> Documentación oficial y Soporte conector a la base de datos SQLSERVER
-- [Python-dotenv](https://pypi.org/project/python-dotenv/) -> Documentación oficial y Soporte para variables de entorno
+[Discord.py](https://discordpy.readthedocs.io/en/stable/) -> Documentación oficial y Soporte del Bot <br>
+[Aioodbc](https://github.com/aio-libs/aioodbc/) -> Documentación oficial y Soporte conector a la base de datos SQLSERVER <br>
+[Python-dotenv](https://pypi.org/project/python-dotenv/) -> Documentación oficial y Soporte para variables de entorno <br>
+[Flask](https://flask.palletsprojects.com/en/2.3.x/) -> Documentación oficial y Soporte para SERVIDOR WEB <br>
+[Servidor-corriendo](https://sites.google.com/view/the-home-of-m692/resources/discord-py-bot-hosting/new) -> Tutorial de servidor de bot para que este siempre prendido
 
 <br>
 
@@ -55,7 +57,7 @@ COMANDOS SLASH
 <br>
 
 ## LIBRERIAS UTILIZADAS
-```txt
+```requirements.txt
 aiohttp==3.8.4
 aioodbc==0.4.0
 aiosignal==1.3.1
@@ -63,12 +65,14 @@ async-timeout==4.0.2
 attrs==22.2.0
 autopep8==2.0.2
 beautifulsoup4==4.12.0
+blinker==1.6.2
 certifi==2022.12.7
 charset-normalizer==3.1.0
 click==8.1.3
 colorama==0.4.6
 discord-py-slash-command==4.2.1
 discord.py==2.2.3
+Flask==2.3.2
 frozenlist==1.3.3
 idna==3.4
 itsdangerous==2.1.2
@@ -90,7 +94,7 @@ pytweening==1.0.4
 requests==2.28.2
 soupsieve==2.4
 urllib3==1.26.15
-Werkzeug==2.2.3
+Werkzeug==2.3.4
 wikipedia==1.4.0
 yarl==1.8.2
 ```

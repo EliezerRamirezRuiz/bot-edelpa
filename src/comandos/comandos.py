@@ -76,3 +76,8 @@ class ComandosPrincipales(Cog):
 async def setup(bot:Bot): 
     print('I am being loaded from comandos.py')
     await bot.add_cog(ComandosPrincipales(bot))
+
+
+async def teardown(bot:Bot):
+    print('I am being unloaded!')
+    await bot.remove_cog(ComandosPrincipales(bot))

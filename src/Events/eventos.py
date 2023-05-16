@@ -70,5 +70,7 @@ async def setup(bot:Bot):
     print('I am being loaded from eventos.py')    
     await bot.add_cog(MyEvents(bot))
 
-
+async def teardown(bot:Bot):
+    print('I am being unloaded!')
+    await bot.remove_cog(MyEvents(bot))
     

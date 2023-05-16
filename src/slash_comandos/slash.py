@@ -77,3 +77,8 @@ class SlashComandos(Cog):
 async def setup(bot:Bot):
     print('I am being loaded from slash.py')
     await bot.add_cog(SlashComandos(bot))
+
+
+async def teardown(bot):
+    print('I am being unloaded!')
+    await bot.remove_cog(SlashComandos(bot))
