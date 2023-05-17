@@ -1,19 +1,15 @@
 # import clase 
 from src.Help.mensaje_ayuda import CustomHelpCommand
 from discord.ext.commands.errors import ExtensionNotLoaded
-
 # import discord
 from discord.ext import commands
 from discord import Intents
 from discord import Game
 from src.database.automico import AlertaAutomatica
-
 #constantes
 from src.config.config import TOKEN
-
 # funciones
 from src.utils.funciones_utiles import create_embed
-
 
 
 def app_factory():

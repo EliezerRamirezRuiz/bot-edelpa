@@ -14,12 +14,9 @@ async def main() -> None:
             task2 = tg.create_task(run_server())
 
             print(f"started at {time.strftime('%X')}")
- 
-    except Exception as ex:
-        if isinstance(ex, KeyboardInterrupt):
-            print('finalizo el ciclo')
-        else:
-            print(f'paso esto: {ex}')
+
+    except ExceptionGroup as ex:
+        print(ex.with_traceback(), ex.__class__, ex.__context__)
     
 
 if __name__ == '__main__':
