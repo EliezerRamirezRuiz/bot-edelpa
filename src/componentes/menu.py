@@ -1,21 +1,21 @@
-"""Archivo que contiene el menu con multiples opciones 
-que apretando alguna realiza la accion conrrespondiente"""
+# Discord clases
 from discord import SelectOption, Interaction
 from discord.ui import Select
-
 # Clases
 from src.database.alerta import AlertaBaseDeDatos
 from src.database.stock import StockBaseDeDatos
 from src.database.robot import RobotBaseDeDatos 
 from src.database.reporte import ReporteBaseDeDatos
+# Funciones
+from src.utils.funciones_utiles import create_embed
 
-# Variables
+
+
 alerta = AlertaBaseDeDatos()
 reporte = ReporteBaseDeDatos()
 stock = StockBaseDeDatos()
 robot = RobotBaseDeDatos()
 
-# constante
 VALUES = [
         SelectOption(label="Default", default=True, value="Default", description="default"),
         SelectOption(label="Consultar Stock", value="Consultar Stock", description="Consultar stock de producto X"),
@@ -66,6 +66,7 @@ class Menu(Select):
 
             # Caso 5
             case "Ultimas alertas desactivadas":
+
                 await interaccion.response.send_message("Obteniendo informacion...")
                 embed = await alerta.retornar_alertas_desactivadas(self.bot)
                 await self.ctx.send(embed=embed)

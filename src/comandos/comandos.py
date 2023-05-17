@@ -73,11 +73,16 @@ class ComandosPrincipales(Cog):
         await ctx.send(embed=embed)
 
 
+    @Cog.listener()
+    async def on_ready(self):
+        print('Comandos.py online.')
+
+
 async def setup(bot:Bot): 
     print('I am being loaded from comandos.py')
     await bot.add_cog(ComandosPrincipales(bot))
 
 
 async def teardown(bot:Bot):
-    print('I am being unloaded!')
+    print('I am being unloaded from comandos.py!')
     await bot.remove_cog(ComandosPrincipales(bot))

@@ -21,11 +21,15 @@ Enlace del bot para que se pueda unir al servidor:
 ```txt
 Aqui se dejara link e informacion de las librerias utilizadas:
 ```
+### LIBRERIAS
 [Discord.py](https://discordpy.readthedocs.io/en/stable/) -> Documentación oficial y Soporte del Bot <br>
 [Aioodbc](https://github.com/aio-libs/aioodbc/) -> Documentación oficial y Soporte conector a la base de datos SQLSERVER <br>
 [Python-dotenv](https://pypi.org/project/python-dotenv/) -> Documentación oficial y Soporte para variables de entorno <br>
 [Flask](https://flask.palletsprojects.com/en/2.3.x/) -> Documentación oficial y Soporte para SERVIDOR WEB <br>
+### TUTORIALES O DISCUSIONES
 [Servidor-corriendo](https://sites.google.com/view/the-home-of-m692/resources/discord-py-bot-hosting/new) -> Tutorial de servidor de bot para que este siempre prendido
+[Discución de github syncronizar](https://gist.github.com/Rapptz/c4324f17a80c94776832430007ad40e6#syncing)
+
 
 <br>
 

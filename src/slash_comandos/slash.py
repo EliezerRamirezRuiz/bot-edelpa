@@ -8,7 +8,7 @@ class SlashComandos(Cog):
         self.bot = bot
 
 
-    @app_commands.commands.command(name='slash_menu', description='Ejecuta el comando !menu')
+    @app_commands.command(name='slash_menu', description='Ejecuta el comando !menu')
     async def slash_menu(self, interaccion: Interaction) -> None:
         Embed = mensaje_simple('Procesando menu...')
         await interaccion.response.send_message(embed=Embed)
@@ -20,8 +20,8 @@ class SlashComandos(Cog):
             await comando.menu(contexto)
 
     
-    @app_commands.command(name='consultar_stock', description='Ejecuta el comando !consultar_stock')
     @app_commands.describe(codigo="""Código requerido para buscar el stock, Ejemplo: 'EP100000000006000621850000500010'  """)
+    @app_commands.command(name='consultar_stock', description='Ejecuta el comando !consultar_stock')
     async def consultar_stock(self, interaccion: Interaction, codigo:str) -> None:
         Embed = mensaje_simple('Procesando solicitud...')
         await interaccion.response.send_message(embed=Embed)
@@ -80,5 +80,5 @@ async def setup(bot:Bot):
 
 
 async def teardown(bot):
-    print('I am being unloaded!')
+    print('I am being unloaded from slash.py!')
     await bot.remove_cog(SlashComandos(bot))

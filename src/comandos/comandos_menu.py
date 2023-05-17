@@ -33,5 +33,5 @@ async def setup(bot:Bot):
 
 
 async def teardown(bot:Bot):
-    print('I am being unloaded!')
+    print('I am being unloaded from comandos_menu.py!')
     await bot.remove_cog(ComandosMenu(bot))

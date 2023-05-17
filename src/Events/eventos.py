@@ -65,12 +65,17 @@ class MyEvents(Cog):
             # Enviar mensaje de bienvenida
             await welcome_channel.send(f'Bienvenido {member.mention} al servidor!')
 
+    @Cog.listener()
+    async def on_ready(self):
+        print('eventos.py online.')
+
 
 async def setup(bot:Bot):
     print('I am being loaded from eventos.py')    
     await bot.add_cog(MyEvents(bot))
 
+
 async def teardown(bot:Bot):
-    print('I am being unloaded!')
+    print('I am being unloaded from eventos.py!')
     await bot.remove_cog(MyEvents(bot))
     

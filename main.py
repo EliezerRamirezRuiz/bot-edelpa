@@ -1,20 +1,24 @@
 from discord.ext.commands.errors import ExtensionNotLoaded
+
 #constantes
 from src.config.config import TOKEN
+
 #funcion
-from src.app.bot import app_factory
 from src.server.webserver import keep_alive
+from src.app.bot import app_factory
+
 # logging
 import logging
 import asyncio
 
-handler = logging.FileHandler(filename='discord.log', encoding='utf-8', mode='r+')
+
 bot = app_factory()
 
 
 @bot.command()
 async def sincronizar(ctx):
     try:
+        await bot.tree.sync()
         await bot.reload_extension('src.comandos.comandos_menu')
         await bot.reload_extension('src.comandos.comandos')
         await bot.reload_extension('src.events.eventos')
@@ -33,7 +37,7 @@ async def main() -> None:
     """ Funcion para que el bot pueda correr y ante cualquier 
     inconveniente mande una excepecion expecion """
     try:
-        #keep_alive()
+        keep_alive()
         async with bot:
             await bot.load_extension('src.comandos.comandos_menu')
             await bot.load_extension('src.comandos.comandos')
@@ -47,4 +51,3 @@ async def main() -> None:
 
 if __name__ == '__main__':
     asyncio.run(main())
-
