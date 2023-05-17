@@ -1,6 +1,8 @@
 from discord.ext.commands import Cog, Bot
 from discord.ext.commands import CommandNotFound, MissingRequiredArgument, DisabledCommand
 
+
+
 class MyEvents(Cog):
     def __init__(self, bot):
         self.bot = bot
@@ -9,22 +11,22 @@ class MyEvents(Cog):
     @Cog.listener()
     async def on_message(self, message):
         print(f'{message.author.name} sent a message: {message.content}')
-    
+
 
     @Cog.listener()
     async def on_command_error(self, ctx, error):
         if isinstance(error, CommandNotFound):
-            await ctx.send('Command not found. know more with !help')
+            await ctx.send('Comando no encontrado. Para saber mas de ls comandos, porfavor ejecute !help')
 
         elif isinstance(error, MissingRequiredArgument):
-            await ctx.send('Missing required argument.')
+            await ctx.send('Argumento no requerido no encontrado-')
 
         elif isinstance(error, DisabledCommand):
-            await ctx.send('This command has been disabled.')
+            await ctx.send('Este comando ha sido desabilitado')
 
         else:
             print(error)  # Print the error to the console
-            await ctx.send('An error occurred while executing the command.')
+            await ctx.send('Ocurrio un error mientras se ejecuta el comando')
 
 
     @Cog.listener()

@@ -1,19 +1,12 @@
-from flask import Flask
-from threading import Thread
+from quart import Quart
 
-
-app = Flask(__name__)
+app = Quart(__name__)
 
 
 @app.route('/')
-def home():
+async def home():
     return "I'm alive"
 
 
-def run():
-  app.run(host='0.0.0.0',port=8080)
-
-
-def keep_alive():  
-    t = Thread(target=run)
-    t.start()
+async def run_server():
+  await app.run_task()

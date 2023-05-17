@@ -1,52 +1,25 @@
-from discord.ext.commands.errors import ExtensionNotLoaded
-
-#constantes
-from src.config.config import TOKEN
-
-#funcion
-from src.server.webserver import keep_alive
-from src.app.bot import app_factory
-
 # logging
-import logging
 import asyncio
+import time
 
-
-bot = app_factory()
-
-
-@bot.command()
-async def sincronizar(ctx):
-    try:
-        await bot.tree.sync()
-        await bot.reload_extension('src.comandos.comandos_menu')
-        await bot.reload_extension('src.comandos.comandos')
-        await bot.reload_extension('src.events.eventos')
-        await bot.reload_extension('src.slash_comandos.slash')
-        await ctx.send('Comandos actualizados')
-
-    except Exception as ex:
-        if isinstance(ex, ImportError):
-            await ctx.send('Hubo un error al recargar las extensiones, verificar path de las extesiones.')
-
-        elif isinstance(ex, ExtensionNotLoaded):
-            await ctx.send('Comandos no pudieron ser cargados y actualizados')
+from src.app.bot import run_bot
+from src.server.webserver import run_server
 
 
 async def main() -> None:
-    """ Funcion para que el bot pueda correr y ante cualquier 
-    inconveniente mande una excepecion expecion """
+    """Funcion que inicia el bot y carga las extensiones"""
     try:
-        keep_alive()
-        async with bot:
-            await bot.load_extension('src.comandos.comandos_menu')
-            await bot.load_extension('src.comandos.comandos')
-            await bot.load_extension('src.events.eventos')
-            await bot.load_extension('src.slash_comandos.slash')
-            await bot.start(TOKEN)
-        
+        async with asyncio.TaskGroup() as tg:
+            task1 = tg.create_task(run_bot())
+            task2 = tg.create_task(run_server())
+
+            print(f"started at {time.strftime('%X')}")
+ 
     except Exception as ex:
-        raise ex
+        if isinstance(ex, KeyboardInterrupt):
+            print('finalizo el ciclo')
+        else:
+            print(f'paso esto: {ex}')
     
 
 if __name__ == '__main__':
