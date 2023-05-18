@@ -35,13 +35,14 @@ Aqui se dejara link e informacion de las librerias utilizadas:
 
 ## COMANDOS DISPONIBLES
 ```txt
-COMANDOS
+COMANDOS (Prefijo de invocación ["!"])
 1) !menu (Opciones)
 2) !consultar_stock (parametro: codigo[int])
 3) !estado_robot (sin parametros)(pendiente)
 4) !alertas_activa (sin parametros)
 5) !alertas_desactivadas (sin parametros)
 6) !sincronizar (Recarga las extensiones)
+7) !help
 
 OPCIONES MENU (Comando de invocación ["!menu" | "/menu"])
 1) Default  <br>
@@ -51,11 +52,12 @@ OPCIONES MENU (Comando de invocación ["!menu" | "/menu"])
 5) Ultimas alertas desactivadas <br>
 6) Reporte del dia <br>
 
-COMANDOS SLASH
+COMANDOS SLASH (Prefijo de invocación ["/"])
 1) /menu <br>
 2) /consultar_stock (parametro: codigo[int]) <br>
 3) /ultimas_alertas_activas <br>
 4) /ultimas_alertas_desactivadas <br>
+5) /estado_robot
 ```
 
 <br>

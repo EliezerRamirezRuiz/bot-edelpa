@@ -1,4 +1,9 @@
 from src.database.conexion_basededatos import conexion_db
+from src.logger.logger_error import logger
+import logging
+
+
+logger.setLevel(logging.ERROR)
 
 
 class ProcedimientosAlmacenados():
@@ -14,17 +19,17 @@ class ProcedimientosAlmacenados():
                     await cursor.execute(query)
                     row = await cursor.fetchall()
 
-                    if not row:
-                        return []
-    
-                    return row
+                    if row is not None:
+                        return row
+                    else:
+                        return [] 
                 
         except Exception as ex:
             if isinstance(ex, TimeoutError):
-                print('Tiempo excedido')
+                logger.error(f'Tiempo excedido: {ex}')
 
             else:
-                print(f'error: {ex}')
+                logger.error(f'Otro error: {ex}')
 
 
     async def cambiar_estado_alerta(self, id:int) -> None:
@@ -38,9 +43,9 @@ class ProcedimientosAlmacenados():
 
         except Exception as ex:
             if isinstance(ex, TimeoutError):
-                print('Tiempo excedido')
+                logger.error(f'Tiempo excedido: {ex}')
             else:
-                print(f'error: {ex}')
+                logger.error(f'Otro error: {ex}')
 
 
     async def bajar_contador_alertas(self, id: int) -> None:
@@ -53,9 +58,9 @@ class ProcedimientosAlmacenados():
 
         except Exception as ex:
             if isinstance(ex, TimeoutError):
-                print('Tiempo excedido')
+                logger.error(f'Tiempo excedido: {ex}')
             else:
-                print('Error durante la ejecución del procedimiento almacenado')
+                logger.error(f'Otro error: {ex}')
 
         
     async def obtener_stock(self, code:str) -> list :
@@ -70,18 +75,18 @@ class ProcedimientosAlmacenados():
                     query = f" EXEC  OBTENERSTOCK {code} "
                     await cursor.execute(query)
                     row = await cursor.fetchone()
-                    print(row)
-                    if row is None:
-                        return []
-                
-                    return row
+
+                    if row is not None:
+                        return row
+                    else:
+                        return [] 
+
             
         except Exception as ex:
             if isinstance(ex, TimeoutError):
-                print('Tiempo excedido')
-                
+                logger.error(f'Tiempo excedido: {ex}')
             else:
-                print(f'Error durante la ejecución del procedimiento almacenado, {ex}')
+                logger.error(f'Otro error: {ex}')
 
 
     async def alertas_activas(self) -> list:
@@ -92,17 +97,18 @@ class ProcedimientosAlmacenados():
                     query = f" EXEC ULTIMAS_ALERTAS_ACTIVAS "
                     await cursor.execute(query)
                     row = await cursor.fetchall()
-                    if row is None:
-                        return []
-                
-                    return row 
+
+                    if row is not None:
+                        return row
+                    else:
+                        return [] 
 
         except Exception as ex:
             if isinstance(ex, TimeoutError):
-                print('Tiempo excedido')
-            
+                logger.error(f'Tiempo excedido: {ex}')
+
             else:
-                print('Error desconocido')
+                logger.error(f'Otro error: {ex}')
 
 
     async def alertas_desactivadas(self):
@@ -113,14 +119,15 @@ class ProcedimientosAlmacenados():
                     query = f" EXEC ULTIMAS_ALERTAS_DESACTIVADAS "
                     await cursor.execute(query)
                     row = await cursor.fetchall()
-                    if row is None:
-                        return []
-                
-                    return row 
+
+                    if row is not None:
+                        return row
+                    else:
+                        return [] 
                 
         except Exception as ex:
             if isinstance(ex, TimeoutError):
-                print('Tiempo excedido')
-        
+                logger.error(f'Tiempo excedido: {ex}')
+
             else:
-                print('Error desconocido')
+                logger.error(f'Otro error: {ex}')

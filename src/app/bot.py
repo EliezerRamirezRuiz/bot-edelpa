@@ -1,20 +1,21 @@
 # import clase 
-from src.Help.mensaje_ayuda import CustomHelpCommand
+from src.ayuda.ayuda import CustomHelpCommand
 from discord.ext.commands.errors import ExtensionNotLoaded
 # import discord
 from discord.ext import commands
 from discord import Intents
 from discord import Game
 from src.database.automico import AlertaAutomatica
-#constantes
+# constantes
 from src.config.config import TOKEN
 # funciones
 from src.utils.funciones_utiles import create_embed
+from src.server.webserver import peticion_server
 
 
 def app_factory():
     alerta_automatica = AlertaAutomatica()
-    descripcion = """Bot encargado de automatizar procesos e intentar """
+    descripcion = """Bot encargado de automatizar consultas y procesos"""
 
     # Atributos
     intents = Intents.all()
@@ -28,6 +29,8 @@ def app_factory():
     async def on_ready():
         await bot.change_presence(activity=Game(name="Working in Edelpa S.A."))
         bot.loop.create_task(alerta_automatica.auto_alertas(bot))
+        bot.loop.create_task(peticion_server())
+
         print('Bot listo')
 
     return bot
@@ -42,7 +45,7 @@ async def sincronizar(ctx):
         await bot.tree.sync()
         await bot.reload_extension('src.comandos.comandos_menu')
         await bot.reload_extension('src.comandos.comandos')
-        await bot.reload_extension('src.events.eventos')
+        await bot.reload_extension('src.eventos.eventos')
         await bot.reload_extension('src.slash_comandos.slash')
         await ctx.send('Comandos actualizados')
 
@@ -60,6 +63,6 @@ async def run_bot():
     async with bot:
         await bot.load_extension('src.comandos.comandos_menu')
         await bot.load_extension('src.comandos.comandos')
-        await bot.load_extension('src.events.eventos')
+        await bot.load_extension('src.eventos.eventos')
         await bot.load_extension('src.slash_comandos.slash')
         await bot.start(TOKEN)

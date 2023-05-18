@@ -2,7 +2,6 @@ from discord.ext.commands import Cog, Bot
 from discord.ext.commands import CommandNotFound, MissingRequiredArgument, DisabledCommand
 
 
-
 class MyEvents(Cog):
     def __init__(self, bot):
         self.bot = bot
@@ -16,10 +15,10 @@ class MyEvents(Cog):
     @Cog.listener()
     async def on_command_error(self, ctx, error):
         if isinstance(error, CommandNotFound):
-            await ctx.send('Comando no encontrado. Para saber mas de ls comandos, porfavor ejecute !help')
+            await ctx.send('Comando no encontrado. Para saber mas de los comandos, porfavor ejecute !help')
 
         elif isinstance(error, MissingRequiredArgument):
-            await ctx.send('Argumento no requerido no encontrado-')
+            await ctx.send('Argumento no requerido no encontrado.')
 
         elif isinstance(error, DisabledCommand):
             await ctx.send('Este comando ha sido desabilitado')
@@ -78,6 +77,6 @@ async def setup(bot:Bot):
 
 
 async def teardown(bot:Bot):
-    print('I am being unloaded from eventos.py!')
+    print('Ha sido descargado eventos.py!')
     await bot.remove_cog(MyEvents(bot))
     

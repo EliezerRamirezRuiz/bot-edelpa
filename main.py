@@ -4,7 +4,7 @@ import time
 
 from src.app.bot import run_bot
 from src.server.webserver import run_server
-
+from src.logger.loggers import *
 
 async def main() -> None:
     """Funcion que inicia el bot y carga las extensiones"""

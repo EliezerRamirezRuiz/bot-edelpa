@@ -1,6 +1,8 @@
 from discord import app_commands, Interaction 
 from discord.ext.commands import Bot, Cog
-from src.utils.funciones_utiles import mensaje_simple
+from discord.ui import View
+
+from src.componentes.menu import Menu
 
 
 class SlashComandos(Cog):
@@ -10,23 +12,17 @@ class SlashComandos(Cog):
 
     @app_commands.command(name='slash_menu', description='Ejecuta el comando !menu')
     async def slash_menu(self, interaccion: Interaction) -> None:
-        Embed = mensaje_simple('Procesando menu...')
-        await interaccion.response.send_message(embed=Embed)
-        original_mensaje = await interaccion.original_response()  
-        contexto = await self.bot.get_context(original_mensaje)
-
-        comando = self.bot.get_cog('ComandosMenu')
-        if comando is not None:
-            await comando.menu(contexto)
+        contexto = await self.bot.get_context(interaccion)
+        select = Menu(self.bot, contexto)
+        view = View(timeout=180)
+        view.add_item(select)
+        await interaccion.response.send_message(view=view)
 
     
     @app_commands.describe(codigo="""Código requerido para buscar el stock, Ejemplo: 'EP100000000006000621850000500010'  """)
     @app_commands.command(name='consultar_stock', description='Ejecuta el comando !consultar_stock')
     async def consultar_stock(self, interaccion: Interaction, codigo:str) -> None:
-        Embed = mensaje_simple('Procesando solicitud...')
-        await interaccion.response.send_message(embed=Embed)
-        original_mensaje = await interaccion.original_response()
-        contexto = await self.bot.get_context(original_mensaje)
+        contexto = await self.bot.get_context(interaccion)
 
         comando = self.bot.get_cog('ComandosPrincipales')
         if comando is not None:
@@ -35,10 +31,7 @@ class SlashComandos(Cog):
 
     @app_commands.command(name='ultimas_alertas_activas', description='Trae las ultimas alertas desactivadas')
     async def alertas_activas(self, interaccion: Interaction) -> None:
-        Embed = mensaje_simple('Procesando solicitud...')
-        await interaccion.response.send_message(embed=Embed)
-        original_mensaje = await interaccion.original_response()  
-        contexto = await self.bot.get_context(original_mensaje)
+        contexto = await self.bot.get_context(interaccion)
         
         comando = self.bot.get_cog('ComandosPrincipales')
         if comando is not None:
@@ -47,10 +40,7 @@ class SlashComandos(Cog):
 
     @app_commands.command(name='ultimas_alertas_desactivadas', description='Trae las ultimas alertas desactivadas')
     async def alertas_desactivadas(self, interaccion: Interaction) -> None:
-        Embed = mensaje_simple('Procesando solicitud...')
-        await interaccion.response.send_message(embed=Embed)
-        original_mensaje = await interaccion.original_response()  
-        contexto = await self.bot.get_context(original_mensaje)
+        contexto = await self.bot.get_context(interaccion)
         
         comando = self.bot.get_cog('ComandosPrincipales')
         if comando is not None:
@@ -59,10 +49,7 @@ class SlashComandos(Cog):
 
     @app_commands.command(name='estado_robot', description='Trae el estado de robot')
     async def estado_robot(self, interaccion: Interaction) -> None:
-        Embed = mensaje_simple('Procesando solicitud...')
-        await interaccion.response.send_message(embed=Embed)
-        original_mensaje = await interaccion.original_response()  
-        contexto = await self.bot.get_context(original_mensaje)
+        contexto = await self.bot.get_context(interaccion)
         
         comando = self.bot.get_cog('ComandosPrincipales')
         if comando is not None:

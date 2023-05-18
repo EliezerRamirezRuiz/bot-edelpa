@@ -19,12 +19,10 @@ class ComandosPrincipales(Cog):
         self.bot = bot
 
 
-    
     @command()
     async def consultar_stock(self, ctx, codigo):
         """Funcion que consultar stock a pedir, manda mensaje para que el usuario sepa 
         que debe mandar una respuesta para consultar el stock"""
-
         try:
             embed = await stock.return_stock(str(codigo))
             await ctx.send(embed=embed)
@@ -34,10 +32,10 @@ class ComandosPrincipales(Cog):
                 await ctx.send('Valor invalido')
 
             if isinstance(ex, TimeoutError):
-                await ctx.send('Se ha excedido el tiempo de respuesta')
+                await ctx.send(f'Se ha excedido el tiempo de respuesta: {ex}')
 
             else:
-                await ctx.send(f'''Error desconocido, porfavor contactar con el encargado de informatica''')
+                await ctx.send(f'''Error desconocido, porfavor contactar con el encargado de informatica, {ex}''')
                 
 
 
@@ -75,14 +73,14 @@ class ComandosPrincipales(Cog):
 
     @Cog.listener()
     async def on_ready(self):
-        print('Comandos.py online.')
+        print('Comandos.py en linea.')
 
 
 async def setup(bot:Bot): 
-    print('I am being loaded from comandos.py')
+    print('He sido cargado comandos.py')
     await bot.add_cog(ComandosPrincipales(bot))
 
 
 async def teardown(bot:Bot):
-    print('I am being unloaded from comandos.py!')
+    print('He sido bajado comandos.py!')
     await bot.remove_cog(ComandosPrincipales(bot))

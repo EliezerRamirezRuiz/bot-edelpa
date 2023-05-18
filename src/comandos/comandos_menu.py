@@ -24,14 +24,14 @@ class ComandosMenu(Cog):
 
     @Cog.listener()
     async def on_ready(self):
-        print('Comandos_menu.py online.')
+        print('Comandos_menu.py en linea.')
 
 
 async def setup(bot:Bot):
-    print('I am being loaded from comandos_menu.py')
+    print('He sido cargado comandos_menu.py')
     await bot.add_cog(ComandosMenu(bot))
 
 
 async def teardown(bot:Bot):
-    print('I am being unloaded from comandos_menu.py!')
+    print('He sido bajado comandos_menu.py!')
     await bot.remove_cog(ComandosMenu(bot))
