@@ -31,8 +31,7 @@ def formatear_fecha(date:datetime) -> str:
     return date.strftime(r'%Y-%m-%d')
 
 
-def create_embed(title=None, description=None, color=None, 
-                    author:dict=None, footer=None, thumbnail=None, image=None, fields=None):
+def create_embed(title=None, description=None, color=None, author:dict=None, footer=None, thumbnail=None, image=None, fields=None):
     """Función para crear objetos embed de Discord, con los campos adicionales si es que existieran
     \n `Consideración`: Los atributos `atributo['nombre']` Si no son declarados arrojara un error llamada `Keyerror`,
     caso contrario pasa con `atributo.get('nombre')` lo dejara en None si no se encuentra."""

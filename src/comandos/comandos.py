@@ -24,17 +24,10 @@ class ComandosPrincipales(Cog):
         """Funcion que consultar stock a pedir, manda mensaje para que el usuario sepa 
         que debe mandar una respuesta para consultar el stock"""
         try:
-            embed = await stock.return_stock(str(codigo))
+            embed = await stock.return_stock(codigo)
             await ctx.send(embed=embed)
 
         except Exception as ex:
-            if isinstance(ex, ValueError):
-                await ctx.send('Valor invalido')
-
-            if isinstance(ex, TimeoutError):
-                await ctx.send(f'Se ha excedido el tiempo de respuesta: {ex}')
-
-            else:
                 await ctx.send(f'''Error desconocido, porfavor contactar con el encargado de informatica, {ex}''')
                 
 

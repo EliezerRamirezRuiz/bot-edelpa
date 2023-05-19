@@ -1,28 +1,6 @@
 from discord.ext.commands import MinimalHelpCommand
 from src.utils.funciones_utiles import create_embed
 
-MENSAJE = """`COMANDOS (Comando de invocación [`!`])
-            -menu (Opciones)
-            -consultar_stock (parametro: codigo[int])
-            -estado_robot (sin parametros)(pendiente)
-            -alertas_activa (sin parametros)
-            -alertas_desactivadas (sin parametros)
-            -sincronizar (Recarga las extensiones)
-            -help
-        \nOPCIONES MENU (Comando de invocación [`!menu` | `/menu`])
-            -Default 
-            -Consultar stock 
-            -Estado robot
-            -Ultimas alertas activas
-            -Ultimas alertas desactivadas
-            -Reporte del dia
-        \nCOMANDOS SLASH (Comando de invocación [`/`])
-            -menu
-            -consultar_stock (parametro: codigo[int])
-            -ultimas_alertas_activas
-            -ultimas_alertas_desactivadas
-            -estado_robot`"""
-
 class CustomHelpCommand(MinimalHelpCommand):
     def __init__(self):
         super().__init__(no_category="No categorizado")

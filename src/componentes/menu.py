@@ -10,12 +10,11 @@ from src.database.reporte import ReporteBaseDeDatos
 from src.utils.funciones_utiles import create_embed
 
 
-
+# Variables
 alerta = AlertaBaseDeDatos()
 reporte = ReporteBaseDeDatos()
 stock = StockBaseDeDatos()
 robot = RobotBaseDeDatos()
-
 VALUES = [
         SelectOption(label="Default", default=True, value="Default", description="default"),
         SelectOption(label="Consultar Stock", value="Consultar Stock", description="Consultar stock de producto X"),
@@ -31,8 +30,7 @@ class Menu(Select):
         self.bot = bot
         self.ctx = ctx
     
-        super().__init__(custom_id="Menu", placeholder="Menu", min_values=1, 
-                         max_values=1, options=VALUES, row=1)
+        super().__init__(custom_id="Menu", placeholder="Menu", min_values=1, max_values=1, options=VALUES, row=1)
 
     async def callback(self, interaccion:Interaction):
         opcion = self.values[0]

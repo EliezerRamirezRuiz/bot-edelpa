@@ -11,13 +11,6 @@ async def conexion_db() -> Connection:
         return connection
 
     except Exception as ex:
-        if isinstance(ex, TimeoutError):
-            print('tiempo de ejecucion excedido')
-        
-        elif isinstance(ex, ProgrammingError):
-            print('Se intento cerrar una conexion')
-
-        else:
             print(f'ocurrio un error durante la ejecucion, {ex}')
 
 
