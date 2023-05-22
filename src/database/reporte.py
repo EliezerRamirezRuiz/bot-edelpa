@@ -1,24 +1,20 @@
-import discord
-from src.database.procedimientos import ProcedimientosAlmacenados
+from src.utils.funciones_utiles import create_embed
+
+from src.logger.logger_app import my_handler
+from logging import makeLogRecord
+from logging import INFO, WARNING
 
 
 class ReporteBaseDeDatos():
-    def __init__(self) -> None:
-        self.procedimiento = ProcedimientosAlmacenados()
-
-
     async def get_data(self):
         """ Funcion para traer datos de la base de datos SQL Server, 
         para ser mas exacto una alerta """
         try:
-            embed = discord.Embed(title='Reporte',
+            embed = create_embed(title='Reporte',
                                   description='Ninguno')
-            return embed
 
         except Exception as ex:
-            embed = discord.Embed(title='Reporte',
-                                  description=f'{ex}')
-            return embed
+            my_handler.emit(makeLogRecord({'msg': f"error: {ex}", 'levelno': INFO, 'levelname':'INFO'}))
 
         finally:
-            """finall operacion"""
+            return embed

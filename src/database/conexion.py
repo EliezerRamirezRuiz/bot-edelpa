@@ -1,7 +1,9 @@
-""" importaciones """
 from aioodbc import Connection, connect
 from src.config.config import DSN
-from pyodbc import ProgrammingError
+
+from src.logger.logger_app import my_handler
+from logging import makeLogRecord
+from logging import INFO, WARNING
 
 
 async def conexion_db() -> Connection:
@@ -11,6 +13,6 @@ async def conexion_db() -> Connection:
         return connection
 
     except Exception as ex:
-            print(f'ocurrio un error durante la ejecucion, {ex}')
+            my_handler.emit(makeLogRecord({'msg': f"error: {ex}", 'levelno': INFO, 'levelname':'INFO'}))
 
 

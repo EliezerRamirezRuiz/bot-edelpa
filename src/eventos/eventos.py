@@ -1,5 +1,9 @@
-from discord.ext.commands import Cog, Bot
 from discord.ext.commands import CommandNotFound, MissingRequiredArgument, DisabledCommand
+from discord.ext.commands import Cog, Bot
+
+from src.logger.logger_app import my_handler
+from logging import makeLogRecord
+from logging import INFO, WARNING
 
 
 class MyEvents(Cog):
@@ -9,7 +13,8 @@ class MyEvents(Cog):
 
     @Cog.listener()
     async def on_message(self, message):
-        print(f'{message.author.name} sent a message: {message.content}')
+        my_handler.emit(makeLogRecord({'msg': f"{message.author.name} sent a message: {message.content} ", 
+                                       'levelno': INFO, 'levelname':'INFO'}))
 
 
     @Cog.listener()
@@ -30,32 +35,34 @@ class MyEvents(Cog):
 
     @Cog.listener()
     async def on_command(self, ctx):
-        print(f"Comando '{ctx.command.name}' fue usado por {ctx.author.name} # {ctx.author.discriminator}")
+        my_handler.emit(makeLogRecord({'msg': f"Comando '{ctx.command.name}' fue usado por {ctx.author.name} # {ctx.author.discriminator}",
+                                        'levelno': INFO, 'levelname':'INFO'}))
 
 
     @Cog.listener()
     async def on_command_completion(self, ctx):
-        print(f"Comando '{ctx.command}' fue ejecutado exitosamente")
+        my_handler.emit(makeLogRecord({'msg': f"Comando '{ctx.command}' fue ejecutado exitosamente",
+                                        'levelno': INFO, 'levelname':'INFO'}))
 
 
     @Cog.listener()
     async def on_connect(self):
-        print("Bot Trabajando")
+        my_handler.emit(makeLogRecord({'msg': "Bot Trabajando", 'levelno': INFO, 'levelname':'INFO'}))
 
     
     @Cog.listener()
     async def on_disconnect(self):
-        print("Bot apagado")
+        my_handler.emit(makeLogRecord({'msg': "Bot apagado", 'levelno': WARNING, 'levelname':'WARNING'}))
     
 
     @Cog.listener()
     async def on_member_join(self, member):
-        print(f"{member} ha entrado al servidor")
+        my_handler.emit(makeLogRecord({'msg': f"{member} ha entrado al servidor", 'levelno': INFO, 'levelname':'INFO'}))
 
 
     @Cog.listener()
     async def on_member_remove(self, member):
-        print(f"{member} ha salido del servidor")
+        my_handler.emit(makeLogRecord({'msg': f"{member} ha salido del servidor", 'levelno': INFO, 'levelname':'INFO'}))
     
 
     @Cog.listener()
@@ -68,15 +75,15 @@ class MyEvents(Cog):
 
     @Cog.listener()
     async def on_ready(self):
-        print('eventos.py online.')
-
+        my_handler.emit(makeLogRecord({'msg': f"eventos.py online.", 'levelno': INFO, 'levelname':'INFO'}))
+        
 
 async def setup(bot:Bot):
-    print('I am being loaded from eventos.py')    
     await bot.add_cog(MyEvents(bot))
+    my_handler.emit(makeLogRecord({'msg': "I am being loaded from eventos.py", 'levelno': INFO, 'levelname':'INFO'}))
 
 
 async def teardown(bot:Bot):
-    print('Ha sido descargado eventos.py!')
     await bot.remove_cog(MyEvents(bot))
+    my_handler.emit(makeLogRecord({'msg': "Ha sido descargado eventos.py!", 'levelno': INFO, 'levelname':'INFO'}))
     

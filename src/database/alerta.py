@@ -1,37 +1,14 @@
-""" Importaciones """
 from discord import Embed
-from src.database.conexion_basededatos import conexion_db
-from src.database.procedimientos import ProcedimientosAlmacenados
+from src.database.conexion import conexion_db
 from src.utils.funciones_utiles import (comprobar_largo, formatear_hora, formatear_fecha, create_embed)
+
+from src.logger.logger_app import my_handler
+from logging import makeLogRecord
+from logging import INFO, WARNING
 
 
 class AlertaBaseDeDatos():
-    """
-    Clase se encarga de las alertas y contendra todos los metodos que tengan alguna relacion con
-    las alertas que sean llamados de comandos o menus con opciones
-    """
-    def __init__(self) -> None:
-        self.procedimiento = ProcedimientosAlmacenados()
-
-
-    async def obtener_alertas(self) -> list:
-        """ Funcion para traer datos `{Procedure MANDAR_ALERTAS}` """
-        try:
-            async with await conexion_db() as conn:
-                async with conn.cursor() as cursor:
-                    query = f"EXEC MANDAR_ALERTAS"
-                    await cursor.execute(query)
-                    row = await cursor.fetchall()
-
-                    if row is None:
-                        row = []
-                        return  row
-                    else:
-                        return row
-             
-        except Exception as ex:
-                print(f'error: {ex}')
-
+    """Clase encargada de las alertas desencadenadas en cada {comandos-slash-menu}"""
 
     async def alertas_activas(self) -> list:
         """ Funcion que trae las ultimas alertas activas """
@@ -48,7 +25,7 @@ class AlertaBaseDeDatos():
                         return [] 
 
         except Exception as ex:
-                print(f'error: {ex}')
+            my_handler.emit(makeLogRecord({'msg': f"error: {ex}", 'levelno': INFO, 'levelname':'INFO'}))
 
 
     async def alertas_desactivadas(self):
@@ -66,14 +43,14 @@ class AlertaBaseDeDatos():
                         return [] 
                 
         except Exception as ex:
-                print(f'error: {ex}')
+            my_handler.emit(makeLogRecord({'msg': f"error: {ex}", 'levelno': INFO, 'levelname':'INFO'}))
 
                 
     async def retornar_alertas_activas(self, bot, lista=None) -> Embed:
         """Funcion que trae los datos de la funcion `alertas_activas()` se manipulan para presentar
         y entregar de una manera mas ordenada. En caso que no contenga alertas activas se mandara 
         un mensaje que le informe al usuario que no hay alertas"""
-        datos = await self.procedimiento.alertas_activas()
+        datos = await self.alertas_activas()
 
         if lista is None:
             lista = []
@@ -105,11 +82,9 @@ class AlertaBaseDeDatos():
 
 
     async def retornar_alertas_desactivadas(self, bot, lista=None) -> Embed:
-        """Funcion que trae los datos de la funcion `alertas_desactivadas()`
-        se manipulan para presentar y entregar de una manera mas 
-        ordenada. """
+        """Retorna alertas desactivadas"""
 
-        datos = await self.procedimiento.alertas_desactivadas()
+        datos = await self.alertas_desactivadas()
 
         if lista is None:
             lista = []

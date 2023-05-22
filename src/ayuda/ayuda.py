@@ -7,14 +7,13 @@ class CustomHelpCommand(MinimalHelpCommand):
 
 
     def get_opening_note(self):
-        return  ''' Usa `{Prefijo}{nombre_comando} [Comando]` para mas informacion del comando.\n
-        Tambien puede usar `{Prefijo}{nombre_comando} [categoria]` Para mas información de la categoria.'''
+        return  '''Nota: cada comando esta detallado y escrito de forma explicita'''
 
 
     def get_ending_note(self):
         return ''' Contacte con `{Area de informática}` para mas ayuda.'''
 
-    
+
     async def send_pages(self):
         encabezado = self.get_opening_note()
         pie_de_pagina = self.get_ending_note()
@@ -52,3 +51,4 @@ class CustomHelpCommand(MinimalHelpCommand):
                               'inline':False,}])        
 
         await self.get_destination().send(embed=embed)
+  

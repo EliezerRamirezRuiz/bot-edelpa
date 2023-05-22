@@ -39,7 +39,7 @@ COMANDOS (Prefijo de invocación ["!"])
 1) !menu (Opciones)
 2) !consultar_stock (parametro: codigo[int])
 3) !estado_robot (sin parametros)(pendiente)
-4) !alertas_activa (sin parametros)
+4) !alertas_activas (sin parametros)
 5) !alertas_desactivadas (sin parametros)
 6) !sincronizar (Recarga las extensiones)
 7) !help

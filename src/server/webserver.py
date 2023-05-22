@@ -1,6 +1,8 @@
-# import from
+from src.logger.logger_app import my_handler
+from logging import makeLogRecord
+from logging import INFO
 from quart import Quart
-# import 
+
 import asyncio
 import aiohttp
 
@@ -22,9 +24,7 @@ async def peticion_server():
     await asyncio.sleep(120)
     async with aiohttp.ClientSession() as session:
       async with session.get('http://127.0.0.1:5500') as response:
-        print(f"""
-        -------------------------------------------------------
-        1)'Status:', {response.status}
-        2)'Content-type:', {response.headers['content-type']}
-        -------------------------------------------------------
-        """)
+        my_handler.emit(makeLogRecord({'msg': f"Status: {response.status}", 'levelno': INFO}))
+
+
+

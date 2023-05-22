@@ -3,6 +3,9 @@ from discord.ext.commands import command
 from discord.ui import View
 
 from src.componentes.menu import Menu
+from src.logger.logger_app import my_handler
+from logging import makeLogRecord
+from logging import INFO, WARNING
 
 
 class ComandosMenu(Cog):
@@ -16,7 +19,7 @@ class ComandosMenu(Cog):
     async def menu(self, ctx):
         """Menu con opciones, las opciones son funciones que  
         posteriormente podrian requerir respuesta del usuario"""
-        select = Menu(self.bot, ctx)
+        select = Menu(self.bot)
         view = View(timeout=180)
         view.add_item(select)
         await ctx.send(view=view)
@@ -24,14 +27,14 @@ class ComandosMenu(Cog):
 
     @Cog.listener()
     async def on_ready(self):
-        print('Comandos_menu.py en linea.')
+        my_handler.emit(makeLogRecord({'msg': f"Comandos_menu.py en linea.", 'levelno': INFO, 'levelname':'INFO'}))
 
 
 async def setup(bot:Bot):
-    print('He sido cargado comandos_menu.py')
     await bot.add_cog(ComandosMenu(bot))
+    my_handler.emit(makeLogRecord({'msg': f"He sido cargado comandos_menu.py", 'levelno': INFO, 'levelname':'INFO'}))    
 
 
 async def teardown(bot:Bot):
-    print('He sido bajado comandos_menu.py!')
     await bot.remove_cog(ComandosMenu(bot))
+    my_handler.emit(makeLogRecord({'msg': f"He sido bajado comandos_menu.py!", 'levelno': INFO, 'levelname':'INFO'}))     
