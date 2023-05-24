@@ -2,3 +2,7 @@ EliezerEdelpa
 eramirezr@edelpa.cl
 Edelpa*2023
 
+CLIENT_SECRET = zXj-4gWm-dHMtu53s6p-lVJpzISRuZfY
+PUBLIC_KEY = 6288006fdad95cb69d1774201bbc75e7cfe66db0fecf103fbf3726122954fc5c
+URI_BOT = https://discord.com/api/oauth2/authorize?client_id=1087791201639485520&permissions=8&scope=bot%20applications.commands
+APP_ID = 1087791201639485520 

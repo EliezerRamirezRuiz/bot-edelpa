@@ -29,7 +29,7 @@ Aqui se dejara link e informacion de las librerias utilizadas:
 ### TUTORIALES O DISCUSIONES
 [Servidor-corriendo](https://sites.google.com/view/the-home-of-m692/resources/discord-py-bot-hosting/new) -> Tutorial de servidor de bot para que este siempre prendido
 [Discución de github syncronizar](https://gist.github.com/Rapptz/c4324f17a80c94776832430007ad40e6#syncing)
-
+https://hdsplus.co/ejecutar-un-script-en-segundo-plano-con-tmux/
 
 <br>
 
@@ -105,5 +105,8 @@ wikipedia==1.4.0
 yarl==1.8.2
 ```
 
+```py
 
+pyinstaller -F -p "C:\Users\eramirezr\OneDrive - Envases del Pacifico S.A\Escritorio\Bot;/bot_discord/src" -p "C:\Users\eramirezr\OneDrive - Envases del Pacifico S.A\Escritorio\Bot;/bot_discord/src/app" -p "C:\Users\eramirezr\OneDrive - Envases del Pacifico S.A\Escritorio\Bot;/bot_discord/src/ayuda" -p "C:\Users\eramirezr\OneDrive - Envases del Pacifico S.A\Escritorio\Bot;/bot_discord/src/comandos" -p "C:\Users\eramirezr\OneDrive - Envases del Pacifico S.A\Escritorio\Bot;/bot_discord/src/componentes" -p "C:\Users\eramirezr\OneDrive - Envases del Pacifico S.A\Escritorio\Bot;/bot_discord/src/config" -p "C:\Users\eramirezr\OneDrive - Envases del Pacifico S.A\Escritorio\Bot;/bot_discord/src/database" -p "C:\Users\eramirezr\OneDrive - Envases del Pacifico S.A\Escritorio\Bot;/bot_discord/src/eventos" -p "C:\Users\eramirezr\OneDrive - Envases del Pacifico S.A\Escritorio\Bot;/bot_discord/src/logger" -p "C:\Users\eramirezr\OneDrive - Envases del Pacifico S.A\Escritorio\Bot;/bot_discord/src/server" -p "C:\Users\eramirezr\OneDrive - Envases del Pacifico S.A\Escritorio\Bot;/bot_discord/src/slash_comandos" -p "C:\Users\eramirezr\OneDrive - Envases del Pacifico S.A\Escritorio\Bot;/bot_discord/src/utils" main.py
 
+```
