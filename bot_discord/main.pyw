@@ -26,6 +26,10 @@ async def sincronizar(ctx):
         await ctx.send('Comandos actualizados')
 
     except Exception as ex:
+        my_handler.emit(makeLogRecord(
+            {'msg': f'''Ocurrio el siguiente error: {ex}''',
+            'levelno': WARNING,
+            'levelname':'WARNING'})) 
         if isinstance(ex, ImportError):
             embed = create_embed(title='Error', description='Hubo un error al recargar las extensiones, verificar path de las extesiones.')
             await ctx.send(embed=embed)
@@ -33,6 +37,10 @@ async def sincronizar(ctx):
         elif isinstance(ex, ExtensionNotLoaded):
             embed = create_embed(title='Error', description='Comandos no pudieron ser cargados y actualizados')
             await ctx.send(embed=embed)
+        
+        else:
+            embed = create_embed(title='Error', description='Error durante el proceso de sincronizacion')
+            await ctx.send(embed=embed)            
 
 
 async def run_bot():
@@ -45,7 +53,6 @@ async def run_bot():
 
 
 async def main() -> None:
-    """Funcion que inicia el bot y carga las extensiones"""
     try:
         async with TaskGroup() as tg:
             task2 = tg.create_task(run_server())

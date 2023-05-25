@@ -6,9 +6,12 @@ from discord.ui import Select
 from src.database.alerta import AlertaBaseDeDatos
 from src.database.stock import StockBaseDeDatos
 from src.database.robot import RobotBaseDeDatos 
-
-# Funciones
+# Constantes
 from src.config.config import VALUES
+from logging import INFO, WARNING
+# Funcion y variable
+from logging import makeLogRecord
+from src.logger.logger_app import my_handler
 
 
 class Menu(Select):
@@ -28,15 +31,21 @@ class Menu(Select):
 
             # Caso 2
             case "Consultar Stock":
-                try:                
+                try:
                     await interaccion.response.send_message('Escriba el codigo a consultar:')
                     message = await self.bot.wait_for('message', check=lambda m: m.author == self.ctx.author, timeout=30.0)
-                    await interaccion.response.defer()
                     embed = await self.stock.return_stock(str(message.content)) 
-                    await interaccion.followup.send(embed=embed)
+                    await self.ctx.send(embed=embed)
 
-                except TimeoutError:
-                    await interaccion.followup.send('Tiempo excedido')
+                except Exception as ex:
+                    my_handler.emit(makeLogRecord({
+                        'msg': f"Ocurrio este error: {ex}", 
+                        'levelno': WARNING, 
+                        'levelname':'WARNING'}))            
+                    if isinstance(ex, TimeoutError):
+                        await self.ctx.send('Tiempo excedido')
+                    else:
+                        await self.ctx.send('Error, contactar con Areá TI')
 
             # Caso 3
             case "Estado Robot":
@@ -44,9 +53,16 @@ class Menu(Select):
                     embed = await self.robot.obtener_datos()
                     await interaccion.response.send_message(embed=embed)
 
-                except TimeoutError:
-                    await interaccion.followup.send('Tiempo excedido')
+                except Exception as ex:
+                    my_handler.emit(makeLogRecord({
+                        'msg': f"Ocurrio este error: {ex}", 
+                        'levelno': WARNING, 
+                        'levelname':'WARNING'}))                        
+                    if isinstance(ex, TimeoutError):
+                        await interaccion.followup.send('Tiempo excedido')
 
+                    else:
+                        await interaccion.followup.send('Error, consultar con el Areá TI')
 
             # Caso 4
             case "Ultimas alertas activas":
@@ -54,9 +70,15 @@ class Menu(Select):
                     embed = await self.alerta.retornar_alertas_activas(self.bot)
                     await interaccion.response.send_message(embed=embed)
 
-                except TimeoutError:
-                    await interaccion.followup.send('Tiempo excedido')
-
+                except Exception as ex:
+                    my_handler.emit(makeLogRecord({
+                        'msg': f"Ocurrio este error: {ex}", 
+                        'levelno': WARNING, 
+                        'levelname':'WARNING'}))                        
+                    if isinstance(ex, TimeoutError):
+                        await interaccion.followup.send('Tiempo excedido')
+                    else:
+                        await interaccion.followup.send('Error, consultar con el Areá TI')
 
             # Caso 5
             case "Ultimas alertas desactivadas":
@@ -64,5 +86,13 @@ class Menu(Select):
                     embed = await self.alerta.retornar_alertas_desactivadas(self.bot)
                     await interaccion.response.send_message(embed=embed)
 
-                except TimeoutError:
-                    await interaccion.followup.send('Tiempo excedido')
+                except Exception as ex:
+                    my_handler.emit(makeLogRecord({
+                        'msg': f"Ocurrio este error: {ex}", 
+                        'levelno': WARNING, 
+                        'levelname':'WARNING'}))    
+                    if isinstance(ex, TimeoutError):
+                        await interaccion.followup.send('Tiempo excedido')
+                    else:
+
+                        await interaccion.followup.send('Error, consultar con el Areá TI')

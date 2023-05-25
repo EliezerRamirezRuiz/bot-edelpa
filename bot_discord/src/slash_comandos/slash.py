@@ -20,8 +20,8 @@ class SlashComandos(Cog):
         self.alerta = AlertaBaseDeDatos()
 
 
-    @app_commands.command(name='slash_menu', description='Ejecuta el comando !menu')
-    async def slash_menu(self, interaccion: Interaction) -> None:
+    @app_commands.command(name='menu', description='Ejecuta el comando !menu')
+    async def menu(self, interaccion: Interaction) -> None:
         try:
             await interaccion.response.defer()            
             ctx = await self.bot.get_context(interaccion)
@@ -35,9 +35,10 @@ class SlashComandos(Cog):
             my_handler.emit(makeLogRecord({
                 'msg': f"Ocurrio este error: {ex}", 
                 'levelno': WARNING, 
-                'levelname':'INFO'}))
+                'levelname':'WARNING'}))
+            await interaccion.followup.send('Error, consultar con el Areá TI')
 
-  
+
     @app_commands.describe(codigo="""Código requerido para buscar el stock, Ejemplo: 'EP100000000006000621850000500010'  """)
     @app_commands.command(name='consultar_stock', description='Trae los datos del stock a consultar')
     async def consultar_stock(self, interaccion: Interaction, codigo:str) -> None:
@@ -46,11 +47,12 @@ class SlashComandos(Cog):
             embed = await self.stock.return_stock(str(codigo))     
             await interaccion.followup.send(embed=embed)
 
-        except Exception as ex:
+        except Exception as ex:        
             my_handler.emit(makeLogRecord({
                 'msg': f"Ocurrio este error: {ex}", 
                 'levelno': WARNING, 
-                'levelname':'INFO'}))
+                'levelname':'WARNING'}))
+            await interaccion.followup.send('Error, consultar con el Areá TI')     
 
 
     @app_commands.command(name='ultimas_alertas_activas', description='Trae las ultimas alertas desactivadas')
@@ -60,11 +62,12 @@ class SlashComandos(Cog):
             embed = await self.alerta.retornar_alertas_activas(self.bot)
             await interaccion.followup.send(embed=embed)
         
-        except Exception as ex:
+        except Exception as ex:       
             my_handler.emit(makeLogRecord({
                 'msg': f"Ocurrio este error: {ex}", 
                 'levelno': WARNING, 
-                'levelname':'INFO'}))
+                'levelname':'WARNING'}))
+            await interaccion.followup.send('Error, consultar con el Areá TI')     
 
 
     @app_commands.command(name='ultimas_alertas_desactivadas', description='Trae las ultimas alertas desactivadas')
@@ -78,8 +81,8 @@ class SlashComandos(Cog):
             my_handler.emit(makeLogRecord({
                 'msg': f"Ocurrio este error: {ex}",
                 'levelno': WARNING,
-                'levelname':'INFO'}))
-
+                'levelname':'WARNING'}))
+            await interaccion.followup.send('Error, consultar con el Areá TI')
 
     @app_commands.command(name='estado_robot', description='Trae el estado de robot')
     async def estado_robot(self, interaccion: Interaction) -> None:
@@ -92,7 +95,8 @@ class SlashComandos(Cog):
             my_handler.emit(makeLogRecord({
                 'msg': f"Ocurrio este error: {ex}",
                 'levelno': WARNING,
-                'levelname':'INFO'}))
+                'levelname':'WARNING'}))
+            await interaccion.followup.send('Error, consultar con el Areá TI')
 
 
     @Cog.listener()
@@ -114,6 +118,6 @@ async def setup(bot:Bot):
 async def teardown(bot:Bot):
     await bot.remove_cog(SlashComandos(bot))
     my_handler.emit(makeLogRecord({
-        'msg': f"I am being unloaded from slash.py!",
+        'msg': f"He sido descargado slash.py!",
         'levelno': INFO, 
         'levelname':'INFO'}))

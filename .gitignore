@@ -2,8 +2,3 @@ venv**
 __pycache__/
 discord.log**
 settings.json
-nssm.exe
-build
-dist
-main.spec
-a.py

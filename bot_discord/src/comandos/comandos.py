@@ -26,10 +26,10 @@ class ComandosPrincipales(Cog):
 
         except Exception as ex:
             my_handler.emit(makeLogRecord({
-                'msg': f"Comandos.py en linea.", 
+                'msg': f"Ocurrio este error: {ex}", 
                 'levelno': WARNING, 
                 'levelname':'WARNING'}))
-
+            await ctx.send('Error, consultar con el Areá TI')
 
     @command()
     async def estado_robot(self, ctx):
@@ -39,10 +39,10 @@ class ComandosPrincipales(Cog):
         
         except Exception as ex:
             my_handler.emit(makeLogRecord({
-                'msg': f"Comandos.py en linea.", 
+                'msg': f"Ocurrio este error: {ex}", 
                 'levelno': WARNING, 
                 'levelname':'WARNING'}))
-    
+            await ctx.send('Error, consultar con el Areá TI')    
 
     @command()
     async def alertas_activas(self, ctx):
@@ -52,10 +52,10 @@ class ComandosPrincipales(Cog):
         
         except Exception as ex:
             my_handler.emit(makeLogRecord({
-                'msg': f"Comandos.py en linea.", 
+                'msg': f"Ocurrio este error: {ex}", 
                 'levelno': WARNING, 
                 'levelname':'WARNING'}))
-
+            await ctx.send('Error, consultar con el Areá TI')
 
     @command()
     async def alertas_desactivadas(self, ctx):
@@ -65,9 +65,10 @@ class ComandosPrincipales(Cog):
 
         except Exception as ex:
             my_handler.emit(makeLogRecord({
-                'msg': f"Comandos.py en linea.", 
-                'levelno': INFO, 
-                'levelname':'INFO'}))
+                'msg': f"Ocurrio este error: {ex}", 
+                'levelno': WARNING, 
+                'levelname':'WARNING'}))
+            await ctx.send('Error, consultar con el Areá TI')
 
 
     @Cog.listener()

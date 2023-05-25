@@ -26,19 +26,32 @@ class ComandosMenu(Cog):
             await ctx.send(view=view)
         
         except Exception as ex:
-            my_handler.emit(makeLogRecord({'msg': f"Ocurrio este errr: {ex}", 'levelno': WARNING, 'levelname':'INFO'}))
+            my_handler.emit(makeLogRecord({
+                'msg': f"Ocurrio este error: {ex}", 
+                'levelno': WARNING, 
+                'levelname':'WARNING'}))
+            await ctx.send('Ocurrio un error, contacte con el Areá TI')
 
 
     @Cog.listener()
     async def on_ready(self):
-        my_handler.emit(makeLogRecord({'msg': f"Comandos_menu.py en linea.", 'levelno': INFO, 'levelname':'INFO'}))
+        my_handler.emit(makeLogRecord({
+            'msg': f"Comandos_menu.py en linea.", 
+            'levelno': INFO, 
+            'levelname':'INFO'}))
 
 
 async def setup(bot:Bot):
     await bot.add_cog(ComandosMenu(bot))
-    my_handler.emit(makeLogRecord({'msg': f"He sido cargado comandos_menu.py", 'levelno': INFO, 'levelname':'INFO'}))    
+    my_handler.emit(makeLogRecord({
+        'msg': f"He sido cargado comandos_menu.py", 
+        'levelno': INFO, 
+        'levelname':'INFO'}))    
 
 
 async def teardown(bot:Bot):
     await bot.remove_cog(ComandosMenu(bot))
-    my_handler.emit(makeLogRecord({'msg': f"He sido bajado comandos_menu.py!", 'levelno': INFO, 'levelname':'INFO'}))     
+    my_handler.emit(makeLogRecord({
+        'msg': f"He sido bajado comandos_menu.py!", 
+        'levelno': INFO, 
+        'levelname':'INFO'}))     
