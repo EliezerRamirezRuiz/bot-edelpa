@@ -41,18 +41,18 @@ COMANDOS (Prefijo de invocación ["!"])
 7) !help
 
 OPCIONES MENU (Comando de invocación ["!menu" | "/menu"])
-1) Default  <br>
-2) Consultar stock  <br>
-3) Estado robot <br>
-4) Ultimas alertas activas <br>
-5) Ultimas alertas desactivadas <br>
-6) Reporte del dia <br>
+1) Default
+2) Consultar stock 
+3) Estado robot
+4) Ultimas alertas activas
+5) Ultimas alertas desactivadas
+6) Reporte del dia
 
 COMANDOS SLASH (Prefijo de invocación ["/"])
-1) /menu <br>
-2) /consultar_stock (parametro: codigo[int]) <br>
-3) /ultimas_alertas_activas <br>
-4) /ultimas_alertas_desactivadas <br>
+1) /menu
+2) /consultar_stock (parametro: codigo[int])
+3) /ultimas_alertas_activas
+4) /ultimas_alertas_desactivadas
 5) /estado_robot
 ```
 
